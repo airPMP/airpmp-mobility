@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_card/models/login_response_model.dart';
 import 'package:job_card/utilities/constants.dart';
 import 'package:job_card/utilities/functions.dart';
 
@@ -103,11 +104,17 @@ class LoginPageState extends State<LoginPage> {
       // else it prints invalid login.
       onTap: () async {
         // i'm converting the input text to string.
-        Map<String, dynamic> loginDetails = await login(_email.toString(), _password.toString());
+        LoginDetails loginDetails =
+            await login(_email.toString(), _password.toString());
+        print(loginDetails);
         if (loginDetails != null) {
-          await saveToken(loginDetails['token']);
-          await saveCompanyID(loginDetails['companyID']);
-          Navigator.pushNamed(context, '/select_project');
+          await saveToken(loginDetails.token);
+          await saveCompanyID(loginDetails.companyID);
+          print(
+              '..............................................................');
+          print(loginDetails.userID);
+          await saveUserID(loginDetails.userID);
+          Navigator.pushReplacementNamed(context, '/select_project');
         } else {
           print("Invalid Login");
         }
@@ -133,8 +140,7 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
       body: Stack(
         children: <Widget>[
           Container(
@@ -142,65 +148,53 @@ class LoginPageState extends State<LoginPage> {
             width: double.infinity,
             decoration: BoxDecoration(
               color: Color(0xFFF4442E),
-              // gradient: LinearGradient(
-              //   begin: Alignment.topLeft,
-              //   end: Alignment.bottomRight,
-              //   // colors: [
-              //   //   Color(0xFFE29587),
-              //   //   Colors.white,
-              //   // ],
-              //       colors: [
-              //     Color(0xFF73AEF5),
-              //     Color(0xFF61A4F1),
-              //     Color(0xFF478DE0),
-              //     Color(0xFF398AE5)
-              //   ],
-              //   stops: [0.1, 0.4, 0.7, 0.9],
-              // ),
             ),
           ),
           Container(
             height: double.infinity,
+            width: double.infinity,
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 100),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Sign In',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OpenSans',
-                        fontSize: 30,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 50),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Email",
-                        style: kLabelStyle,
-                      ),
-                      SizedBox(height: 10),
-                      _buildEmail(),
-                      SizedBox(height: 50),
-                      Text("Password", style: kLabelStyle),
-                      SizedBox(height: 10),
-                      _buildPassword(),
-                      _buildForgotPassword(),
-                      SizedBox(height: 40),
-                      Center(child: _buildloginButton()),
-                    ],
-                  )
-                ],
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 100),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Sign In',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'OpenSans',
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(height: 50),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Email",
+                          style: kLabelStyle,
+                        ),
+                        SizedBox(height: 10),
+                        _buildEmail(),
+                        SizedBox(height: 50),
+                        Text("Password", style: kLabelStyle),
+                        SizedBox(height: 10),
+                        _buildPassword(),
+                        _buildForgotPassword(),
+                        SizedBox(height: 40),
+                        Center(child: _buildloginButton()),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ],
       ),
-    ));
+    );
   }
 }

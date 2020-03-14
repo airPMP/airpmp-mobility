@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_card/utilities/constants.dart';
 
+// this will navigater to a new page
 Widget clickableCard(
     GlobalKey<NavigatorState> key, String routeName, String text) {
   return Padding(
@@ -74,7 +75,8 @@ DropdownButton dropDownByDateOrAll(
         child: Text(
           "Year",
         ),
-      ),DropdownMenuItem(
+      ),
+      DropdownMenuItem(
         value: "All",
         child: Text(
           "All",
@@ -83,5 +85,22 @@ DropdownButton dropDownByDateOrAll(
     ],
     onChanged: onChangedFunction,
     value: isByDateOrAll,
+  );
+}
+
+// button which executes a function
+Widget button(String text, VoidCallback function) {
+  return Padding(
+    padding: const EdgeInsets.all(12.0),
+    child: GestureDetector(
+      onTap: function,
+      child: Container(
+        height: 50,
+        width: 250,
+        child: Center(child: Text(text, style: heading3)),
+        decoration: kButtonBoxDecorationStyle.copyWith(
+            border: Border.all(width: 1, color: Colors.black12)),
+      ),
+    ),
   );
 }

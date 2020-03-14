@@ -52,6 +52,11 @@ final heading1 = TextStyle(
   fontSize: 25,
 );
 
+final heading2 = TextStyle(
+  fontFamily: 'OpenSans',
+  fontSize: 22,
+);
+
 final heading3 = TextStyle(
   fontFamily: 'OpenSans',
   fontSize: 18,

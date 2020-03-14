@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:job_card/basic_frame.dart';
+import 'package:job_card/screens/job_card_tab/detailed_job_card_page.dart';
 import 'package:job_card/screens/job_card_tab/my_job_card_home_page.dart';
+import 'package:job_card/screens/landing_page.dart';
 import 'package:job_card/screens/login_page.dart';
 import 'package:job_card/screens/my_dash_board.dart';
 import 'package:job_card/screens/select_project_page.dart';
@@ -11,6 +13,9 @@ class RouterGenerator {
     final args = settings.arguments;
     print(args);
     switch (settings.name) {
+      case '/landing_page':
+        return MaterialPageRoute(builder: (_) => LandingPage());
+
       case '/basic_frame':
         return MaterialPageRoute(builder: (_) => BasicFrame());
 
@@ -25,6 +30,10 @@ class RouterGenerator {
 
       case '/my_job_cards':
         return MaterialPageRoute(builder: (_) => MyJobCardsHomePage());
+
+      case '/detailed_job_card':
+        return MaterialPageRoute(builder: (_) => DetailedJobCardPage());
+
       case '/test_page':
         return MaterialPageRoute(builder: (_) => TestPage());
 

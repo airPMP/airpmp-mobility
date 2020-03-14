@@ -61,7 +61,7 @@ class RouterGeneratorForJobCard {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
           body: Center(
-        child: Text('Error'),
+        child: Text('Error from jc root page'),
       ));
     });
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cuberto_bottom_bar/cuberto_bottom_bar.dart';
+import 'package:job_card/global_keys.dart';
 import 'package:job_card/screens/job_card_tab/my_job_cards_root.dart';
 import 'package:job_card/screens/my_dash_board.dart';
 import 'package:job_card/screens/my_remarks.dart';
@@ -14,10 +15,10 @@ class Tabs {
 
 class BasicFrame extends StatefulWidget {
   @override
-  _BasicFrameState createState() => _BasicFrameState();
+  BasicFrameState createState() => BasicFrameState();
 }
 
-class _BasicFrameState extends State<BasicFrame>
+class BasicFrameState extends State<BasicFrame>
     with SingleTickerProviderStateMixin {
   // tab property configuration
   Color inactiveTabColor = Colors.grey;
@@ -50,6 +51,8 @@ class _BasicFrameState extends State<BasicFrame>
   @override
   Widget build(BuildContext basicFrameContext) {
     return Scaffold(
+      key: basicFrameKey,
+        // key: basicFrameKey,
         bottomNavigationBar: CubertoBottomBar(
           // barBackgroundColor: Color(0xFFF4442E),
           barShadow: [],

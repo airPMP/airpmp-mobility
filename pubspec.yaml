@@ -22,7 +22,7 @@ dependencies:
   cuberto_bottom_bar:
   http: any
   webview_flutter: any
-  flutter_inappwebview: any
+  # flutter_inappwebview: any
   shared_preferences:
 
 

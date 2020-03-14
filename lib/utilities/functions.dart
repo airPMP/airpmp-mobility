@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:job_card/models/job_card_models.dart';
+import 'package:job_card/models/login_response_model.dart';
 import 'package:job_card/models/project_model.dart';
+import 'package:job_card/screens/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// login function returns the String token
-Future<Map<String, dynamic>> login(String email, String password) async {
+// login function returns the loginDetail object it contains, userid, token, companyid..
+Future<LoginDetails> login(String email, String password) async {
   //"558854634"
   print("login is working..");
 
@@ -34,15 +37,11 @@ Future<Map<String, dynamic>> login(String email, String password) async {
   }
 
   var jsonResponse = json.decode(response.body);
-  String companyID = jsonResponse['user']['company'];
-  String token = jsonResponse['token'];
+  // String companyID = jsonResponse['user']['company'];
+  // String token = jsonResponse['token'];
   print("sucessfuly loged in!");
-
-  return {
-    'token': token,
-    'statusCode': statusCode,
-    'companyID': companyID,
-  };
+  LoginDetails loginDetails = LoginDetails.fromJson(jsonResponse);
+  return loginDetails;
 }
 
 FutureOr<void> saveToken(String token) async {
@@ -53,7 +52,11 @@ FutureOr<void> saveToken(String token) async {
 
 FutureOr<String> getSavedToken() async {
   SharedPreferences storageSpace = await SharedPreferences.getInstance();
-  String token = storageSpace.getString("token");
+  String token = storageSpace.getString("token") ?? "token is null";
+  // if (token == "null"){
+  //   return "token is null";
+  // }
+  
   return token;
 }
 
@@ -79,6 +82,18 @@ FutureOr<String> getSavedProjectID() async {
   SharedPreferences storageSpace = await SharedPreferences.getInstance();
   String projectID = storageSpace.getString("projectID");
   return projectID;
+}
+
+FutureOr<void> saveUserID(String userID) async {
+  SharedPreferences storageSpace = await SharedPreferences.getInstance();
+  storageSpace.setString("userID", userID);
+  print('userID saved!');
+}
+
+FutureOr<String> getSavedUserID() async {
+  SharedPreferences storageSpace = await SharedPreferences.getInstance();
+  String userID = storageSpace.getString("userID");
+  return userID;
 }
 
 Future<List<MyJobCard>> getInProgressJobCard(String token) async {
@@ -140,23 +155,28 @@ Future<List<MyProject>> getProjects(String token, String companyID) async {
     return null;
 }
 
-Future<List<MyJobCard>> getJobCardByDate() {}
+// Future<List<MyJobCard>> getJobCardByDate() {}
 
 Future<Map<String, dynamic>> getMyJobCard(String token) async {
   print('getting job card from internet..');
   var myJobCardsJson;
   var aJobCard;
+  final String userID = await getSavedUserID();
+  final String projectID = await getSavedProjectID();
   List<MyJobCard> myJobCardsList = [];
 
   // -------------this will only get sama al jadaf 's job cards -------------------
+  print(userID);
+  print(projectID);
   String url =
-      'https://airpmo.herokuapp.com/api/jobcard/index?search=&userId=5c5ed93be43537215c6f5538&projectId=5d9d3faa2a36470004b05129';
+      'https://airpmo.herokuapp.com/api/jobcard/index?search=&userId=$userID&projectId=$projectID';
   Map<String, String> headers = {
     "Content-type": "application/json",
     'Accept': 'application/json',
     "Authorization": "Bearer " + token,
   };
   Response response = await get(url, headers: headers);
+  print(response.statusCode);
   print(response.body);
 
   if (response.statusCode == 200) {
@@ -173,4 +193,11 @@ Future<Map<String, dynamic>> getMyJobCard(String token) async {
     'myJobCardList': myJobCardsList,
     'numberOfJCs': myJobCardsList.length
   };
+}
+
+Future<void> clearSharedPreferences() async {
+  SharedPreferences storageSpace = await SharedPreferences.getInstance();
+  storageSpace.clear();
+  
+  // key.currentState.pushNamed("/login_page");
 }

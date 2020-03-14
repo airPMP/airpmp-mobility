@@ -1,3 +1,9 @@
+// this gives the list of projects that the client is on.
+// and if he taps on the project he will be directed to the main app
+// before the project id is saved in the shared preference.
+// so when the user open the app again, it will check the presence of the string,
+// if it is present it will proceed or else it will show the select project page.
+
 import 'package:flutter/material.dart';
 import 'package:job_card/models/project_model.dart';
 import 'package:job_card/utilities/functions.dart';
@@ -41,28 +47,28 @@ class _SelectProjectState extends State<SelectProject> {
         return InkWell(
           onTap: () async {
             await saveProjectID(projects[index].id);
-            Navigator.pushNamed(context, '/basic_frame');
+            Navigator.pushReplacementNamed(context, '/basic_frame');
           },
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(15),
-                  child: Text(
-                    projects[index].name,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.black12),
-                ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(15),
+              child: Text(
+                projects[index].name,
+                style: TextStyle(fontSize: 18),
               ),
-              Divider(
-                height: 1,
-              )
-            ],
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 5,
+                      color: Colors.black12,
+                      offset: Offset(0, -2),
+                    )
+                  ]),
+            ),
           ),
         );
       },
@@ -72,6 +78,7 @@ class _SelectProjectState extends State<SelectProject> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF4442E),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 8, left: 15, right: 15, top: 10),
         child: Column(
