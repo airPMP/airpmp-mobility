@@ -165,8 +165,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-
-
 class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -183,7 +181,6 @@ class TestPage extends StatelessWidget {
             // print(savedToken);
             // getJobCard(savedToken);
 
-
             // getJobCard(token);
             // print("login button clicked...");
             // String token = await login();
@@ -198,27 +195,6 @@ class TestPage extends StatelessWidget {
       ),
     );
   }
-
-  // loginOne() async {
-  //   print('login one working');
-  //   String url = 'https://airpmo.herokuapp.com/api/auth/login';
-
-  //   var body = jsonEncode({
-  //     "email": "558854634",
-  //     "password": "558854634",
-  //   });
-  //   Map<String, String> headers = {
-  //     "Content-type": "application/json",
-  //     'Accept': 'application/json',
-  //   };
-  //   try {
-  //     Response response = await post(url, headers: headers, body: body);
-  //     print(response.body);
-  //   } on TimeoutException catch (_) {}
-  // }
-
-
-  
 
   getJobCard(String token) async {
     String url = 'https://airpmo.herokuapp.com/api/clients/index?search=';

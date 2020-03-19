@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class MyDashBoardPage extends StatefulWidget {
   @override
@@ -8,31 +9,13 @@ class MyDashBoardPage extends StatefulWidget {
 class _MyDashBoardPageState extends State<MyDashBoardPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.transparent,
-        //   automaticallyImplyLeading: false,
-        //   elevation: 0,
-        //   title: Center(
-        //     child: Text(
-        //       "DASHBOARD",
-        //       style: TextStyle(
-        //           fontSize: 20, letterSpacing: 10, color: Colors.black26),
-        //     ),
-        //   ),
-        // ),
-        // body: InAppWebView(
-        //   initialOptions: InAppWebViewWidgetOptions(
-        //       inAppWebViewOptions: InAppWebViewOptions(
-        //     javaScriptEnabled: true,
-        //   )),
-        //   initialUrl: "https://airpmo.herokuapp.com/dashboard",
-        //   // javascriptMode: JavascriptMode.unrestricted,
-        //   initialHeaders: {
-        //     'email': "12345678",
-        //     'password': "12345678",
-        //   },
-        // ),
-        );
+    
+    return WebviewScaffold(
+      url: "https://airpmo.herokuapp.com/login",
+      headers: {
+        "email": "12345678",
+        "password": "12345678",
+      },
+    );
   }
 }

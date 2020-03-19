@@ -12,10 +12,39 @@ class MyJobCardsHomePage extends StatefulWidget {
 }
 
 class _MyJobCardsHomePageState extends State<MyJobCardsHomePage> {
+  final GlobalKey<ScaffoldState> _jobCardHomePageKey =
+      GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    comfirmLogOut() {
+      return showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              content: Text("Sure you wanna log out?"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Logout"),
+                  onPressed: () {
+                    clearSharedPreferences();
+                    runApp(MaterialApp(
+                      home: MyApp(),
+                    ));
+                  },
+                ),
+                FlatButton(
+                  child: Text("Cancel"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          });
+    }
+
     return Scaffold(
-      // key: jobCardHomePageKey,
+      key: _jobCardHomePageKey,
       drawer: Drawer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -24,11 +53,8 @@ class _MyJobCardsHomePageState extends State<MyJobCardsHomePage> {
                 title: Text("Log out"),
                 trailing: Icon(Icons.exit_to_app),
                 onTap: () {
-                  clearSharedPreferences();
-                  runApp(MyApp());
-                  basicFrameKey.currentState
-                      .pushReplacementNamed("/login_page");
-                  // myAppKey.currentState.pushNamed("/login_page");
+                  print("tapped");
+                  comfirmLogOut();
                 })
           ],
         ),
@@ -37,14 +63,10 @@ class _MyJobCardsHomePageState extends State<MyJobCardsHomePage> {
         leading: IconButton(
             icon: Icon(Icons.menu),
             onPressed: () {
-              Scaffold.of(context).openDrawer();
+              _jobCardHomePageKey.currentState.openDrawer();
             }),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.change_history), onPressed: null)
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),

@@ -64,7 +64,7 @@ class _SelectProjectState extends State<SelectProject> {
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 5,
-                      color: Colors.black12,
+                      color: Colors.black26,
                       offset: Offset(0, -2),
                     )
                   ]),
@@ -78,7 +78,8 @@ class _SelectProjectState extends State<SelectProject> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF4442E),
+      backgroundColor: Colors.white,
+      // backgroundColor: Color(0xFFF4442E),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 8, left: 15, right: 15, top: 10),
         child: Column(
@@ -101,7 +102,17 @@ class _SelectProjectState extends State<SelectProject> {
             ),
             Expanded(
               flex: 5,
-              child: isLoading ? Container() : listOfProjects(),
+              child: isLoading
+                  ? Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.red)),
+                      ),
+                    )
+                  : listOfProjects(),
             )
           ],
         ),

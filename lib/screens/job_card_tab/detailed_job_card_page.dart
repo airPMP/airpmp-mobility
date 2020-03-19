@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:job_card/models/job_card_models.dart';
 import 'package:job_card/utilities/constants.dart';
 import 'package:job_card/utilities/widgets.dart';
 
 class DetailedJobCardPage extends StatefulWidget {
+  DetailedJobCardPage({this.myJobCard});
+  final MyJobCard myJobCard;
   @override
   _DetailedJobCardPageState createState() => _DetailedJobCardPageState();
 }
@@ -44,19 +47,21 @@ class _DetailedJobCardPageState extends State<DetailedJobCardPage> {
             ),
           )),
       appBar: AppBar(
-        title: Text("asdlkfjsldkf"),
+        title: Text(widget.myJobCard.activiyName),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          jobCardSingleDetail("Activity ID:", "4.02"),
-          jobCardSingleDetail("Job Card Number:", "3452345lkfjsdfj324"),
-          jobCardSingleDetail("Date", "2019-10-28"),
-          jobCardSingleDetail("Quantity", "6"),
-          jobCardSingleDetail("Zone", "T1 - F1R3"),
-          jobCardSingleDetail("CPI", "1.061"),
+          jobCardSingleDetail("Activity ID:", widget.myJobCard.activityCode),
+          jobCardSingleDetail(
+              "Job Card Number:", widget.myJobCard.jobCardNumber),
+          jobCardSingleDetail("Date", widget.myJobCard.assignedDate),
+          // this is the quantity to be achived
+          jobCardSingleDetail("Quantity", widget.myJobCard.tobeAchievedQTY),
+          jobCardSingleDetail("Zone", widget.myJobCard.zone),
+          jobCardSingleDetail("CPI", "fhytg"),
           SizedBox(height: 30),
-          button("Accept", null),
+          button("Place Holder", null),
           button("Mark as complete", null),
         ],
       ),

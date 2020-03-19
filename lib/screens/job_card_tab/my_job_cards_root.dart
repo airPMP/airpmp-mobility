@@ -48,9 +48,13 @@ class RouterGeneratorForJobCard {
       case '/approved_page':
         return MaterialPageRoute(
             builder: (_) => ApprovedPage(), settings: settings);
-      case '/temp':
+
+      case '/detailed_job_card':
         return MaterialPageRoute(
-            builder: (_) => DetailedJobCardPage(), settings: settings);
+          builder: (_) => DetailedJobCardPage(
+            myJobCard: args,
+          ),
+        );
 
       default:
         return errorRoute();

@@ -3,6 +3,7 @@
 // data is not injected to UI one by one
 
 import 'package:flutter/material.dart';
+import 'package:job_card/global_keys.dart';
 import 'package:job_card/models/job_card_models.dart';
 import 'package:job_card/utilities/constants.dart';
 import 'package:job_card/utilities/functions.dart';
@@ -16,7 +17,6 @@ class InProgressPage extends StatefulWidget {
 class _InProgressPageState extends State<InProgressPage> {
   String month = "February";
   String isByDateOrAll = "Date";
-  String token;
   List<MyJobCard> inProgressJCs;
   bool isLoading = true;
 
@@ -28,11 +28,8 @@ class _InProgressPageState extends State<InProgressPage> {
   }
 
   Future<void> getDataForInProgress() async {
-    // print('to work at start running.............');
-    token = await getSavedToken();
-    // print('token getting done...');
+    String token = await getSavedToken();
     inProgressJCs = await getInProgressJobCard(token);
-    // print('fileterd in progress jcs');
     setState(() {
       isLoading = false;
     });
@@ -199,20 +196,28 @@ class _InProgressPageState extends State<InProgressPage> {
                   },
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   itemBuilder: (context, index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          width: 300,
-                          child: Text(
-                            inProgressJCs[index].activiyName,
-                            style: heading3,
-                            softWrap: true,
-                            // overflow: TextOverflow.ellipsis,
+                    return GestureDetector(
+                      onTap: () {
+                        myJobCardRootPageKey.currentState.pushNamed(
+                          "/detailed_job_card",
+                          arguments: inProgressJCs[index],
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            width: 300,
+                            child: Text(
+                              inProgressJCs[index].activiyName,
+                              style: heading3,
+                              softWrap: true,
+                              // overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                        Text(inProgressJCs[index].activityCode),
-                      ],
+                          Text(inProgressJCs[index].activityCode),
+                        ],
+                      ),
                     );
                     // ListTile(
                     //   // dense: true,

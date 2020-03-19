@@ -1,16 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:job_card/models/job_card_models.dart';
 import 'package:job_card/models/login_response_model.dart';
 import 'package:job_card/models/project_model.dart';
-import 'package:job_card/screens/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // login function returns the loginDetail object it contains, userid, token, companyid..
-Future<LoginDetails> login(String email, String password) async {
+Future<LoginDetails> login({String email, String password}) async {
   //"558854634"
   print("login is working..");
 
@@ -56,7 +54,7 @@ FutureOr<String> getSavedToken() async {
   // if (token == "null"){
   //   return "token is null";
   // }
-  
+
   return token;
 }
 
@@ -198,6 +196,6 @@ Future<Map<String, dynamic>> getMyJobCard(String token) async {
 Future<void> clearSharedPreferences() async {
   SharedPreferences storageSpace = await SharedPreferences.getInstance();
   storageSpace.clear();
-  
+
   // key.currentState.pushNamed("/login_page");
 }
