@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:job_card/utilities/constants.dart';
 
+Widget stateError() {
+  return Center(
+    child: Text("State error!\n check the state returned by the bloc"),
+  );
+}
+
 // this will navigater to a new page
 Widget clickableCard(
     GlobalKey<NavigatorState> key, String routeName, String text) {

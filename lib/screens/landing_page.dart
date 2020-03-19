@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_card/basic_frame.dart';
+import 'package:job_card/bloc/landing_page_bloc/landingpage_bloc.dart';
 import 'package:job_card/screens/login_page.dart';
-import 'package:job_card/utilities/functions.dart';
+import 'package:job_card/utilities/widgets.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -9,36 +11,33 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  var page;
-  String token;
+  LandingPageBloc _landingPageBloc = LandingPageBloc();
   @override
   void initState() {
-    // setPage();
+    _landingPageBloc.dispatch(SetLandingPage());
     super.initState();
-  }
-
-  Future<void> setPage() async {
-    token = await getSavedToken();
-    if (token == "token is null") {
-      print('setting page to login_page');
-      page = "login_page";
-    } else {
-      print('setting page to basic_frame');
-      page = "basic_frame";
-    }
-    print("TOKEN IS $token");
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: setPage(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (page == 'login_page')
+    return BlocBuilder(
+      bloc: _landingPageBloc,
+      builder: (BuildContext context, LandingPageState state) {
+        if (state is LandingPageInitial) {
+          return Scaffold();
+        } else if (state is StartLoginPage) {
           return LoginPage();
-        else
+        } else if (state is StartHomePage) {
           return BasicFrame();
+        }
+        return stateError();
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _landingPageBloc.dispose();
+    super.dispose();
   }
 }

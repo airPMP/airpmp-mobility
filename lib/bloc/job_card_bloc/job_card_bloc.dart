@@ -14,6 +14,6 @@ class JobCardBloc extends Bloc<JobCardEvent, JobCardState> {
   Stream<JobCardState> mapEventToState(
     JobCardEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    
   }
 }

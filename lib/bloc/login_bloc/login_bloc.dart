@@ -11,28 +11,27 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
-  LoginState get initialState => LoginWaiting();
+  LoginState get initialState => LoginWaitingForCredentials();
 
   @override
   Stream<LoginState> mapEventToState(
     LoginEvent event,
   ) async* {
     if (event is Login) {
-      LoginDetails loginDetails;
+      yield LoginLoading();
 
-      loginDetails =
+      LoginDetails loginDetails =
           await login(email: event.userName, password: event.password);
 
       if (loginDetails == null) {
-        yield LoginSubmitted(
-          loginStatus: false,
-          loginDetails: null,
-        );
+        yield LoginFailed();
       } else {
-        yield LoginSubmitted(
-          loginStatus: true,
-          loginDetails: loginDetails,
-        );
+        await saveToken(loginDetails.token);
+        await saveCompanyID(loginDetails.companyID);
+        await saveUserID(loginDetails.userID);
+        print("token, companyID, userID has been saved");
+
+        yield LogedIn(loginDetails: loginDetails);
       }
     }
   }

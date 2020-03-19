@@ -3,12 +3,13 @@ part of 'login_bloc.dart';
 @immutable
 abstract class LoginState {}
 
-class LoginWaiting extends LoginState {}
+class LoginWaitingForCredentials extends LoginState {}
 
-class LoginSubmitted extends LoginState {
-  final bool loginStatus;
+class LoginLoading extends LoginState {}
+
+class LoginFailed extends LoginState {}
+
+class LogedIn extends LoginState {
   final LoginDetails loginDetails;
-  LoginSubmitted({@required this.loginStatus, this.loginDetails});
+  LogedIn({@required this.loginDetails});
 }
-
-class LogedIn extends LoginState {}
