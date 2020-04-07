@@ -23,13 +23,15 @@ class _DetailedJobCardPageState extends State<DetailedJobCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-          height: 60,
+          height: 50,
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25))),
+              color: Colors.black12,
+              // borderRadius: BorderRadius.only(
+              //   topLeft: Radius.circular(25),
+              //   topRight: Radius.circular(25),
+              // ),
+            ),
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -59,7 +61,7 @@ class _DetailedJobCardPageState extends State<DetailedJobCardPage> {
           // this is the quantity to be achived
           jobCardSingleDetail("Quantity", widget.myJobCard.tobeAchievedQTY),
           jobCardSingleDetail("Zone", widget.myJobCard.zone),
-          jobCardSingleDetail("CPI", "fhytg"),
+          jobCardSingleDetail("CPI", "1.2"),
           SizedBox(height: 30),
           button("Place Holder", null),
           button("Mark as complete", null),

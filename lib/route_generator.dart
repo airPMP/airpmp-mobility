@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_card/basic_frame.dart';
 import 'package:job_card/screens/job_card_tab/my_job_card_home_page.dart';
+import 'package:job_card/screens/job_card_tab/resource_entering_page.dart';
 import 'package:job_card/screens/landing_page.dart';
 import 'package:job_card/screens/login_page.dart';
 import 'package:job_card/screens/my_dash_board.dart';
@@ -10,9 +11,9 @@ import 'package:job_card/test_page.dart';
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
-    print(args);
+    print(settings.name);
     switch (settings.name) {
-      case '/landing_page':
+      case '/':
         return MaterialPageRoute(builder: (_) => LandingPage());
 
       case '/basic_frame':
@@ -33,6 +34,12 @@ class RouterGenerator {
       case '/test_page':
         return MaterialPageRoute(builder: (_) => TestPage());
 
+      case '/resource_page':
+        return MaterialPageRoute(builder: (_) => ResourcePage());
+
+      case '/resource_entering_page':
+        return MaterialPageRoute(builder: (_) => ResourceEnteringPage());
+
       default:
         return errorRoute();
     }
@@ -42,7 +49,7 @@ class RouterGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
           body: Center(
-        child: Text('Error'),
+        child: Text('Route Error'),
       ));
     });
   }

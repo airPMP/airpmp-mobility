@@ -19,7 +19,7 @@ class _MyJobCardRootState extends State<MyJobCardRoot> {
     return Navigator(
       onGenerateRoute: RouterGeneratorForJobCard.generateRoute,
       key: myJobCardRootPageKey,
-      initialRoute: '/my_job_card_home_page',
+      initialRoute: '/',
     );
   }
 }
@@ -27,9 +27,9 @@ class _MyJobCardRootState extends State<MyJobCardRoot> {
 class RouterGeneratorForJobCard {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
-    print(args);
+    print(settings.name);
     switch (settings.name) {
-      case '/my_job_card_home_page':
+      case '/':
         return MaterialPageRoute(
             builder: (_) => MyJobCardsHomePage(), settings: settings);
 

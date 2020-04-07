@@ -241,6 +241,7 @@ class LoginPageState extends State<LoginPage> {
       },
       child: BlocBuilder(
         bloc: _loginBloc,
+        
         builder: (BuildContext context, LoginState state) {
           if (state is LoginWaitingForCredentials) {
             return buildLoginBody();

@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(),
         floatingActionButtonTheme:
             FloatingActionButtonThemeData(backgroundColor: Color(0xFFF4442E)),
         appBarTheme: AppBarTheme(
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       onGenerateRoute: RouterGenerator.generateRoute,
-      initialRoute: '/landing_page',
+      initialRoute: '/resource_page',
     );
   }
 }

@@ -21,11 +21,12 @@ dependencies:
     sdk: flutter
   cuberto_bottom_bar:
   http: any
-  webview_flutter: any
   # flutter_inappwebview: any
   shared_preferences:
-  flutter_webview_plugin: ^0.3.10+1
+  webview_flutter: ^0.3.19+9
   flutter_bloc: ^0.15.1
+  # for intercepting back button on nested routing
+  back_button_interceptor: ^4.2.3
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -15,6 +15,8 @@ class _WaitingForApprovalPageState extends State<WaitingForApprovalPage> {
   String token;
   List<MyJobCard> executedJCs;
   bool isLoading = true;
+  String denominator = "-";
+  String numerator = "-";
 
   // job card is obtained immediatly after the widget is called
   @override
@@ -28,10 +30,46 @@ class _WaitingForApprovalPageState extends State<WaitingForApprovalPage> {
     token = await getSavedToken();
     // print('token getting done...');
     executedJCs = await getExecutedJobCard(token);
+    //....................................................................
+
+    // convertDateStringToDateTimeObject(executedJCs);
+    executedJCs = sortAscending(executedJCs);
+
+    //....................................................................
     // print('fileterd in progress jcs');
     setState(() {
       isLoading = false;
+      getFractionForFloatingButton();
     });
+  }
+
+  getFractionForFloatingButton() async {
+    Map<String, dynamic> allJC = await getMyJobCard(token);
+    List myjcs = allJC['myJobCardList'];
+    setState(() {
+      denominator = myjcs.length.toString();
+      numerator = executedJCs.length.toString();
+    });
+  }
+
+  // this function takes the string form of datetime and
+  // converts that to real DateTime object and saves that in
+  // the class variable itself.
+  convertDateStringToDateTimeObject(List<MyJobCard> jcs) {
+    MyJobCard aJC;
+    for (aJC in jcs) {
+      aJC.convertedCreatedDateTime = DateTime.parse(aJC.assignedDate);
+    }
+    return jcs;
+  }
+
+  sortAscending(List<MyJobCard> jcs) {
+    jcs.sort((a, b) =>
+        a.convertedCreatedDateTime.compareTo(b.convertedCreatedDateTime));
+    return jcs;
+    // String date = "2019-10-09T21:53:07.359Z";
+    // DateTime createdDateTime = DateTime.parse(date);
+    // print("---------------------------------${createdDateTime.toString()}");
   }
 
   @override
@@ -48,12 +86,12 @@ class _WaitingForApprovalPageState extends State<WaitingForApprovalPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("11"),
+              Text(numerator),
               SizedBox(height: 3),
               Divider(
                   height: 2, color: Colors.white, endIndent: 13, indent: 13),
               SizedBox(height: 3),
-              Text("23"),
+              Text(denominator),
             ],
           ),
         ),
@@ -207,7 +245,9 @@ class _WaitingForApprovalPageState extends State<WaitingForApprovalPage> {
                             // overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Text(executedJCs[index].activityCode),
+                        Text(
+                          "${executedJCs[index].convertedCreatedDateTime.day}.${executedJCs[index].convertedCreatedDateTime.month}.${executedJCs[index].convertedCreatedDateTime.year}",
+                        ),
                       ],
                     );
                     // ListTile(

@@ -173,24 +173,29 @@ Future<Map<String, dynamic>> getMyJobCard(String token) async {
     'Accept': 'application/json',
     "Authorization": "Bearer " + token,
   };
-  Response response = await get(url, headers: headers);
-  print(response.statusCode);
-  print(response.body);
+  try {
+    Response response = await get(url, headers: headers);
+    print(response.statusCode);
+    print(response.body);
 
-  if (response.statusCode == 200) {
-    print('sucessfully obtained jobcards....');
-    myJobCardsJson = jsonDecode(response.body);
-    for (aJobCard in myJobCardsJson) {
-      myJobCardsList.add(MyJobCard.fromJson(aJobCard));
+    if (response.statusCode == 200) {
+      print('sucessfully obtained jobcards....');
+      myJobCardsJson = jsonDecode(response.body);
+      for (aJobCard in myJobCardsJson) {
+        myJobCardsList.add(MyJobCard.fromJson(aJobCard));
+      }
     }
+    int len = myJobCardsList.length;
+    print("number of jc in obtained = $len");
+    // return myJobCardsList;
+    return {
+      'myJobCardList': myJobCardsList,
+      'numberOfJCs': myJobCardsList.length
+    };
+  } catch (e) {
+    print(e);
+    return null;
   }
-  int len = myJobCardsList.length;
-  print("number of jc in obtained = $len");
-  // return myJobCardsList;
-  return {
-    'myJobCardList': myJobCardsList,
-    'numberOfJCs': myJobCardsList.length
-  };
 }
 
 Future<void> clearSharedPreferences() async {
