@@ -1,7 +1,7 @@
-import 'package:airpmp_mobility/constants/colors.dart';
-import 'package:airpmp_mobility/constants/enums.dart';
-import 'package:airpmp_mobility/screens_new/JobListTile.dart';
-import 'package:airpmp_mobility/screens_new/drawer.dart';
+import 'package:airpmp_mobility/utilities/constants/colors.dart';
+import 'package:airpmp_mobility/utilities/constants/enums.dart';
+import 'package:airpmp_mobility/utilities/widgets/components/JobListTile.dart';
+import 'package:airpmp_mobility/utilities/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {

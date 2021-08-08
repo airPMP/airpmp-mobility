@@ -1,4 +1,4 @@
-import 'package:airpmp_mobility/constants/colors.dart';
+import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class JobListTile extends StatelessWidget {

@@ -1,10 +1,7 @@
-import 'package:airpmp_mobility/constants/colors.dart';
-import 'package:airpmp_mobility/constants/enums.dart';
-import 'package:airpmp_mobility/constants/fonts.dart';
-import 'package:airpmp_mobility/screens_new/scrollableTable.dart';
+import 'package:airpmp_mobility/utilities/components/scrollableTable.dart';
+import 'package:airpmp_mobility/utilities/constants/colors.dart';
+import 'package:airpmp_mobility/utilities/widgets/components/roundedButton.dart';
 import 'package:flutter/material.dart';
-
-import 'roundedButton.dart';
 
 class JobPage extends StatelessWidget {
   const JobPage({

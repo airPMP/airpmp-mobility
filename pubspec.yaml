@@ -22,7 +22,6 @@ dependencies:
   cuberto_bottom_bar:
   http: any
   # flutter_inappwebview: any
-  shared_preferences:
   webview_flutter: ^0.3.19+9
   flutter_bloc: ^0.15.1
   # for intercepting back button on nested routing

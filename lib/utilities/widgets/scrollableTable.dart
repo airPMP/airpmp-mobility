@@ -1,6 +1,6 @@
-import 'package:airpmp_mobility/constants/colors.dart';
-import 'package:airpmp_mobility/screens_new/scrollableTableElement.dart';
 import 'package:flutter/material.dart';
+
+import 'components/scrollableTableElement.dart';
 
 class ScrollableTable extends StatelessWidget {
   const ScrollableTable({Key? key}) : super(key: key);
