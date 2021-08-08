@@ -1,6 +1,6 @@
-part of 'landingpage_bloc.dart';
+// part of 'landingpage_bloc.dart';
 
-@immutable
-abstract class LandingPageEvent {}
+// @immutable
+// abstract class LandingPageEvent {}
 
-class SetLandingPage extends LandingPageEvent{}
+// class SetLandingPage extends LandingPageEvent{}
