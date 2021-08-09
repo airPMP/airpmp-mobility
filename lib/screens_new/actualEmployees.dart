@@ -1,4 +1,6 @@
+import 'package:airpmp_mobility/models/tableElement.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
+import 'package:airpmp_mobility/utilities/widgets/components/simpleTableElement.dart';
 import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +72,28 @@ class ActualEmployees extends StatelessWidget {
                             TextStyle(fontSize: 20, color: Color(0xdd7B9990))),
                   ),
                 ),
-                Expanded(child: SimpleTable())
+                Expanded(
+                    child: SimpleTable(
+                  headings: [
+                    TableElement("Activity ID", flex: 1),
+                    TableElement("Date", flex: 1),
+                    TableElement("Description", flex: 1),
+                    TableElement("Qty", flex: 1),
+                    TableElement("Zone", flex: 1),
+                  ],
+                  elements: [
+                    SimpleTableElement(
+                      datas: [
+                        TableValueElement("3.1.2"),
+                        TableValueElement("2019-10-09"),
+                        TableValueElement(
+                            "Irrigation Excavation (Open areas) 0 -3 mtr"),
+                        TableValueElement("3"),
+                        TableValueElement("-"),
+                      ],
+                    )
+                  ],
+                ))
               ],
             ),
           ),

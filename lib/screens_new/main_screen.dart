@@ -1,7 +1,10 @@
+import 'package:airpmp_mobility/models/tableElement.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:airpmp_mobility/utilities/constants/enums.dart';
 import 'package:airpmp_mobility/utilities/widgets/components/JobListTile.dart';
+import 'package:airpmp_mobility/utilities/widgets/components/simpleTableElement.dart';
 import 'package:airpmp_mobility/utilities/widgets/drawer.dart';
+import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -229,54 +232,57 @@ class MainPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text("Name"),
-                          ),
-                          Expanded(
-                            child: Text("Descriotion"),
-                          ),
-                          Expanded(
-                            child: Text("QTY"),
-                          ),
-                          Expanded(
-                            child: Text("Zone"),
-                          ),
-                          Expanded(
-                            child: Text("Assigned"),
-                          ),
-                          Expanded(
-                            child: Text("SPI"),
-                          ),
-                          Expanded(child: Text("CPI"))
-                        ],
+                      Expanded(
+                        child: SimpleTable(headings: [
+                          TableElement("Activity ID", flex: 100),
+                          TableElement("Date", flex: 92),
+                          TableElement("Description", flex: 248),
+                          TableElement("Qty", flex: 40),
+                          TableElement("Zone", flex: 54),
+                          TableElement("Assigned", flex: 91),
+                          TableElement("SPI", flex: 40),
+                          TableElement("CPI", flex: 40),
+                        ], elements: [
+                          SimpleTableElement(
+                            datas: [
+                              TableValueElement("3.1.2"),
+                              TableValueElement("2019-10-09"),
+                              TableValueElement(
+                                  "Irrigation Excavation (Open areas) 0 -3 mtr"),
+                              TableValueElement("3"),
+                              TableValueElement("-"),
+                              TableValueElement("NO"),
+                              TableValueElement("-"),
+                              TableValueElement("-"),
+                            ],
+                          )
+                        ]),
                       ),
-                      Divider(),
-                      Container(
-                          child: Row(
-                        children: [
-                          Expanded(
-                            child: Text("0.1.0"),
-                          ),
-                          Expanded(
-                            child: Text("efsf"),
-                          ),
-                          Expanded(
-                            child: Text("3"),
-                          ),
-                          Expanded(
-                            child: Text("_"),
-                          ),
-                          Expanded(
-                            child: Text("NO"),
-                          ),
-                          Expanded(
-                            child: Text("-"),
-                          ),
-                          Expanded(child: Text("-")),
-                        ],
-                      )),
+                      // Divider(),
+                      // Container(
+                      //     child: Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: Text("0.1.0"),
+                      //     ),
+                      //     Expanded(
+                      //       child: Text("efsf"),
+                      //     ),
+                      //     Expanded(
+                      //       child: Text("3"),
+                      //     ),
+                      //     Expanded(
+                      //       child: Text("_"),
+                      //     ),
+                      //     Expanded(
+                      //       child: Text("NO"),
+                      //     ),
+                      //     Expanded(
+                      //       child: Text("-"),
+                      //     ),
+                      //     Expanded(child: Text("-")),
+                      //   ],
+                      // )),
                     ],
                   ),
                 ))
