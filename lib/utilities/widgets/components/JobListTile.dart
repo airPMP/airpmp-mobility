@@ -26,7 +26,8 @@ class JobListTile extends StatelessWidget {
                 child: Container(
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text("Seawater Fishhole Sidefilling 0-3 mtr"),
+                    child: Text(
+                        "Seawater Fishhole Sidefilling 0-3 mtr Seawater Fishhole Sidefilling 0-3 mtr"),
                   ),
                 ),
               )

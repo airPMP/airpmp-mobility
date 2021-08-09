@@ -16,6 +16,8 @@ class MainPage extends StatelessWidget {
             body: CustomScrollView(
               slivers: [
                 SliverAppBar(
+                  backgroundColor: CustomColors.primary,
+                  iconTheme: IconThemeData(color: Colors.white),
                   elevation: 0,
                   pinned: true,
                   shape: RoundedRectangleBorder(
@@ -23,32 +25,47 @@ class MainPage extends StatelessWidget {
                           BorderRadius.only(bottomRight: Radius.circular(30))),
                   // backgroundColor: Colors.red,
                   flexibleSpace: Container(
-                    child: Row(
+                    child: Column(
                       children: [
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "ArabTech",
-                              style: TextStyle(
-                                fontSize: 25,
-                              ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        "lib/assets/images/appBarBG.png"),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(30))),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 50,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        "Arab Tech",
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    )
+                                  ],
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 68,
-                            )
-                          ],
+                          ),
                         ),
+                        SizedBox(height: 56)
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(30))),
                   ),
                   expandedHeight: bc.maxHeight / 3.3,
                   bottom: AppBar(
@@ -80,16 +97,29 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 SliverAppBar(
+                  toolbarHeight: 80,
                   leadingWidth: 0,
                   leading: Container(),
                   backgroundColor: Colors.transparent,
                   title: Row(
                     children: [
                       SizedBox(width: 10),
-                      Text("Project: ", style: TextStyle(color: Colors.black)),
+                      Text("Project:  ",
+                          style: TextStyle(
+                              color: Color(0xff424C64),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18)),
                       Expanded(
-                          child: Text("adfsdgsdg",
-                              style: TextStyle(color: Colors.black)))
+                        child: Text(
+                          "Sama Al Jaddaf infrastructure works DS135/2",
+                          style: TextStyle(
+                              color: Color(0xff424C64),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      )
                     ],
                   ),
                 ),

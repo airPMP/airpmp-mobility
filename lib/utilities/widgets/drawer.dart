@@ -1,3 +1,4 @@
+import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -24,10 +25,10 @@ class CustomDrawer extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    "Project: Tabloviskey Halmikuttan Pi Asro",
-                    textAlign: TextAlign.center,
-                  ),
+                  child: Text("Project: Tabloviskey Halmikuttan Pi Asro",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20, color: CustomColors.textColor)),
                 ),
                 Expanded(
                   child: Padding(
