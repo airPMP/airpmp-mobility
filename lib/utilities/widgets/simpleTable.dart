@@ -48,6 +48,7 @@ class SimpleTable extends StatelessWidget {
         ),
         Expanded(
           child: Container(
+            margin: EdgeInsets.all(5),
             child: ListView.builder(
               itemBuilder: (context, index) {
                 for (int i = 0; i < elements[index].datas.length; i++)
