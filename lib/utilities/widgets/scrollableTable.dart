@@ -13,7 +13,7 @@ class ScrollableTable extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 40,
+            height: 60,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -21,57 +21,72 @@ class ScrollableTable extends StatelessWidget {
                   Container(
                       width: 80,
                       child: Text(
-                        "heading",
+                        "Designation",
                         textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      )),
+                  VerticalDivider(),
+                  Container(
+                      width: 80,
+                      child: Text(
+                        "Allowable Resources",
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       )),
                   Container(
                       width: 80,
                       child: Text(
-                        "heading",
+                        "Allowable Total Hrs",
                         textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       )),
                   Container(
                       width: 80,
                       child: Text(
-                        "heading",
+                        "Actual Total Hrs",
                         textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       )),
                   Container(
                       width: 80,
                       child: Text(
-                        "heading",
+                        "Actual Cost",
                         textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       )),
                   Container(
                       width: 80,
                       child: Text(
-                        "heading",
+                        "SPI",
                         textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       )),
                   Container(
                       width: 80,
                       child: Text(
-                        "heading",
+                        "CPI",
                         textAlign: TextAlign.center,
-                      )),
-                  Container(
-                      width: 80,
-                      child: Text(
-                        "heading",
-                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       )),
                 ],
               ),
             ),
           ),
           Container(
-            width: 580,
+            width: 600,
             height: 3,
             color: Color(0xddB4BBC5),
           ),
           Expanded(
             child: Container(
-              width: 580,
+              width: 600,
               child: ListView.builder(
                 itemBuilder: (context, index) => ScrollableTableElement(),
                 itemCount: 15,

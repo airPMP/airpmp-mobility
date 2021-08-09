@@ -18,43 +18,44 @@ class ScrollableTableElement extends StatelessWidget {
           Container(
               width: 80,
               child: Text(
-                "rt",
+                "Carpenter",
+                textAlign: TextAlign.center,
+              )),
+          VerticalDivider(),
+          Container(
+              width: 80,
+              child: Text(
+                "0.833",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "fv",
+                "8.33",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "vc",
+                "0.7",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "dc",
+                "49.678",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "heading",
+                "0.8333",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "heading",
-                textAlign: TextAlign.center,
-              )),
-          Container(
-              width: 80,
-              child: Text(
-                "heading",
+                "0.8333",
                 textAlign: TextAlign.center,
               )),
         ],
