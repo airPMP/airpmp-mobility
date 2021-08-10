@@ -1,8 +1,10 @@
 import 'package:airpmp_mobility/models/tableElement.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:airpmp_mobility/utilities/constants/enums.dart';
+import 'package:airpmp_mobility/utilities/constants/fonts.dart';
 import 'package:airpmp_mobility/utilities/widgets/components/JobListTile.dart';
 import 'package:airpmp_mobility/utilities/widgets/components/simpleTableElement.dart';
+import 'package:airpmp_mobility/utilities/widgets/components/stageCard.dart';
 import 'package:airpmp_mobility/utilities/widgets/drawer.dart';
 import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ class MainPage extends StatelessWidget {
             backgroundColor: Colors.white,
             body: CustomScrollView(
               slivers: [
+                // Includes the "Arabtech" part with background image and "Not Started" part
+
                 SliverAppBar(
                   backgroundColor: CustomColors.primary,
                   iconTheme: IconThemeData(color: Colors.white),
@@ -26,7 +30,6 @@ class MainPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.only(bottomRight: Radius.circular(30))),
-                  // backgroundColor: Colors.red,
                   flexibleSpace: Container(
                     child: Column(
                       children: [
@@ -41,6 +44,7 @@ class MainPage extends StatelessWidget {
                                     bottomRight: Radius.circular(30))),
                             child: Row(
                               children: [
+                                // Width between the left end of screen and ArabTech Text
                                 SizedBox(
                                   width: 50,
                                 ),
@@ -51,12 +55,10 @@ class MainPage extends StatelessWidget {
                                     Container(
                                       child: Text(
                                         "Arab Tech",
-                                        style: TextStyle(
-                                            fontSize: 25,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
+                                        style: CustomTextStyles.whiteTitle,
                                       ),
                                     ),
+                                    //Bottom Padding of ArabTech text
                                     SizedBox(
                                       height: 8,
                                     )
@@ -66,11 +68,15 @@ class MainPage extends StatelessWidget {
                             ),
                           ),
                         ),
+                        //Space for the second appbar, with the not started text.
+                        //Padding given so that the bottom left border radius will be seen
                         SizedBox(height: 56)
                       ],
                     ),
                   ),
                   expandedHeight: bc.maxHeight / 3.3,
+
+                  // Not Started App Bar
                   bottom: AppBar(
                     elevation: 0,
                     backgroundColor: CustomColors.primary,
@@ -99,6 +105,8 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                // Project name above the list
                 SliverAppBar(
                   toolbarHeight: 80,
                   leadingWidth: 0,
@@ -109,14 +117,14 @@ class MainPage extends StatelessWidget {
                       SizedBox(width: 10),
                       Text("Project:  ",
                           style: TextStyle(
-                              color: Color(0xff424C64),
+                              color: CustomColors.textColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 18)),
                       Expanded(
                         child: Text(
                           "Sama Al Jaddaf infrastructure works DS135/2",
                           style: TextStyle(
-                              color: Color(0xff424C64),
+                              color: CustomColors.textColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                           maxLines: 2,
@@ -137,53 +145,84 @@ class MainPage extends StatelessWidget {
             ),
             drawer: CustomDrawer());
       } else {
+        // Tablet View
         return Scaffold(
           body: Row(
             children: [
-              NavigationRail(
-                  backgroundColor: CustomColors.primary,
-                  leading: Container(
-                      width: 100,
-                      margin: EdgeInsets.symmetric(vertical: 25),
-                      child: Image.asset("lib/assets/images/airpmo.png")),
-                  destinations: [
-                    NavigationRailDestination(
-                      icon: Icon(Icons.dashboard,
+              // Side Navigation Rail
+              // Navigation rail Widget not used due to the lack of proper trailing property
+              Container(
+                color: CustomColors.primary,
+                child: Column(
+                  children: [
+                    Container(
+                        width: 100,
+                        margin: EdgeInsets.symmetric(vertical: 25),
+                        child: Image.asset("lib/assets/images/airpmo.png")),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      child: Icon(Icons.dashboard,
                           color: CustomColors.icon_not_selected),
-                      selectedIcon:
-                          Icon(Icons.dashboard, color: CustomColors.secondary),
-                      label: Text('Dashboard'),
                     ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.card_giftcard_outlined,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      child: Icon(Icons.card_giftcard_outlined,
+                          color: CustomColors.secondary),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      child: Icon(Icons.edit,
                           color: CustomColors.icon_not_selected),
-                      selectedIcon: Icon(Icons.favorite),
-                      label: Text('Job Cards'),
                     ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.edit,
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      child: Icon(Icons.settings_outlined,
                           color: CustomColors.icon_not_selected),
-                      selectedIcon:
-                          Icon(Icons.edit, color: CustomColors.secondary),
-                      label: Text('First'),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      child: Icon(Icons.logout,
+                          color: CustomColors.icon_not_selected),
+                    )
                   ],
-                  trailing: Column(
-                    children: [
-                      // Spacer(),
-                      Icon(Icons.settings_outlined),
-                      Icon(Icons.logout)
-                    ],
-                  ),
-                  selectedIndex: 1),
+                ),
+              ),
+
               Expanded(
                 flex: 10,
                 child: Container(
                   color: CustomColors.backgroundColor,
                   child: Column(
                     children: [
-                      Text("Job Cards"),
-                      Card(child: Text("NOt Started")),
+                      Container(
+                          height: 100,
+                          child: Center(
+                            child: Text("Job Cards",
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold)),
+                          )),
+                      Expanded(
+                          child: StageCard(
+                              icon: Icon(Icons.task),
+                              onPressed: () {},
+                              text: Text("Not Started"))),
+                      Expanded(
+                          child: StageCard(
+                              icon: Icon(Icons.task),
+                              onPressed: () {},
+                              text: Text("Not Started"))),
+                      Expanded(
+                          child: StageCard(
+                              icon: Icon(Icons.task),
+                              onPressed: () {},
+                              text: Text("Not Started"))),
+                      Expanded(
+                          child: StageCard(
+                              icon: Icon(Icons.task),
+                              onPressed: () {},
+                              text: Text("Not Started"))),
+                      SizedBox(height: 50)
                     ],
                   ),
                 ),
@@ -214,20 +253,20 @@ class MainPage extends StatelessWidget {
                         SizedBox(height: 20),
                         Container(
                           margin: EdgeInsets.all(10),
-                          child: Stack(
-                            children: [
-                              Image.asset("lib/assets/images/appBarBG.png",
-                                  fit: BoxFit.cover),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 40.0, vertical: 20),
-                                child: Text("Arab Tech",
-                                    style: TextStyle(
-                                        fontSize: 30,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
-                              )
-                            ],
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "lib/assets/images/appBarBG.png"),
+                                  fit: BoxFit.cover)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 40.0, vertical: 20),
+                            child: Text("Arab Tech",
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold)),
                           ),
                         ),
                         Padding(
