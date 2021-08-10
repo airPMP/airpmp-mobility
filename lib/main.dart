@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: MainPage(stage: Stage.Approved)
+        home: ActualEmployees()
         // onGenerateRoute: RouterGenerator.generateRoute,
         // initialRoute: '/resource_page',
         );

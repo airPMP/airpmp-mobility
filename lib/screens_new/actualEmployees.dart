@@ -1,5 +1,6 @@
 import 'package:airpmp_mobility/models/tableElement.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
+import 'package:airpmp_mobility/utilities/constants/fonts.dart';
 import 'package:airpmp_mobility/utilities/widgets/components/simpleTableElement.dart';
 import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,17 @@ class ActualEmployees extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             leadingWidth: 0,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.only(bottomRight: Radius.circular(24)),
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "lib/assets/images/appBarBG.png",
+                    ),
+                    fit: BoxFit.cover,
+                  )),
+            ),
             shape: RoundedRectangleBorder(
                 borderRadius:
                     BorderRadius.only(bottomRight: Radius.circular(24))),
@@ -25,6 +37,7 @@ class ActualEmployees extends StatelessWidget {
             child: Column(
               children: [
                 Card(
+                  elevation: 4,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                   // margin: EdgeInsets.all(20.0),
@@ -41,7 +54,8 @@ class ActualEmployees extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: TextField(
                                 decoration: InputDecoration(
-                                    hintText: "Search an Employee",
+                                    hintText: "Search to add an Employee",
+                                    hintStyle: CustomTextStyles.hintTextStyle,
                                     border: InputBorder.none),
                               ),
                             ),
@@ -50,7 +64,7 @@ class ActualEmployees extends StatelessWidget {
                         Expanded(
                           child: Container(
                             child: TextButton(
-                              child: Icon(Icons.search),
+                              child: Icon(Icons.search, color: Colors.white),
                               onPressed: () {},
                             ),
                             decoration: BoxDecoration(
@@ -75,20 +89,28 @@ class ActualEmployees extends StatelessWidget {
                 Expanded(
                     child: SimpleTable(
                   headings: [
-                    TableElement("Activity ID", flex: 1),
-                    TableElement("Date", flex: 1),
-                    TableElement("Description", flex: 1),
-                    TableElement("Qty", flex: 1),
-                    TableElement("Zone", flex: 1),
+                    TableElement("ID", flex: 2),
+                    TableElement("Name", flex: 3),
+                    TableElement("Designation", flex: 3),
+                    TableElement("Total Hrs", flex: 2, maxLines: 2),
+                    TableElement("Remarks", flex: 2),
                   ],
                   elements: [
                     SimpleTableElement(
                       datas: [
-                        TableValueElement("3.1.2"),
-                        TableValueElement("2019-10-09"),
-                        TableValueElement(
-                            "Irrigation Excavation (Open areas) 0 -3 mtr"),
-                        TableValueElement("3"),
+                        TableValueElement("DA1079"),
+                        TableValueElement("PETER HAINE", maxLines: 2),
+                        TableValueElement("Technical Reporter", maxLines: 2),
+                        TableValueElement("5"),
+                        TableValueElement("-"),
+                      ],
+                    ),
+                    SimpleTableElement(
+                      datas: [
+                        TableValueElement("DA1079"),
+                        TableValueElement("PETER HAINE", maxLines: 2),
+                        TableValueElement("Architect", maxLines: 2),
+                        TableValueElement("5"),
                         TableValueElement("-"),
                       ],
                     )
@@ -98,16 +120,21 @@ class ActualEmployees extends StatelessWidget {
             ),
           ),
           floatingActionButton: Container(
-              width: 100,
-              padding: EdgeInsets.all(8),
+              // width: 100,
+              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                   color: CustomColors.secondary,
                   borderRadius: BorderRadius.circular(40)),
               child: InkWell(
                 onTap: () {},
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text("Proceed"), Icon(Icons.arrow_forward_ios)],
+                  children: [
+                    Text("Proceed",
+                        style: TextStyle(color: Colors.white, fontSize: 18)),
+                    Icon(Icons.arrow_forward_ios, color: Colors.white)
+                  ],
                 ),
               )),
           bottomNavigationBar: BottomNavigationBar(

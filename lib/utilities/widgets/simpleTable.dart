@@ -21,7 +21,6 @@ class SimpleTable extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 40,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

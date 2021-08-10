@@ -9,5 +9,6 @@ abstract class CustomTextStyles {
   static const TextStyle appbarTitle = TextStyle();
   static const TextStyle buttonText =
       TextStyle(color: Colors.white, fontWeight: FontWeight.bold);
-  static const TextStyle hintTextStyle = TextStyle(fontSize: 14);
+  static const TextStyle hintTextStyle =
+      TextStyle(fontSize: 16, color: Color(0xffC1C1C1));
 }

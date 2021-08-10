@@ -29,12 +29,14 @@ class StageCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(13.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Icon(Icons.task, size: 30, color: Colors.white),
                     ),
-                    Text("Not Started"),
+                    Text("Not Started",
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
                   ],
                 ),
               ),

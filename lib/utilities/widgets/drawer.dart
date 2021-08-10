@@ -1,6 +1,8 @@
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:flutter/material.dart';
 
+import 'components/stageCard.dart';
+
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
 
@@ -31,13 +33,10 @@ class CustomDrawer extends StatelessWidget {
                           fontSize: 20, color: CustomColors.textColor)),
                 ),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Card(
-                      child: Text("Not Started"),
-                    ),
-                  ),
-                ),
+                    child: StageCard(
+                        icon: Icon(Icons.task),
+                        onPressed: () {},
+                        text: Text("Not Started"))),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),

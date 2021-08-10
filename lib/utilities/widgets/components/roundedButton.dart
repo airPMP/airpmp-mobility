@@ -46,3 +46,19 @@ class CustomRoundedButton extends StatelessWidget {
     );
   }
 }
+
+class CircleButton extends StatelessWidget {
+  final Icon icon;
+  final Color bgColor;
+  const CircleButton(
+      {Key? key, required this.icon, this.bgColor = Colors.white})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(shape: BoxShape.circle, color: bgColor),
+        padding: EdgeInsets.all(5),
+        child: icon);
+  }
+}
