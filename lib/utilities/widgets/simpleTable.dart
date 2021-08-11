@@ -26,6 +26,7 @@ class SimpleTableElement extends StatelessWidget {
               child: Container(
                   child: Text(
                 tbv.valueName,
+                style: TextStyle(color: tbv.color, fontWeight: FontWeight.bold),
                 textAlign: tbv.textAlign,
                 maxLines: tbv.maxLines,
               )),
@@ -64,6 +65,8 @@ class SimpleTable extends StatelessWidget {
                     child: Container(
                         child: Text(
                       h.valueName,
+                      style: TextStyle(
+                          color: h.color, fontWeight: FontWeight.bold),
                       textAlign: h.textAlign,
                       maxLines: h.maxLines,
                       overflow: TextOverflow.ellipsis,
