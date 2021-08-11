@@ -2,6 +2,8 @@ import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomRoundedButton extends StatelessWidget {
+  /// Width should be given by wrapping inside a bouded widget
+
   const CustomRoundedButton(
       {Key? key, required this.label, required this.onPressed, this.iconData})
       : super(key: key);

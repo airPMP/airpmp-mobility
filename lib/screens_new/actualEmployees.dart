@@ -1,7 +1,6 @@
 import 'package:airpmp_mobility/models/tableElement.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:airpmp_mobility/utilities/constants/fonts.dart';
-import 'package:airpmp_mobility/utilities/widgets/components/simpleTableElement.dart';
 import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
 

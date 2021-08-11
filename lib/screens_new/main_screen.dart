@@ -1,13 +1,17 @@
 import 'package:airpmp_mobility/models/tableElement.dart';
+import 'package:airpmp_mobility/screens_new/tab%20screens/tabMainScreen.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:airpmp_mobility/utilities/constants/enums.dart';
 import 'package:airpmp_mobility/utilities/constants/fonts.dart';
 import 'package:airpmp_mobility/utilities/widgets/components/JobListTile.dart';
-import 'package:airpmp_mobility/utilities/widgets/components/simpleTableElement.dart';
 import 'package:airpmp_mobility/utilities/widgets/components/stageCard.dart';
 import 'package:airpmp_mobility/utilities/widgets/drawer.dart';
 import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
+import 'package:airpmp_mobility/utilities/widgets/tabSideNavMenu.dart';
 import 'package:flutter/material.dart';
+
+import 'tab screens/tabActualEmployees.dart';
+import 'tab screens/tabJobScreen.dart';
 
 class MainPage extends StatelessWidget {
   final Stage stage;
@@ -189,174 +193,12 @@ class MainPage extends StatelessWidget {
                 ),
               ),
 
-              Expanded(
-                flex: 10,
-                child: Container(
-                  color: CustomColors.backgroundColor,
-                  child: Column(
-                    children: [
-                      Container(
-                          height: 100,
-                          child: Center(
-                            child: Text("Job Cards",
-                                style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.bold)),
-                          )),
-                      Expanded(
-                          child: StageCard(
-                              icon: Icon(Icons.task),
-                              onPressed: () {},
-                              text: Text("Not Started"))),
-                      Expanded(
-                          child: StageCard(
-                              icon: Icon(Icons.task),
-                              onPressed: () {},
-                              text: Text("Not Started"))),
-                      Expanded(
-                          child: StageCard(
-                              icon: Icon(Icons.task),
-                              onPressed: () {},
-                              text: Text("Not Started"))),
-                      Expanded(
-                          child: StageCard(
-                              icon: Icon(Icons.task),
-                              onPressed: () {},
-                              text: Text("Not Started"))),
-                      SizedBox(height: 50)
-                    ],
-                  ),
-                ),
-              ),
+              Expanded(flex: 10, child: SideNavMenu()),
               Expanded(
                   flex: 38,
                   child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 18.0),
-                                child: Icon(
-                                  Icons.notifications,
-                                  size: 30,
-                                ),
-                              ),
-                              CircleAvatar()
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "lib/assets/images/appBarBG.png"),
-                                  fit: BoxFit.cover)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40.0, vertical: 20),
-                            child: Text("Arab Tech",
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold)),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Container(
-                            height: 50,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 18),
-                                        decoration: BoxDecoration(
-                                            color: CustomColors.secondary,
-                                            borderRadius:
-                                                BorderRadius.horizontal(
-                                                    left: Radius.circular(10))),
-                                        child: Center(
-                                            child: Text(
-                                          "Sama Al Jaddaf infrastructure works DS135/2",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                          maxLines: 2,
-                                        ))),
-                                  ),
-                                  Expanded(
-                                      child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        width: 200,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                              hintText: "Search..",
-                                              suffixIcon: Icon(Icons.search)),
-                                        )),
-                                  )),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: SimpleTable(headings: [
-                            TableElement("Activity ID", flex: 100),
-                            TableElement("Date", flex: 92),
-                            TableElement("Description", flex: 248),
-                            TableElement("Qty", flex: 40),
-                            TableElement("Zone", flex: 54),
-                            TableElement("Assigned", flex: 91),
-                            TableElement("SPI", flex: 40),
-                            TableElement("CPI", flex: 40),
-                          ], elements: [
-                            SimpleTableElement(
-                              datas: [
-                                TableValueElement("3.1.2"),
-                                TableValueElement("2019-10-09"),
-                                TableValueElement(
-                                    "Irrigation Excavation (Open areas) 0 -3 mtr"),
-                                TableValueElement("3"),
-                                TableValueElement("-"),
-                                TableValueElement("NO"),
-                                TableValueElement("-"),
-                                TableValueElement("-"),
-                              ],
-                            ),
-                            SimpleTableElement(
-                              datas: [
-                                TableValueElement("3.1.2"),
-                                TableValueElement("2019-10-09"),
-                                TableValueElement(
-                                    "Irrigation Excavation (Open areas) 0 -3 mtr"),
-                                TableValueElement("3"),
-                                TableValueElement("-"),
-                                TableValueElement("NO"),
-                                TableValueElement("-"),
-                                TableValueElement("-"),
-                              ],
-                            )
-                          ]),
-                        ),
-                      ],
-                    ),
-                  ))
+                      padding: const EdgeInsets.all(15.0),
+                      child: TabActualEmployees()))
             ],
           ),
         );
