@@ -17,6 +17,7 @@ class LoginPage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         Column(
+          
           children: [
             Spacer(
               flex: 1,
@@ -29,7 +30,7 @@ class LoginPage extends StatelessWidget {
                     flex: 1,
                   ),
                   Expanded(
-                      flex: 4,
+                      flex: 9,
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18),
@@ -37,9 +38,13 @@ class LoginPage extends StatelessWidget {
                         color: Colors.white,
                         child: Container(
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "lib/assets/images/loginbgdesign.png"))),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  "lib/assets/images/loginbgdesign.png"),
+                              fit: BoxFit.cover,
+                            
+                            ),
+                          ),
                           child: FractionallySizedBox(
                             heightFactor: 1,
                             widthFactor: 0.7,

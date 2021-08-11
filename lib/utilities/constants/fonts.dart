@@ -16,4 +16,6 @@ abstract class CustomTextStyles {
       TextStyle(color: Colors.white, fontWeight: FontWeight.bold);
   static const TextStyle hintTextStyle =
       TextStyle(fontSize: 16, color: Color(0xffC1C1C1));
+  static const TextStyle buttongreen = TextStyle(
+      color: Color(0xff57D1AF), fontSize: 16, fontWeight: FontWeight.w600);
 }
