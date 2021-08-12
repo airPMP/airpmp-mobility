@@ -26,24 +26,16 @@ class _SideNavMenuState extends State<SideNavMenu> {
               )),
           Expanded(
               child: StageCard(
-                  icon: Icon(Icons.task),
-                  onPressed: () {},
-                  text: Text("Not Started"))),
+                  icon: Icons.task, onPressed: () {}, text: "Not Started")),
           Expanded(
               child: StageCard(
-                  icon: Icon(Icons.task),
-                  onPressed: () {},
-                  text: Text("Not Started"))),
+                  icon: Icons.task, onPressed: () {}, text: "Not Started")),
           Expanded(
               child: StageCard(
-                  icon: Icon(Icons.task),
-                  onPressed: () {},
-                  text: Text("Not Started"))),
+                  icon: Icons.task, onPressed: () {}, text: "Not Started")),
           Expanded(
               child: StageCard(
-                  icon: Icon(Icons.task),
-                  onPressed: () {},
-                  text: Text("Not Started"))),
+                  icon: Icons.task, onPressed: () {}, text: "Not Started")),
           SizedBox(height: 50)
         ],
       ),

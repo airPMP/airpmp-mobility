@@ -5,33 +5,39 @@ import 'package:flutter/material.dart';
 class SimpleTableElement extends StatelessWidget {
   /// A Map of Column headings, with the key being the data in the column, and the value being its width ratio(flex).
   final List<TableValueElement> datas;
-
+  final VoidCallback onTap;
   const SimpleTableElement({
     Key? key,
     required this.datas,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12), color: CustomColors.primary),
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        children: [
-          for (TableValueElement tbv in datas)
-            Expanded(
-              flex: tbv.flex,
-              child: Container(
-                  child: Text(
-                tbv.valueName,
-                style: TextStyle(color: tbv.color, fontWeight: FontWeight.bold),
-                textAlign: tbv.textAlign,
-                maxLines: tbv.maxLines,
-              )),
-            ),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: CustomColors.primary),
+        padding: EdgeInsets.all(8),
+        margin: EdgeInsets.symmetric(vertical: 4),
+        child: Row(
+          children: [
+            for (TableValueElement tbv in datas)
+              Expanded(
+                flex: tbv.flex,
+                child: Container(
+                    child: Text(
+                  tbv.valueName,
+                  style:
+                      TextStyle(color: tbv.color, fontWeight: FontWeight.bold),
+                  textAlign: tbv.textAlign,
+                  maxLines: tbv.maxLines,
+                )),
+              ),
+          ],
+        ),
       ),
     );
   }

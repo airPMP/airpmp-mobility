@@ -34,32 +34,33 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 Expanded(
                     child: StageCard(
-                        icon: Icon(Icons.task),
-                        onPressed: () {},
-                        text: Text("Not Started"))),
+                        icon: Icons.task,
+                        onPressed: () {
+                          Navigator.pushNamed(context, "not_Started_Screen");
+                        },
+                        text: "Not Started")),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Card(
-                      child: Text("In Progress"),
-                    ),
-                  ),
-                ),
+                    child: StageCard(
+                        icon: Icons.workspaces_outline,
+                        onPressed: () {
+                          Navigator.pushNamed(context, "in_Progress_Screen");
+                        },
+                        text: "In Progress")),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Card(
-                      child: Text("Waiting"),
-                    ),
-                  ),
-                ),
+                    child: StageCard(
+                        icon: Icons.access_time,
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, "waiting_For_Approval_Screen");
+                        },
+                        text: "Waiting for Approval")),
                 Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Card(
-                        child: Text("Approved"),
-                      )),
-                ),
+                    child: StageCard(
+                        icon: Icons.approval,
+                        onPressed: () {
+                          Navigator.pushNamed(context, "approved_Screen");
+                        },
+                        text: "Approved")),
               ],
             ),
           ),
