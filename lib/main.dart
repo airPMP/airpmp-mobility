@@ -1,5 +1,6 @@
 import 'package:airpmp_mobility/screens_new/account.dart';
 import 'package:airpmp_mobility/screens_new/job_screen.dart';
+import 'package:airpmp_mobility/test.dart';
 import 'package:airpmp_mobility/utilities/constants/enums.dart';
 
 import 'package:flutter/material.dart';
@@ -28,9 +29,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: MainPage(
-          stage: Stage
-              .Not_Started), // onGenerateRoute: RouterGenerator.generateRoute,
+      home: TestPage(), // onGenerateRoute: RouterGenerator.generateRoute,
       // initialRoute: '/resource_page',
     );
   }
