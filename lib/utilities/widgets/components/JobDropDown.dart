@@ -2,8 +2,8 @@ import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:airpmp_mobility/utilities/constants/fonts.dart';
 import 'package:flutter/material.dart';
 
-class AddEmpDropDown extends StatelessWidget {
-  const AddEmpDropDown({Key? key}) : super(key: key);
+class JobEmpDropDown extends StatelessWidget {
+  const JobEmpDropDown({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,37 +79,70 @@ class AddEmpDropDown extends StatelessWidget {
             ),
           ),
         ),
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Stack(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Search...',
-                      hintStyle: CustomTextStyles.hintTextStyle,
-                    ),
-                    textAlignVertical: TextAlignVertical.bottom,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Stack(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search...',
+                    hintStyle: CustomTextStyles.hintTextStyle,
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Ink(
-                      //decoration: ShapeDecoration(),
-                      child: IconButton(
-                        
-                        icon: Icon(Icons.search),
-                        color: Colors.white,
-                        
-                        onPressed: () {},
-                    
-                      ),
+                  textAlignVertical: TextAlignVertical.bottom,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Ink(
+                    decoration: ShapeDecoration(
+                      shape: CircleBorder(),
+                      color: Color(0xff57D1AF),
                     ),
-                  )
-                ],
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Expanded(
+              child: ListView.separated(
+                separatorBuilder: (context, i) {
+                  return SizedBox(
+                    height: 10,
+                  );
+                },
+                scrollDirection: Axis.vertical,
+                itemCount: id.length,
+                itemBuilder: (context, i) {
+                  return Row(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child:
+                            Text(id[i], style: CustomTextStyles.listTileTitle),
+                      ),
+                      SizedBox(
+                        width: w < 600 ? w * .1 : w * 0.4,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(name[i],
+                            style: CustomTextStyles.listTileTitle),
+                      ),
+                    ],
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
