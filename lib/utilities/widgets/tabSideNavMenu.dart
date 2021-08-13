@@ -25,17 +25,29 @@ class _SideNavMenuState extends State<SideNavMenu> {
                         TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
               )),
           Expanded(
-              child: StageCard(
-                  icon: Icons.task, onPressed: () {}, text: "Not Started")),
+              child: Align(
+            alignment: Alignment.centerLeft,
+            child: StageCard(
+                icon: Icons.task, onPressed: () {}, text: "Not Started"),
+          )),
           Expanded(
-              child: StageCard(
-                  icon: Icons.task, onPressed: () {}, text: "Not Started")),
+              child: Align(
+            alignment: Alignment.centerLeft,
+            child: StageCard(
+                icon: Icons.task, onPressed: () {}, text: "Not Started"),
+          )),
           Expanded(
-              child: StageCard(
-                  icon: Icons.task, onPressed: () {}, text: "Not Started")),
+              child: Align(
+            alignment: Alignment.centerRight,
+            child: StageCard(
+                icon: Icons.task, onPressed: () {}, text: "Not Started"),
+          )),
           Expanded(
-              child: StageCard(
-                  icon: Icons.task, onPressed: () {}, text: "Not Started")),
+              child: Align(
+            alignment: Alignment.centerLeft,
+            child: StageCard(
+                icon: Icons.task, onPressed: () {}, text: "Not Started"),
+          )),
           SizedBox(height: 50)
         ],
       ),

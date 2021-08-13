@@ -1,4 +1,6 @@
 import 'package:airpmp_mobility/models/tableElement.dart';
+import 'package:airpmp_mobility/screens_new/tab%20screens/tabActualEmployees.dart';
+import 'package:airpmp_mobility/screens_new/tab%20screens/tabBaseStructure.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:airpmp_mobility/utilities/constants/enums.dart';
 import 'package:airpmp_mobility/utilities/constants/fonts.dart';
@@ -154,7 +156,7 @@ class ActualResources extends StatelessWidget {
           ),
         );
       } else {
-        return Container();
+        return TabBaseStructure(child: TabActualEmployees());
       }
     });
   }

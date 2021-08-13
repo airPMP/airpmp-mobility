@@ -1,4 +1,5 @@
 import 'package:airpmp_mobility/models/tableElement.dart';
+import 'package:airpmp_mobility/screens_new/tab%20screens/tabBaseStructure.dart';
 import 'package:airpmp_mobility/screens_new/tab%20screens/tabMainScreen.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:airpmp_mobility/utilities/constants/enums.dart';
@@ -143,65 +144,21 @@ class MainPage extends StatelessWidget {
                   return Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                      child: JobListTile());
+                      child: JobListTile(
+                        text:
+                            "Seawater Fishhole Sidefilling 0-3 mtr Seawater Fishhole Sidefilling 0-3 mtr",
+                        iD: "0.14.0",
+                        onPressed: () {
+                          Navigator.pushNamed(context, "job_Card_Screen");
+                        },
+                      ));
                 }, childCount: 30))
               ],
             ),
             drawer: CustomDrawer());
       } else {
         // Tablet View
-        return Scaffold(
-          body: Row(
-            children: [
-              // Side Navigation Rail
-              // Navigation rail Widget not used due to the lack of proper trailing property
-              Container(
-                color: CustomColors.primary,
-                child: Column(
-                  children: [
-                    Container(
-                        width: 100,
-                        margin: EdgeInsets.symmetric(vertical: 25),
-                        child: Image.asset("lib/assets/images/airpmo.png")),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25),
-                      child: Icon(Icons.dashboard,
-                          color: CustomColors.icon_not_selected),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25),
-                      child: Icon(Icons.card_giftcard_outlined,
-                          color: CustomColors.secondary),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25),
-                      child: Icon(Icons.edit,
-                          color: CustomColors.icon_not_selected),
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25),
-                      child: Icon(Icons.settings_outlined,
-                          color: CustomColors.icon_not_selected),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25),
-                      child: Icon(Icons.logout,
-                          color: CustomColors.icon_not_selected),
-                    )
-                  ],
-                ),
-              ),
-
-              Expanded(flex: 10, child: SideNavMenu()),
-              Expanded(
-                  flex: 38,
-                  child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: TabActualEmployees()))
-            ],
-          ),
-        );
+        return TabBaseStructure(child: TabMainScreen());
       }
     });
   }

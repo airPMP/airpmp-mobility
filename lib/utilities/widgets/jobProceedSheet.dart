@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'components/roundedButton.dart';
 
 class JobProceedSheet extends StatelessWidget {
-  const JobProceedSheet({Key? key}) : super(key: key);
+  final VoidCallback onClosed;
+  const JobProceedSheet({Key? key, required this.onClosed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +110,8 @@ class JobProceedSheet extends StatelessWidget {
                     ),
                   ),
                   CircleButton(
-                    icon: Icon(Icons.close,
-                        size: 30, color: CustomColors.secondary),
+                    onPressed: onClosed,
+                    icon: Icon(Icons.close, color: CustomColors.secondary),
                     bgColor: Colors.white,
                   )
                 ]),
