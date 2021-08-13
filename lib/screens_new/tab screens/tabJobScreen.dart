@@ -5,7 +5,9 @@ import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
 
 class TabJobScreen extends StatelessWidget {
-  const TabJobScreen({Key? key}) : super(key: key);
+  const TabJobScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +110,8 @@ class TabJobScreen extends StatelessWidget {
                                 width: 200,
                                 child: TextField(
                                   decoration: InputDecoration(
-                                      hintText: "JC Executed",
-                                      prefixIcon: Icon(Icons.calendar_today)),
+                                      hintText: "Search..",
+                                      prefixIcon: Icon(Icons.search)),
                                 )),
                           )),
                     ],
@@ -141,14 +143,18 @@ class TabJobScreen extends StatelessWidget {
                         child: CustomRoundedButton(
                           label: "Add Employee",
                           iconData: Icons.person_add,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "actual_Equipments");
+                          },
                         ),
                       ),
                       Expanded(
                         child: CustomRoundedButton(
                           label: "Add Equipents",
                           iconData: Icons.person_add,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "actual_Equipments");
+                          },
                         ),
                       )
                     ],
@@ -169,6 +175,9 @@ class TabJobScreen extends StatelessWidget {
                 TableElement("CPI", flex: 40),
               ], elements: [
                 SimpleTableElement(
+                  onTap: () {
+                    // Navigator.pushNamed(context, "job_Card_Screen");
+                  },
                   datas: [
                     TableValueElement("3.1.2"),
                     TableValueElement("2019-10-09"),
@@ -182,6 +191,9 @@ class TabJobScreen extends StatelessWidget {
                   ],
                 ),
                 SimpleTableElement(
+                  onTap: () {
+                    // Navigator.pushNamed(context, "job_Card_Screen");
+                  },
                   datas: [
                     TableValueElement("3.1.2"),
                     TableValueElement("2019-10-09"),

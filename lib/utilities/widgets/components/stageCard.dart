@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StageCard extends StatelessWidget {
-  final Icon icon;
-  final Text text;
-  final Function onPressed;
+  final IconData icon;
+  final String text;
+  final VoidCallback onPressed;
   const StageCard(
       {Key? key,
       required this.icon,
@@ -14,12 +14,16 @@ class StageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10.0),
       child: AspectRatio(
         aspectRatio: 1.4,
         child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          shadowColor: Colors.white,
+          elevation: 5,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          child: InkWell(
+            onTap: onPressed,
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
@@ -33,14 +37,16 @@ class StageCard extends StatelessWidget {
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Icon(Icons.task, size: 30, color: Colors.white),
+                      child: Icon(icon, size: 30, color: Colors.white),
                     ),
-                    Text("Not Started",
+                    Text(text,
                         style: TextStyle(color: Colors.white, fontSize: 20)),
                   ],
                 ),
               ),
-            )),
+            ),
+          ),
+        ),
       ),
     );
   }

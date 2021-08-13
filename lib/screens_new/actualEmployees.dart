@@ -1,13 +1,15 @@
 import 'package:airpmp_mobility/models/tableElement.dart';
+import 'package:airpmp_mobility/screens_new/tab%20screens/tabActualEmployees.dart';
+import 'package:airpmp_mobility/screens_new/tab%20screens/tabBaseStructure.dart';
 import 'package:airpmp_mobility/utilities/constants/colors.dart';
+import 'package:airpmp_mobility/utilities/constants/enums.dart';
 import 'package:airpmp_mobility/utilities/constants/fonts.dart';
 import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
 
-class ActualEmployees extends StatelessWidget {
-  const ActualEmployees({
-    Key? key,
-  }) : super(key: key);
+class ActualResources extends StatelessWidget {
+  final Resource resource;
+  const ActualResources({Key? key, required this.resource}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, bc) {
@@ -96,6 +98,9 @@ class ActualEmployees extends StatelessWidget {
                   ],
                   elements: [
                     SimpleTableElement(
+                      onTap: () {
+                        Navigator.pushNamed(context, "job_Card_Screen");
+                      },
                       datas: [
                         TableValueElement("DA1079"),
                         TableValueElement("PETER HAINE", maxLines: 2),
@@ -105,6 +110,9 @@ class ActualEmployees extends StatelessWidget {
                       ],
                     ),
                     SimpleTableElement(
+                      onTap: () {
+                        Navigator.pushNamed(context, "job_Card_Screen");
+                      },
                       datas: [
                         TableValueElement("DA1079"),
                         TableValueElement("PETER HAINE", maxLines: 2),
@@ -148,7 +156,7 @@ class ActualEmployees extends StatelessWidget {
           ),
         );
       } else {
-        return Container();
+        return TabBaseStructure(child: TabActualEmployees());
       }
     });
   }

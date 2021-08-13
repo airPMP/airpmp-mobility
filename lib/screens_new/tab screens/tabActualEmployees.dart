@@ -92,6 +92,9 @@ class TabActualEmployees extends StatelessWidget {
             TableElement("CPI", flex: 40),
           ], elements: [
             SimpleTableElement(
+              onTap: () {
+                Navigator.pushNamed(context, "job_Card_Screen");
+              },
               datas: [
                 TableValueElement("3.1.2"),
                 TableValueElement("2019-10-09"),
@@ -105,6 +108,9 @@ class TabActualEmployees extends StatelessWidget {
               ],
             ),
             SimpleTableElement(
+              onTap: () {
+                Navigator.pushNamed(context, "job_Card_Screen");
+              },
               datas: [
                 TableValueElement("3.1.2"),
                 TableValueElement("2019-10-09"),

@@ -17,7 +17,6 @@ class LoginPage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         Column(
-          
           children: [
             Spacer(
               flex: 1,
@@ -42,7 +41,6 @@ class LoginPage extends StatelessWidget {
                               image: AssetImage(
                                   "lib/assets/images/loginbgdesign.png"),
                               fit: BoxFit.cover,
-                            
                             ),
                           ),
                           child: FractionallySizedBox(
@@ -109,7 +107,10 @@ class LoginPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, "not_Started_Screen");
+                                    },
                                   ),
                                 )
                               ],

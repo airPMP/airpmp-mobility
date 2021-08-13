@@ -2,12 +2,13 @@ import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class JobDetailsSheet extends StatelessWidget {
-  const JobDetailsSheet({Key? key}) : super(key: key);
+  final VoidCallback onPressed;
+  const JobDetailsSheet({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.fromLTRB(17, 17, 17, 0),
+        margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: CustomColors.secondary),
@@ -41,7 +42,7 @@ class JobDetailsSheet extends StatelessWidget {
                           "Details",
                           style: TextStyle(color: CustomColors.secondary),
                         ),
-                        onPressed: () {},
+                        onPressed: onPressed,
                       ),
                       decoration: BoxDecoration(
                           color: Colors.white,

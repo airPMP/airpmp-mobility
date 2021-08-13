@@ -9,12 +9,12 @@ class CustomRoundedButton extends StatelessWidget {
       : super(key: key);
   final IconData? iconData;
   final String label;
-  final Function onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed(),
+      onTap: onPressed,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         color: CustomColors.secondary,
@@ -52,8 +52,12 @@ class CustomRoundedButton extends StatelessWidget {
 class CircleButton extends StatelessWidget {
   final Icon icon;
   final Color bgColor;
+  final VoidCallback? onPressed;
   const CircleButton(
-      {Key? key, required this.icon, this.bgColor = Colors.white})
+      {Key? key,
+      required this.icon,
+      this.bgColor = Colors.white,
+      this.onPressed})
       : super(key: key);
 
   @override
@@ -61,6 +65,9 @@ class CircleButton extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(shape: BoxShape.circle, color: bgColor),
         padding: EdgeInsets.all(5),
-        child: icon);
+        child: IconButton(
+          icon: icon,
+          onPressed: onPressed,
+        ));
   }
 }
