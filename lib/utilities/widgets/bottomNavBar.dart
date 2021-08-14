@@ -1,3 +1,4 @@
+import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -15,6 +16,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+        iconSize: 28,
+        selectedItemColor: CustomColors.secondary,
+        unselectedItemColor: CustomColors.icon_not_selected,
         showUnselectedLabels: false,
         showSelectedLabels: false,
         currentIndex: widget.currentTab,
@@ -22,11 +26,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
           widget.onSelectTab(i);
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "ssg"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.workspaces), label: "dfdhdh"),
-          BottomNavigationBarItem(icon: Icon(Icons.edit), label: "gdtt"),
-          BottomNavigationBarItem(icon: CircleAvatar(), label: "gdtt"),
+              icon: Icon(Icons.dashboard), label: "Dashboard"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.sim_card_sharp), label: "Job Cards"),
+          BottomNavigationBarItem(icon: Icon(Icons.edit), label: "Remarks"),
+          BottomNavigationBarItem(icon: CircleAvatar(), label: "Account"),
         ]);
   }
 }

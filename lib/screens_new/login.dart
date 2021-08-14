@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../main.dart';
+import 'phoneApp.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
   @override
@@ -108,8 +111,19 @@ class LoginPage extends StatelessWidget {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Navigator.pushReplacementNamed(
-                                          context, "not_Started_Screen");
+                                      if (MediaQuery.of(context).size.width >
+                                          700)
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TabApp()));
+                                      else
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PhoneApp()));
                                     },
                                   ),
                                 )

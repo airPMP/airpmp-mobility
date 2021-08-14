@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: HomeApp()
+        home: LoginPage()
         // routes: {
         //   "not_Started_Screen": (context) => MainPage(stage: Stage.Not_Started),
         //   "in_Progress_Screen": (context) => MainPage(stage: Stage.In_Progress),
@@ -48,55 +48,5 @@ class MyApp extends StatelessWidget {
         // initialRoute: "login", // onGenerateRoute: RouterGenerator.generateRoute,
         // initialRoute: '/resource_page',
         );
-  }
-}
-
-class HomeApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => HomeAppState();
-}
-
-class HomeAppState extends State<HomeApp> {
-  int currentTab = 1;
-  Map<int, GlobalKey<NavigatorState>> navigatorKeys = {
-    0: GlobalKey<NavigatorState>(),
-    1: GlobalKey<NavigatorState>(),
-    2: GlobalKey<NavigatorState>(),
-    3: GlobalKey<NavigatorState>(),
-  };
-  void _selectTab(int tabItem) {
-    setState(() {
-      currentTab = tabItem;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async =>
-          !await navigatorKeys[currentTab]!.currentState!.maybePop(),
-      child: Scaffold(
-        body: Stack(children: <Widget>[
-          _buildOffstageNavigator(0),
-          _buildOffstageNavigator(1),
-          _buildOffstageNavigator(2),
-          _buildOffstageNavigator(3),
-        ]),
-        bottomNavigationBar: BottomNavigation(
-          currentTab: currentTab,
-          onSelectTab: _selectTab,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildOffstageNavigator(int tabItem) {
-    return Offstage(
-      offstage: currentTab != tabItem,
-      child: TabNavigator(
-        navigatorKey: navigatorKeys[tabItem]!,
-        tabItem: tabItem,
-      ),
-    );
   }
 }

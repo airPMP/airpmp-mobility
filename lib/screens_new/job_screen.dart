@@ -7,46 +7,37 @@ import 'package:airpmp_mobility/utilities/constants/colors.dart';
 import 'package:airpmp_mobility/utilities/widgets/components/roundedButton.dart';
 import 'package:flutter/material.dart';
 
-class JobPage extends StatelessWidget {
+class JobPagePhone extends StatelessWidget {
   final Function onPush;
-  const JobPage({Key? key, required this.onPush}) : super(key: key);
+  const JobPagePhone({Key? key, required this.onPush}) : super(key: key);
   @override
   Widget build(BuildContext pageContext) {
-    return LayoutBuilder(builder: (context, bc) {
-      if (bc.maxWidth < 700) {
-        return Scaffold(
-            appBar: AppBar(
-              flexibleSpace: Container(
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.only(bottomRight: Radius.circular(24)),
-                    image: DecorationImage(
-                      image: AssetImage(
-                        "lib/assets/images/appBarBG.png",
-                      ),
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              iconTheme: IconThemeData(color: Colors.white),
-              shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.only(bottomRight: Radius.circular(24))),
-              title: Text(
-                "Job Card Details",
-              ),
-            ),
-            body: JobPageBody(
-              onPush: onPush,
-            ), // implemented below this widget.
-            floatingActionButton:
-                JobFloatingPanel()); // implemented below this widget.
-      } else {
-        return TabBaseStructure(
-            child: TabJobScreen(
+    return Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.only(bottomRight: Radius.circular(24)),
+                image: DecorationImage(
+                  image: AssetImage(
+                    "lib/assets/images/appBarBG.png",
+                  ),
+                  fit: BoxFit.cover,
+                )),
+          ),
+          iconTheme: IconThemeData(color: Colors.white),
+          shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.only(bottomRight: Radius.circular(24))),
+          title: Text(
+            "Job Card Details",
+          ),
+        ),
+        body: JobPageBody(
           onPush: onPush,
-        ));
-      }
-    });
+        ), // implemented below this widget.
+        floatingActionButton:
+            JobFloatingPanel()); // implemented below this widget.
   }
 }
 
