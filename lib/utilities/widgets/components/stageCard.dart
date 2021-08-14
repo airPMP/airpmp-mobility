@@ -39,8 +39,10 @@ class StageCard extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Icon(icon, size: 30, color: Colors.white),
                     ),
-                    Text(text,
-                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    Expanded(
+                      child: Text(text,
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                    ),
                   ],
                 ),
               ),

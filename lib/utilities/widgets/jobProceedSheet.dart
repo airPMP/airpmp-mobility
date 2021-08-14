@@ -62,26 +62,36 @@ class JobProceedSheet extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircleButton(
-                            icon: Icon(Icons.remove,
-                                color: CustomColors.secondary)),
-                        Container(width: 50, child: TextField()),
-                        CircleButton(
-                            icon:
-                                Icon(Icons.add, color: CustomColors.secondary))
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.remove, color: Colors.white),
+                        ),
+                        Container(
+                          width: 50,
+                          child: TextField(),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.add, color: Colors.white),
+                        )
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CircleButton(
-                            icon: Icon(Icons.remove,
-                                color: CustomColors.secondary)),
-                        Container(width: 50, child: TextField()),
-                        CircleButton(
-                            icon:
-                                Icon(Icons.add, color: CustomColors.secondary))
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.remove, color: Colors.white),
+                        ),
+                        Container(
+                          width: 50,
+                          child: TextField(),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.add, color: Colors.white),
+                        ),
                       ],
                     ),
                   ],

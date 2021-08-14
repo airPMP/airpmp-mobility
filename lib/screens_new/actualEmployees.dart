@@ -61,6 +61,7 @@ class ActualResources extends StatelessWidget {
                                     hintText: "Search to add an Employee",
                                     hintStyle: CustomTextStyles.hintTextStyle,
                                     border: InputBorder.none),
+                                onTap: () {},
                               ),
                             ),
                           ),

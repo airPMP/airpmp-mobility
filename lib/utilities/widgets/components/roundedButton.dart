@@ -9,12 +9,15 @@ class CustomRoundedButton extends StatelessWidget {
       : super(key: key);
   final IconData? iconData;
   final String label;
-  final VoidCallback onPressed;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: () {
+        onPressed();
+        print("hello");
+      },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         color: CustomColors.secondary,
