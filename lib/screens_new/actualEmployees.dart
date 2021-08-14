@@ -8,8 +8,11 @@ import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
 
 class ActualResources extends StatelessWidget {
+  final Function onPush;
   final Resource resource;
-  const ActualResources({Key? key, required this.resource}) : super(key: key);
+  const ActualResources(
+      {Key? key, required this.resource, required this.onPush})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, bc) {
@@ -99,7 +102,7 @@ class ActualResources extends StatelessWidget {
                   elements: [
                     SimpleTableElement(
                       onTap: () {
-                        Navigator.pushNamed(context, "job_Card_Screen");
+                        onPush(context, "job_Card_Screen");
                       },
                       datas: [
                         TableValueElement("DA1079"),
@@ -111,7 +114,7 @@ class ActualResources extends StatelessWidget {
                     ),
                     SimpleTableElement(
                       onTap: () {
-                        Navigator.pushNamed(context, "job_Card_Screen");
+                        onPush(context, "job_Card_Screen");
                       },
                       datas: [
                         TableValueElement("DA1079"),
@@ -156,7 +159,10 @@ class ActualResources extends StatelessWidget {
           ),
         );
       } else {
-        return TabBaseStructure(child: TabActualEmployees());
+        return TabBaseStructure(
+            child: TabActualEmployees(
+          onPush: onPush,
+        ));
       }
     });
   }

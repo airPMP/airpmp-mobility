@@ -4,7 +4,8 @@ import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
 
 class TabMainScreen extends StatelessWidget {
-  const TabMainScreen({Key? key}) : super(key: key);
+  final Function onPush;
+  const TabMainScreen({Key? key, required this.onPush}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +108,7 @@ class TabMainScreen extends StatelessWidget {
           ], elements: [
             SimpleTableElement(
               onTap: () {
-                Navigator.pushNamed(context, "job_Card_Screen");
+                onPush(context, "job_Card_Screen");
               },
               datas: [
                 TableValueElement("3.1.2"),
@@ -123,7 +124,7 @@ class TabMainScreen extends StatelessWidget {
             ),
             SimpleTableElement(
               onTap: () {
-                Navigator.pushNamed(context, "job_Card_Screen");
+                onPush(context, "job_Card_Screen");
               },
               datas: [
                 TableValueElement("3.1.2"),

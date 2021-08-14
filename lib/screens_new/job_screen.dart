@@ -8,9 +8,8 @@ import 'package:airpmp_mobility/utilities/widgets/components/roundedButton.dart'
 import 'package:flutter/material.dart';
 
 class JobPage extends StatelessWidget {
-  const JobPage({
-    Key? key,
-  }) : super(key: key);
+  final Function onPush;
+  const JobPage({Key? key, required this.onPush}) : super(key: key);
   @override
   Widget build(BuildContext pageContext) {
     return LayoutBuilder(builder: (context, bc) {
@@ -36,11 +35,16 @@ class JobPage extends StatelessWidget {
                 "Job Card Details",
               ),
             ),
-            body: JobPageBody(), // implemented below this widget.
+            body: JobPageBody(
+              onPush: onPush,
+            ), // implemented below this widget.
             floatingActionButton:
                 JobFloatingPanel()); // implemented below this widget.
       } else {
-        return TabBaseStructure(child: TabJobScreen());
+        return TabBaseStructure(
+            child: TabJobScreen(
+          onPush: onPush,
+        ));
       }
     });
   }
@@ -102,9 +106,8 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
 }
 
 class JobPageBody extends StatefulWidget {
-  const JobPageBody({
-    Key? key,
-  }) : super(key: key);
+  final Function onPush;
+  const JobPageBody({Key? key, required this.onPush}) : super(key: key);
 
   @override
   _JobPageBodyState createState() => _JobPageBodyState();
@@ -177,7 +180,7 @@ class _JobPageBodyState extends State<JobPageBody> {
                       label: "Add Employee",
                       iconData: Icons.person_add,
                       onPressed: () {
-                        Navigator.pushNamed(context, "actual_Employees");
+                        widget.onPush(context, "actual_Employees");
                       },
                     )),
                     Expanded(
@@ -185,7 +188,7 @@ class _JobPageBodyState extends State<JobPageBody> {
                       label: "Add Equipment",
                       iconData: Icons.add,
                       onPressed: () {
-                        Navigator.pushNamed(context, "actual_Equipments");
+                        widget.onPush(context, "actual_Equipments");
                       },
                     ))
                   ],
@@ -200,19 +203,23 @@ class _JobPageBodyState extends State<JobPageBody> {
             ],
           ),
         ),
-        AnimatedCrossFade(
-            firstChild: JobDetailsSheet(
-              onPressed: () {
-                setState(() {
-                  detailsSheetOpen = !detailsSheetOpen;
-                });
-              },
-            ),
-            secondChild: Container(),
-            crossFadeState: detailsSheetOpen
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            duration: Duration(milliseconds: 500)),
+        IgnorePointer(
+          ignoring: !detailsSheetOpen,
+          child: AnimatedCrossFade(
+              firstChild: JobDetailsSheet(
+                onPressed: () {
+                  setState(() {
+                    detailsSheetOpen = !detailsSheetOpen;
+                  });
+                },
+              ),
+              secondChild:
+                  Align(alignment: Alignment.topCenter, child: Container()),
+              crossFadeState: detailsSheetOpen
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: Duration(milliseconds: 500)),
+        ),
       ],
     );
   }

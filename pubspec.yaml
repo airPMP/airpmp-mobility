@@ -24,10 +24,8 @@ dependencies:
   # flutter_inappwebview: any
   webview_flutter: ^0.3.19+9
   flutter_svg: ^0.22.0
-  flutter_bloc: ^0.15.1
   sizer: ^2.0.13
-  # for intercepting back button on nested routing
-  back_button_interceptor: ^4.2.3
+  persistent_bottom_nav_bar: ^4.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

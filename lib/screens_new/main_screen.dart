@@ -16,7 +16,9 @@ import 'tab screens/tabJobScreen.dart';
 
 class MainPage extends StatelessWidget {
   final Stage stage;
-  const MainPage({Key? key, required this.stage}) : super(key: key);
+  final Function onPush;
+  const MainPage({Key? key, required this.stage, required this.onPush})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, bc) {
@@ -149,7 +151,8 @@ class MainPage extends StatelessWidget {
                             "Seawater Fishhole Sidefilling 0-3 mtr Seawater Fishhole Sidefilling 0-3 mtr",
                         iD: "0.14.0",
                         onPressed: () {
-                          Navigator.pushNamed(context, "job_Card_Screen");
+                          onPush(context, "job_Card_Screen");
+                          // onPush(context, "job_Card_Screen");
                         },
                       ));
                 }, childCount: 30))
@@ -158,7 +161,10 @@ class MainPage extends StatelessWidget {
             drawer: CustomDrawer());
       } else {
         // Tablet View
-        return TabBaseStructure(child: TabMainScreen());
+        return TabBaseStructure(
+            child: TabMainScreen(
+          onPush: onPush,
+        ));
       }
     });
   }

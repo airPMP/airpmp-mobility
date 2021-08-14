@@ -5,9 +5,8 @@ import 'package:airpmp_mobility/utilities/widgets/simpleTable.dart';
 import 'package:flutter/material.dart';
 
 class TabJobScreen extends StatelessWidget {
-  const TabJobScreen({
-    Key? key,
-  }) : super(key: key);
+  final Function onPush;
+  const TabJobScreen({Key? key, required this.onPush}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +143,7 @@ class TabJobScreen extends StatelessWidget {
                           label: "Add Employee",
                           iconData: Icons.person_add,
                           onPressed: () {
-                            Navigator.pushNamed(context, "actual_Equipments");
+                            onPush(context, "actual_Equipments");
                           },
                         ),
                       ),
@@ -153,7 +152,7 @@ class TabJobScreen extends StatelessWidget {
                           label: "Add Equipents",
                           iconData: Icons.person_add,
                           onPressed: () {
-                            Navigator.pushNamed(context, "actual_Equipments");
+                            onPush(context, "actual_Equipments");
                           },
                         ),
                       )
@@ -175,9 +174,7 @@ class TabJobScreen extends StatelessWidget {
                 TableElement("CPI", flex: 40),
               ], elements: [
                 SimpleTableElement(
-                  onTap: () {
-                    // Navigator.pushNamed(context, "job_Card_Screen");
-                  },
+                  onTap: () {},
                   datas: [
                     TableValueElement("3.1.2"),
                     TableValueElement("2019-10-09"),
@@ -191,9 +188,7 @@ class TabJobScreen extends StatelessWidget {
                   ],
                 ),
                 SimpleTableElement(
-                  onTap: () {
-                    // Navigator.pushNamed(context, "job_Card_Screen");
-                  },
+                  onTap: () {},
                   datas: [
                     TableValueElement("3.1.2"),
                     TableValueElement("2019-10-09"),

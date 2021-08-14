@@ -37,21 +37,21 @@ class CustomDrawer extends StatelessWidget {
               //         child: StageCard(
               //             icon: Icons.task,
               //             onPressed: () {
-              //               Navigator.pushNamed(context, "not_Started_Screen");
+              //               onPush(context, "not_Started_Screen");
               //             },
               //             text: "Not Started")),
               //     Expanded(
               //         child: StageCard(
               //             icon: Icons.workspaces_outline,
               //             onPressed: () {
-              //               Navigator.pushNamed(context, "in_Progress_Screen");
+              //               onPush(context, "in_Progress_Screen");
               //             },
               //             text: "In Progress")),
               //     Expanded(
               //         child: StageCard(
               //             icon: Icons.access_time,
               //             onPressed: () {
-              //               Navigator.pushNamed(
+              //               onPush(
               //                   context, "waiting_For_Approval_Screen");
               //             },
               //             text: "Waiting for Approval")),
