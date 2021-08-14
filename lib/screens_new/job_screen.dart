@@ -171,7 +171,8 @@ class _JobPageBodyState extends State<JobPageBody> {
                       label: "Add Employee",
                       iconData: Icons.person_add,
                       onPressed: () {
-                        widget.onPush(context, "actual_Employees");
+                        print("HI");
+                        Navigator.pushNamed(context, "actual_Employees");
                       },
                     )),
                     Expanded(
@@ -194,23 +195,19 @@ class _JobPageBodyState extends State<JobPageBody> {
             ],
           ),
         ),
-        IgnorePointer(
-          ignoring: !detailsSheetOpen,
-          child: AnimatedCrossFade(
-              firstChild: JobDetailsSheet(
-                onPressed: () {
-                  setState(() {
-                    detailsSheetOpen = !detailsSheetOpen;
-                  });
-                },
-              ),
-              secondChild:
-                  Align(alignment: Alignment.topCenter, child: Container()),
-              crossFadeState: detailsSheetOpen
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-              duration: Duration(milliseconds: 500)),
-        ),
+        AnimatedCrossFade(
+            firstChild: JobDetailsSheet(
+              onPressed: () {
+                setState(() {
+                  detailsSheetOpen = !detailsSheetOpen;
+                });
+              },
+            ),
+            secondChild: Container(),
+            crossFadeState: detailsSheetOpen
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+            duration: Duration(milliseconds: 100)),
       ],
     );
   }
