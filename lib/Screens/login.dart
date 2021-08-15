@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'PhoneScreens/phoneApp.dart';
 
-
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
   @override
@@ -15,7 +14,7 @@ class LoginPage extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         SvgPicture.asset(
-          "lib/assets/images/bgsvg.svg",
+          "assets/images/bgsvg.svg",
           fit: BoxFit.cover,
         ),
         Column(
@@ -40,8 +39,8 @@ class LoginPage extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage(
-                                  "lib/assets/images/loginbgdesign.png"),
+                              image:
+                                  AssetImage("assets/images/loginbgdesign.png"),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -51,9 +50,9 @@ class LoginPage extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Image.asset("lib/assets/images/airpmo.png"),
+                                Image.asset("assets/images/airpmo.png"),
                                 // SvgPicture.asset(
-                                //   "lib/assets/images/AIRPMO_2.svg",
+                                //   "assets/images/AIRPMO_2.svg",
                                 //   fit: BoxFit.contain,
                                 // ),
                                 Align(
@@ -65,8 +64,7 @@ class LoginPage extends StatelessWidget {
                                     TextField(
                                       decoration: InputDecoration(
                                         hintText: "Email or Mobile",
-                                        hintStyle:
-                                            CustomTextStyles.Hint_style,
+                                        hintStyle: CustomTextStyles.Hint_style,
                                       ),
                                       textAlignVertical:
                                           TextAlignVertical.bottom,
@@ -77,8 +75,7 @@ class LoginPage extends StatelessWidget {
                                     TextField(
                                       decoration: InputDecoration(
                                         hintText: "Password",
-                                        hintStyle:
-                                            CustomTextStyles.Hint_style,
+                                        hintStyle: CustomTextStyles.Hint_style,
                                       ),
                                       textAlignVertical:
                                           TextAlignVertical.bottom,
@@ -100,7 +97,8 @@ class LoginPage extends StatelessWidget {
                                         children: [
                                           Text(
                                             "LOGIN ",
-                                            style: CustomTextStyles.Button_subtitle,
+                                            style: CustomTextStyles
+                                                .Button_subtitle,
                                           ),
                                           Icon(
                                             Icons.send,

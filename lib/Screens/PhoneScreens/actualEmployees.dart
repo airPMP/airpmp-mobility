@@ -1,4 +1,3 @@
-
 import 'dart:html';
 
 import 'package:airpmp_mobility/Components/simpleTable.dart';
@@ -23,7 +22,7 @@ class ActualResourcesPhone extends StatelessWidget {
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(24)),
               image: DecorationImage(
                 image: AssetImage(
-                  "lib/assets/images/appBarBG.png",
+                  "assets/images/appBarBG.png",
                 ),
                 fit: BoxFit.cover,
               )),

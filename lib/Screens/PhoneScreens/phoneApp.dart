@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import '../../tabNavigator.dart';
 
-
 class PhoneApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => PhoneAppState();
@@ -93,7 +92,7 @@ class TabAppState extends State<TabApp> {
                   Container(
                       width: 100,
                       margin: EdgeInsets.symmetric(vertical: 25),
-                      child: Image.asset("lib/assets/images/airpmo.png")),
+                      child: Image.asset("assets/images/airpmo.png")),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 25),
                     child: Icon(Icons.dashboard,

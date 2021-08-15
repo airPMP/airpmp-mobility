@@ -57,7 +57,7 @@ class TabMainScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                      image: AssetImage("lib/assets/images/appBarBG.png"),
+                      image: AssetImage("assets/images/appBarBG.png"),
                       fit: BoxFit.cover)),
               child: Padding(
                 padding:

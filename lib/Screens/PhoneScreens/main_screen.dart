@@ -1,11 +1,9 @@
-
 import 'package:airpmp_mobility/Components/Drawer.dart';
 import 'package:airpmp_mobility/Components/JobListTile.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
 import 'package:flutter/material.dart';
-
 
 class MainPagePhone extends StatelessWidget {
   final Stage stage;
@@ -35,8 +33,7 @@ class MainPagePhone extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(
-                                    "lib/assets/images/appBarBG.png"),
+                                image: AssetImage("assets/images/appBarBG.png"),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(30))),

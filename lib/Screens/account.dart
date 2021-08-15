@@ -1,4 +1,3 @@
-
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class AccountPage extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             SvgPicture.asset(
-              "lib/assets/images/bgsvg.svg",
+              "assets/images/bgsvg.svg",
               fit: BoxFit.cover,
             ),
             Column(
@@ -50,7 +49,7 @@ class AccountPage extends StatelessWidget {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(
-                                      "lib/assets/images/loginbgdesign.png"),
+                                      "assets/images/loginbgdesign.png"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -101,16 +100,16 @@ class AccountPage extends StatelessWidget {
                                                 flex: 5,
                                                 child: Text(
                                                   'Project:',
-                                                  style:
-                                                      CustomTextStyles.Main_subtitle,
+                                                  style: CustomTextStyles
+                                                      .Main_subtitle,
                                                 ),
                                               ),
                                               Expanded(
                                                 flex: 5,
                                                 child: Text(
                                                   'Sama Al Jadaf Infrastructure Works DS135/2',
-                                                  style:
-                                                      CustomTextStyles.Main_subtitle,
+                                                  style: CustomTextStyles
+                                                      .Main_subtitle,
                                                 ),
                                               ),
                                             ],
@@ -126,16 +125,16 @@ class AccountPage extends StatelessWidget {
                                                 flex: 5,
                                                 child: Text(
                                                   'Company:',
-                                                  style:
-                                                      CustomTextStyles.Main_subtitle,
+                                                  style: CustomTextStyles
+                                                      .Main_subtitle,
                                                 ),
                                               ),
                                               Expanded(
                                                 flex: 5,
                                                 child: Text(
                                                   'airPMO',
-                                                  style:
-                                                      CustomTextStyles.Main_subtitle,
+                                                  style: CustomTextStyles
+                                                      .Main_subtitle,
                                                 ),
                                               ),
                                             ],
@@ -151,16 +150,16 @@ class AccountPage extends StatelessWidget {
                                                 flex: 5,
                                                 child: Text(
                                                   'Job Cards Assigned:',
-                                                  style:
-                                                      CustomTextStyles.Main_subtitle,
+                                                  style: CustomTextStyles
+                                                      .Main_subtitle,
                                                 ),
                                               ),
                                               Expanded(
                                                 flex: 5,
                                                 child: Text(
                                                   '7',
-                                                  style:
-                                                      CustomTextStyles.Main_subtitle,
+                                                  style: CustomTextStyles
+                                                      .Main_subtitle,
                                                 ),
                                               ),
                                             ],

@@ -1,4 +1,3 @@
-
 import 'package:airpmp_mobility/Components/CustomRoundedButton.dart';
 import 'package:airpmp_mobility/Components/JobDetailsDropdown.dart';
 import 'package:airpmp_mobility/Components/JobProceedButton.dart';
@@ -19,7 +18,7 @@ class JobPagePhone extends StatelessWidget {
                     BorderRadius.only(bottomRight: Radius.circular(24)),
                 image: DecorationImage(
                   image: AssetImage(
-                    "lib/assets/images/appBarBG.png",
+                    "assets/images/appBarBG.png",
                   ),
                   fit: BoxFit.cover,
                 )),
