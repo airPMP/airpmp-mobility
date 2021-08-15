@@ -1,14 +1,13 @@
-import 'package:airpmp_mobility/screens_new/job_screen.dart';
-import 'package:airpmp_mobility/screens_new/main_screen.dart';
-import 'package:airpmp_mobility/screens_new/tab%20screens/tabMainScreen.dart';
-import 'package:airpmp_mobility/utilities/constants/enums.dart';
+import 'package:airpmp_mobility/Screens/login.dart';
 import 'package:flutter/material.dart';
-
-import 'screens_new/account.dart';
-import 'screens_new/actualEmployees.dart';
-import 'screens_new/login.dart';
-import 'screens_new/tab screens/tabActualEmployees.dart';
-import 'screens_new/tab screens/tabJobScreen.dart';
+import 'Constants/Enums.dart';
+import 'Screens/PhoneScreens/actualEmployees.dart';
+import 'Screens/PhoneScreens/job_screen.dart';
+import 'Screens/PhoneScreens/main_screen.dart';
+import 'Screens/TabScreens/tabActualEmployees.dart';
+import 'Screens/TabScreens/tabJobScreen.dart';
+import 'Screens/TabScreens/tabMainScreen.dart';
+import 'Screens/account.dart';
 
 class CustomNavigator extends StatelessWidget {
   CustomNavigator(
