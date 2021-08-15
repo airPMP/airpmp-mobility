@@ -1,9 +1,10 @@
 import 'package:airpmp_mobility/Components/Side_Nav_Bar.dart';
+import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+  final Function(Stage) onChanged;
+  const CustomDrawer({Key? key, required this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,13 @@ class CustomDrawer extends StatelessWidget {
               },
             ),
           ),
-          Expanded(child: SideNavBar()
-             
-              ),
+          Expanded(child: SideNavBar(
+            onchanged: (st) {
+              onChanged(st);
+
+              Navigator.pop(context);
+            },
+          )),
         ],
       ),
     );

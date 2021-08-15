@@ -71,7 +71,7 @@ class TabJobScreen extends StatelessWidget {
                           child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
                               decoration: BoxDecoration(
-                                  color: CustomColors.Secondary,
+                                  color: CustomColors.secondary,
                                   borderRadius: BorderRadius.horizontal(
                                       left: Radius.circular(10))),
                               child: Center(
@@ -90,7 +90,7 @@ class TabJobScreen extends StatelessWidget {
                           child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
                               decoration: BoxDecoration(
-                                color: CustomColors.Secondary,
+                                color: CustomColors.secondary,
                               ),
                               child: Center(
                                   child: Text(
@@ -107,7 +107,7 @@ class TabJobScreen extends StatelessWidget {
                           child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
                               decoration: BoxDecoration(
-                                color: CustomColors.Secondary,
+                                color: CustomColors.secondary,
                               ),
                               child: Center(
                                   child: Text(
@@ -225,7 +225,7 @@ class TabJobScreen extends StatelessWidget {
             ],
           ),
           Card(
-              color: CustomColors.Secondary,
+              color: CustomColors.secondary,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               child: Padding(
@@ -255,7 +255,7 @@ class TabJobScreen extends StatelessWidget {
                         icon: Icon(
                       Icons.save,
                       size: 30,
-                      color: CustomColors.Secondary,
+                      color: CustomColors.secondary,
                     )),
                   ],
                 ),

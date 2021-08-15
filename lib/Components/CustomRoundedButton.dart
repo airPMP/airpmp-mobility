@@ -16,11 +16,10 @@ class CustomRoundedButton extends StatelessWidget {
     return InkWell(
       onTap: () {
         onPressed();
-        print("hello");
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: CustomColors.Secondary,
+        color: CustomColors.secondary,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

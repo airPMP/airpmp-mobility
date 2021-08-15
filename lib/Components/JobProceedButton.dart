@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'CustomRoundedButton.dart';
 
-
 class JobProceedButton extends StatelessWidget {
   final VoidCallback onClosed;
   const JobProceedButton({Key? key, required this.onClosed}) : super(key: key);
@@ -15,7 +14,7 @@ class JobProceedButton extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
       height: 300,
       decoration: BoxDecoration(
-          color: CustomColors.Secondary,
+          color: CustomColors.secondary,
           borderRadius: BorderRadius.circular(24)),
       //outer column containing the proceed and close button, with the main column
       child: Column(
@@ -115,14 +114,14 @@ class JobProceedButton extends StatelessWidget {
                       child: Text(
                         "Proceed",
                         style: TextStyle(
-                            fontSize: 18, color: CustomColors.Secondary),
+                            fontSize: 18, color: CustomColors.secondary),
                       ),
                       onPressed: () {},
                     ),
                   ),
                   CircleButton(
                     onPressed: onClosed,
-                    icon: Icon(Icons.close, color: CustomColors.Secondary),
+                    icon: Icon(Icons.close, color: CustomColors.secondary),
                     bgColor: Colors.white,
                   )
                 ]),

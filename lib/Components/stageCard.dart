@@ -1,15 +1,38 @@
+import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:flutter/material.dart';
 
 class StageCard extends StatelessWidget {
-  final IconData icon;
+  final Stage stage;
   final String text;
+  final IconData icon;
   final VoidCallback onPressed;
   const StageCard(
       {Key? key,
+      required this.stage,
       required this.icon,
       required this.onPressed,
       required this.text})
       : super(key: key);
+
+  String? _stageToFile() {
+    String f = "assets/images/";
+    switch (stage) {
+      case Stage.Not_Started:
+        f += "Not_Started";
+        break;
+      case Stage.In_Progress:
+        f += "In_Progress";
+        break;
+      case Stage.Waiting:
+        f += "Waiting";
+        break;
+      case Stage.Approved:
+        f += "Approved";
+        break;
+    }
+    f += ".png";
+    return f;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +51,7 @@ class StageCard extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   image: DecorationImage(
-                      image: AssetImage("assets/images/appBarBG.png"),
-                      fit: BoxFit.cover)),
+                      image: AssetImage(_stageToFile()!), fit: BoxFit.cover)),
               child: Padding(
                 padding: const EdgeInsets.all(13.0),
                 child: Column(
@@ -41,7 +63,10 @@ class StageCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(text,
-                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18)),
                     ),
                   ],
                 ),

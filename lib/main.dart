@@ -21,23 +21,6 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: LoginPage()
-        // routes: {
-        //   "not_Started_Screen": (context) => MainPage(stage: Stage.Not_Started),
-        //   "in_Progress_Screen": (context) => MainPage(stage: Stage.In_Progress),
-        //   "waiting_For_Approval_Screen": (context) =>
-        //       MainPage(stage: Stage.Waiting),
-        //   "approved_Screen": (context) => MainPage(stage: Stage.Approved),
-        //   "job_Card_Screen": (context) => JobPage(),
-        //   "actual_Employees": (context) =>
-        //       ActualResources(resource: Resource.Employee),
-        //   "actual_Equipments": (context) =>
-        //       ActualResources(resource: Resource.Equipment),
-        //   "login": (context) => LoginPage(),
-        //   "account": (context) => AccountPage()
-        // },
-        // initialRoute: "login", // onGenerateRoute: RouterGenerator.generateRoute,
-        // initialRoute: '/resource_page',
-        );
+        home: LoginPage());
   }
 }

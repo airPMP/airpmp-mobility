@@ -70,7 +70,7 @@ class TabActualResources extends StatelessWidget {
                       child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           decoration: BoxDecoration(
-                              color: CustomColors.Secondary,
+                              color: CustomColors.secondary,
                               borderRadius: BorderRadius.horizontal(
                                   left: Radius.circular(10))),
                           child: Center(
@@ -114,9 +114,7 @@ class TabActualResources extends StatelessWidget {
               TableElement("CPI", flex: 40),
             ], elements: [
               SimpleTableElement(
-                onTap: () {
-                  onPush(context, "job_Card_Screen");
-                },
+                onTap: () {},
                 datas: [
                   TableValueElement("3.1.2"),
                   TableValueElement("2019-10-09"),
@@ -130,9 +128,7 @@ class TabActualResources extends StatelessWidget {
                 ],
               ),
               SimpleTableElement(
-                onTap: () {
-                  onPush(context, "job_Card_Screen");
-                },
+                onTap: () {},
                 datas: [
                   TableValueElement("3.1.2"),
                   TableValueElement("2019-10-09"),

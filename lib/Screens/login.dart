@@ -3,7 +3,7 @@ import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'PhoneScreens/phoneApp.dart';
+import 'phoneApp.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -88,7 +88,7 @@ class LoginPage extends StatelessWidget {
                                     style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
-                                      CustomColors.Secondary,
+                                      CustomColors.secondary,
                                     )),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -108,19 +108,14 @@ class LoginPage extends StatelessWidget {
                                       ),
                                     ),
                                     onPressed: () {
-                                      if (MediaQuery.of(context).size.width >
-                                          700)
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TabApp()));
-                                      else
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PhoneApp()));
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => MainApp(
+                                                  isTab: MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      700)));
                                     },
                                   ),
                                 )

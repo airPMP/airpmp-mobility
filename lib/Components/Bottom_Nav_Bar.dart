@@ -17,8 +17,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
         iconSize: 28,
-        selectedItemColor: CustomColors.Secondary,
-        unselectedItemColor: CustomColors.Icon_not_selected,
+        selectedItemColor: CustomColors.secondary,
+        unselectedItemColor: CustomColors.icon_not_selected,
         showUnselectedLabels: false,
         showSelectedLabels: false,
         currentIndex: widget.currentTab,

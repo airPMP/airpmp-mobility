@@ -5,11 +5,37 @@ import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
 import 'package:flutter/material.dart';
 
-class MainPagePhone extends StatelessWidget {
+class MainPagePhone extends StatefulWidget {
   final Stage stage;
   final Function? onPush;
   const MainPagePhone({Key? key, required this.stage, this.onPush})
       : super(key: key);
+
+  @override
+  _MainPagePhoneState createState() => _MainPagePhoneState();
+}
+
+class _MainPagePhoneState extends State<MainPagePhone> {
+  Stage stage = Stage.Not_Started;
+  String? _stageToString() {
+    switch (stage) {
+      case Stage.Not_Started:
+        return "Not Started";
+      case Stage.In_Progress:
+        return "In Progress";
+      case Stage.Waiting:
+        return "Waiting For Approval";
+      case Stage.Approved:
+        return "Approved";
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    stage = widget.stage;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,11 +113,11 @@ class MainPagePhone extends StatelessWidget {
                     ),
                     Icon(
                       Icons.task,
-                      color: CustomColors.Icon_not_selected,
+                      color: CustomColors.icon_not_selected,
                       size: 30,
                     ),
                     Text(
-                      "Not Started",
+                      _stageToString() ?? "Not Started",
                       style: TextStyle(
                           color: Color(0xff39597E),
                           fontWeight: FontWeight.bold),
@@ -112,14 +138,14 @@ class MainPagePhone extends StatelessWidget {
                   SizedBox(width: 10),
                   Text("Project:  ",
                       style: TextStyle(
-                          color: CustomColors.Textcolor,
+                          color: CustomColors.textcolor,
                           fontWeight: FontWeight.bold,
                           fontSize: 18)),
                   Expanded(
                     child: Text(
                       "Sama Al Jaddaf infrastructure works DS135/2",
                       style: TextStyle(
-                          color: CustomColors.Textcolor,
+                          color: CustomColors.textcolor,
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
                       maxLines: 2,
@@ -138,13 +164,19 @@ class MainPagePhone extends StatelessWidget {
                         "Seawater Fishhole Sidefilling 0-3 mtr Seawater Fishhole Sidefilling 0-3 mtr",
                     iD: "0.14.0",
                     onPressed: () {
-                      onPush!(context, "job_Card_Screen");
+                      widget.onPush!(context, "job_Card_Screen");
                     },
                   ));
             }, childCount: 30))
           ],
         ),
-        drawer: CustomDrawer());
+        drawer: CustomDrawer(
+          onChanged: (Stage st) {
+            setState(() {
+              stage = st;
+            });
+          },
+        ));
   }
 }
 

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
@@ -17,6 +15,7 @@ class ActualResourcesPhone extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(24)),
@@ -67,7 +66,7 @@ class ActualResourcesPhone extends StatelessWidget {
                           onPressed: () {},
                         ),
                         decoration: BoxDecoration(
-                            color: CustomColors.Secondary,
+                            color: CustomColors.secondary,
                             borderRadius: BorderRadius.horizontal(
                                 right: Radius.circular(20))),
                       ),
@@ -95,9 +94,7 @@ class ActualResourcesPhone extends StatelessWidget {
               ],
               elements: [
                 SimpleTableElement(
-                  onTap: () {
-                    onPush(context, "job_Card_Screen");
-                  },
+                  onTap: () {},
                   datas: [
                     TableValueElement("DA1079"),
                     TableValueElement("PETER HAINE", maxLines: 2),
@@ -107,9 +104,7 @@ class ActualResourcesPhone extends StatelessWidget {
                   ],
                 ),
                 SimpleTableElement(
-                  onTap: () {
-                    onPush(context, "job_Card_Screen");
-                  },
+                  onTap: () {},
                   datas: [
                     TableValueElement("DA1079"),
                     TableValueElement("PETER HAINE", maxLines: 2),
@@ -127,7 +122,7 @@ class ActualResourcesPhone extends StatelessWidget {
           // width: 100,
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
-              color: CustomColors.Secondary,
+              color: CustomColors.secondary,
               borderRadius: BorderRadius.circular(40)),
           child: InkWell(
             onTap: () {},

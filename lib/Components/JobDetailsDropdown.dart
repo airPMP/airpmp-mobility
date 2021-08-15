@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class JobDetailsDropDown extends StatelessWidget {
   final VoidCallback onPressed;
-  const JobDetailsDropDown({Key? key, required this.onPressed}) : super(key: key);
+  const JobDetailsDropDown({Key? key, required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class JobDetailsDropDown extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: CustomColors.Secondary),
+            color: CustomColors.secondary),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -40,7 +41,7 @@ class JobDetailsDropDown extends StatelessWidget {
                       child: TextButton(
                         child: Text(
                           "Details",
-                          style: TextStyle(color: CustomColors.Secondary),
+                          style: TextStyle(color: CustomColors.secondary),
                         ),
                         onPressed: onPressed,
                       ),

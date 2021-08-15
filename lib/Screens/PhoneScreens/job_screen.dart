@@ -62,7 +62,7 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
         child: Container(
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-                color: CustomColors.Secondary,
+                color: CustomColors.secondary,
                 borderRadius: BorderRadius.circular(24)),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -116,7 +116,7 @@ class _JobPageBodyState extends State<JobPageBody> {
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                color: CustomColors.Secondary,
+                color: CustomColors.secondary,
                 child: Container(
                   height: 50,
                   child: Row(
@@ -142,7 +142,7 @@ class _JobPageBodyState extends State<JobPageBody> {
                           child: TextButton(
                             child: Text(
                               "Details",
-                              style: TextStyle(color: CustomColors.Secondary),
+                              style: TextStyle(color: CustomColors.secondary),
                             ),
                             onPressed: () {
                               setState(() {
@@ -169,7 +169,6 @@ class _JobPageBodyState extends State<JobPageBody> {
                       label: "Add Employee",
                       iconData: Icons.person_add,
                       onPressed: () {
-                        print("HI");
                         Navigator.pushNamed(context, "actual_Employees");
                       },
                     )),
@@ -193,19 +192,22 @@ class _JobPageBodyState extends State<JobPageBody> {
             ],
           ),
         ),
-        AnimatedCrossFade(
-            firstChild: JobDetailsDropDown(
-              onPressed: () {
-                setState(() {
-                  detailsSheetOpen = !detailsSheetOpen;
-                });
-              },
-            ),
-            secondChild: Container(),
-            crossFadeState: detailsSheetOpen
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            duration: Duration(milliseconds: 100)),
+        IgnorePointer(
+          ignoring: !detailsSheetOpen,
+          child: AnimatedCrossFade(
+              firstChild: JobDetailsDropDown(
+                onPressed: () {
+                  setState(() {
+                    detailsSheetOpen = !detailsSheetOpen;
+                  });
+                },
+              ),
+              secondChild: Container(),
+              crossFadeState: detailsSheetOpen
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: Duration(milliseconds: 100)),
+        ),
       ],
     );
   }

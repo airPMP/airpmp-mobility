@@ -33,22 +33,6 @@ class TabMainScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 60.0),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.end,
-          //     children: [
-          //       Padding(
-          //         padding: const EdgeInsets.symmetric(horizontal: 18.0),
-          //         child: Icon(
-          //           Icons.notifications,
-          //           size: 30,
-          //         ),
-          //       ),
-          //       CircleAvatar()
-          //     ],
-          //   ),
-          // ),
           SizedBox(height: 20),
           Expanded(
             flex: 18,
@@ -85,7 +69,7 @@ class TabMainScreen extends StatelessWidget {
                       child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 18),
                           decoration: BoxDecoration(
-                              color: CustomColors.Secondary,
+                              color: CustomColors.secondary,
                               borderRadius: BorderRadius.horizontal(
                                   left: Radius.circular(10))),
                           child: Center(
