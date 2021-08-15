@@ -75,8 +75,7 @@ class MainAppState extends State<MainApp> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 25),
                           child: IconButton(
-                            icon: Icon(Icons.card_giftcard_outlined,
-                                color: _getColor(1)),
+                            icon: Icon(Icons.workspaces, color: _getColor(1)),
                             onPressed: () {
                               _selectTab(1);
                             },
@@ -111,6 +110,8 @@ class MainAppState extends State<MainApp> {
                     Expanded(
                         flex: 30,
                         child: SideNavBar(
+                          isTab: true,
+                          stage: stage,
                           onchanged: _selectStage,
                         )),
                   Expanded(

@@ -3,8 +3,10 @@ import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
+  final Stage stage;
   final Function(Stage) onChanged;
-  const CustomDrawer({Key? key, required this.onChanged}) : super(key: key);
+  const CustomDrawer({Key? key, required this.onChanged, required this.stage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,10 @@ class CustomDrawer extends StatelessWidget {
               },
             ),
           ),
-          Expanded(child: SideNavBar(
+          Expanded(
+              child: SideNavBar(
+            isTab: false,
+            stage: stage,
             onchanged: (st) {
               onChanged(st);
 

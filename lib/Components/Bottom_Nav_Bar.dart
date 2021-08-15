@@ -15,23 +15,30 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        iconSize: 28,
-        selectedItemColor: CustomColors.secondary,
-        unselectedItemColor: CustomColors.icon_not_selected,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        currentIndex: widget.currentTab,
-        onTap: (i) {
-          widget.onSelectTab(i);
-        },
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard), label: "Dashboard"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.sim_card_sharp), label: "Job Cards"),
-          BottomNavigationBarItem(icon: Icon(Icons.edit), label: "Remarks"),
-          BottomNavigationBarItem(icon: CircleAvatar(), label: "Account"),
-        ]);
+    return SizedBox(
+      height: 60,
+      child: BottomNavigationBar(
+          // iconSize: 28,
+          selectedItemColor: CustomColors.secondary,
+          unselectedItemColor: CustomColors.icon_not_selected,
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+          currentIndex: widget.currentTab,
+          onTap: (i) {
+            widget.onSelectTab(i);
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.dashboard), label: "Dashboard"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.workspaces), label: "Job Cards"),
+            BottomNavigationBarItem(icon: Icon(Icons.edit), label: "Remarks"),
+            BottomNavigationBarItem(
+                icon: CircleAvatar(
+                  maxRadius: 14,
+                ),
+                label: "Account"),
+          ]),
+    );
   }
 }

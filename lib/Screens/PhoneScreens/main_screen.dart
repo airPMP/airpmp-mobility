@@ -171,6 +171,7 @@ class _MainPagePhoneState extends State<MainPagePhone> {
           ],
         ),
         drawer: CustomDrawer(
+          stage: stage,
           onChanged: (Stage st) {
             setState(() {
               stage = st;
