@@ -37,7 +37,7 @@ class StageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(8.0),
       child: AspectRatio(
         aspectRatio: 1.4,
         child: Card(
@@ -53,7 +53,7 @@ class StageCard extends StatelessWidget {
                   image: DecorationImage(
                       image: AssetImage(_stageToFile()!), fit: BoxFit.cover)),
               child: Padding(
-                padding: const EdgeInsets.all(13.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +64,7 @@ class StageCard extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                          fontSize: 17),
                       textAlign: TextAlign.left,
                       maxLines: 2,
                     ),

@@ -17,19 +17,15 @@ class TabActualResources extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Icon(
-              Icons.notifications,
-              size: 30,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 40.0),
-            child: CircleAvatar(),
-          )
-        ],
+        title: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              "Job Screen",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
+            )),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

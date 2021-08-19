@@ -1,24 +1,30 @@
 import 'package:airpmp_mobility/Components/stageCard.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
+import 'package:airpmp_mobility/Models/ProviderModel.dart';
+import 'package:airpmp_mobility/functions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SideNavBar extends StatefulWidget {
-  final Stage stage;
-  final Function(Stage) onchanged;
+class SideNavBar extends StatelessWidget {
   final bool isTab;
-  const SideNavBar(
-      {Key? key,
-      required this.onchanged,
-      required this.stage,
-      required this.isTab})
+  final onSelected;
+  SideNavBar({Key? key, required this.isTab, required this.onSelected})
       : super(key: key);
 
-  @override
-  _SideNavBarState createState() => _SideNavBarState();
-}
+  final List<Stage> stages = [
+    Stage.Not_Started,
+    Stage.In_Progress,
+    Stage.Waiting,
+    Stage.Approved
+  ];
 
-class _SideNavBarState extends State<SideNavBar> {
+  final List<IconData> icons = [
+    Icons.not_started,
+    Icons.construction,
+    Icons.timelapse,
+    Icons.approval,
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,65 +34,28 @@ class _SideNavBarState extends State<SideNavBar> {
         child: Column(
           children: [
             Container(
-                height: widget.isTab ? 100 : 50,
+                height: isTab ? 100 : 50,
                 child: Center(
                   child: Text("Job Cards",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
                 )),
-            Expanded(
-                child: Align(
-              alignment: widget.stage == Stage.Not_Started
-                  ? Alignment.center
-                  : Alignment.centerLeft,
-              child: StageCard(
-                  stage: Stage.Not_Started,
-                  icon: Icons.not_started,
-                  onPressed: () {
-                    widget.onchanged(Stage.Not_Started);
-                  },
-                  text: "Not Started"),
-            )),
-            Expanded(
-                child: Align(
-              alignment: widget.stage == Stage.In_Progress
-                  ? Alignment.center
-                  : Alignment.centerLeft,
-              child: StageCard(
-                  stage: Stage.In_Progress,
-                  icon: Icons.construction,
-                  onPressed: () {
-                    widget.onchanged(Stage.In_Progress);
-                  },
-                  text: "In Progress"),
-            )),
-            Expanded(
-                child: Align(
-              alignment: widget.stage == Stage.Waiting
-                  ? Alignment.center
-                  : Alignment.centerLeft,
-              child: StageCard(
-                  stage: Stage.Waiting,
-                  icon: Icons.access_time,
-                  onPressed: () {
-                    widget.onchanged(Stage.Waiting);
-                  },
-                  text: "Waiting For Approval"),
-            )),
-            Expanded(
-                child: Align(
-              alignment: widget.stage == Stage.Approved
-                  ? Alignment.center
-                  : Alignment.centerLeft,
-              child: StageCard(
-                  stage: Stage.Approved,
-                  icon: Icons.task,
-                  onPressed: () {
-                    widget.onchanged(Stage.Approved);
-                  },
-                  text: "Approved"),
-            )),
-            if (widget.isTab) SizedBox(height: 50)
+            for (int i = 0; i < 4; i++)
+              Expanded(
+                  child: Align(
+                alignment: Provider.of<ProviderModel>(context).stageSelection ==
+                        stages[i]
+                    ? Alignment.center
+                    : Alignment.centerLeft,
+                child: StageCard(
+                    stage: stages[i],
+                    icon: icons[i],
+                    onPressed: () {
+                      onSelected(stages[i]);
+                    },
+                    text: stageToString(stages[i])!),
+              )),
+            if (isTab) SizedBox(height: 50)
           ],
         ),
       ),

@@ -25,8 +25,8 @@ dependencies:
   webview_flutter: ^0.3.19+9
   flutter_svg: ^0.22.0
   sizer: ^2.0.13
+  provider: ^5.0.0
   # for intercepting back button on nested routing
-  back_button_interceptor: ^4.2.3
   
 
 

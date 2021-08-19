@@ -3,38 +3,17 @@ import 'package:airpmp_mobility/Components/JobListTile.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
+import 'package:airpmp_mobility/Models/ProviderModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class MainPagePhone extends StatefulWidget {
+import '../../functions.dart';
+
+class MainPagePhone extends StatelessWidget {
   final Stage stage;
   final Function? onPush;
   const MainPagePhone({Key? key, required this.stage, this.onPush})
       : super(key: key);
-
-  @override
-  _MainPagePhoneState createState() => _MainPagePhoneState();
-}
-
-class _MainPagePhoneState extends State<MainPagePhone> {
-  Stage stage = Stage.Not_Started;
-  String? _stageToString() {
-    switch (stage) {
-      case Stage.Not_Started:
-        return "Not Started";
-      case Stage.In_Progress:
-        return "In Progress";
-      case Stage.Waiting:
-        return "Waiting For Approval";
-      case Stage.Approved:
-        return "Approved";
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    stage = widget.stage;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +96,9 @@ class _MainPagePhoneState extends State<MainPagePhone> {
                       size: 30,
                     ),
                     Text(
-                      _stageToString() ?? "Not Started",
+                      stageToString(Provider.of<ProviderModel>(context)
+                              .stageSelection) ??
+                          "Not Started",
                       style: TextStyle(
                           color: Color(0xff39597E),
                           fontWeight: FontWeight.bold),
@@ -164,20 +145,13 @@ class _MainPagePhoneState extends State<MainPagePhone> {
                         "Seawater Fishhole Sidefilling 0-3 mtr Seawater Fishhole Sidefilling 0-3 mtr",
                     iD: "0.14.0",
                     onPressed: () {
-                      widget.onPush!(context, "job_Card_Screen");
+                      onPush!(context, "job_Card_Screen");
                     },
                   ));
             }, childCount: 30))
           ],
         ),
-        drawer: CustomDrawer(
-          stage: stage,
-          onChanged: (Stage st) {
-            setState(() {
-              stage = st;
-            });
-          },
-        ));
+        drawer: CustomDrawer());
   }
 }
 
