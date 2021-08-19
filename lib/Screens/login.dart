@@ -1,8 +1,10 @@
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
+import 'package:airpmp_mobility/Models/ProviderModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'phoneApp.dart';
 
 class LoginPage extends StatelessWidget {
@@ -111,11 +113,17 @@ class LoginPage extends StatelessWidget {
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => MainApp(
-                                                  isTab: MediaQuery.of(context)
-                                                          .size
-                                                          .width >
-                                                      700)));
+                                              builder: (context) =>
+                                                  ChangeNotifierProvider<
+                                                          ProviderModel>(
+                                                      create: (context) =>
+                                                          ProviderModel(),
+                                                      child: MainApp(
+                                                          isTab: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width >
+                                                              700))));
                                     },
                                   ),
                                 )

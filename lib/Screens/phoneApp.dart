@@ -2,7 +2,9 @@ import 'package:airpmp_mobility/Components/Bottom_Nav_Bar.dart';
 import 'package:airpmp_mobility/Components/Side_Nav_Bar.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
+import 'package:airpmp_mobility/Models/ProviderModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../tabNavigator.dart';
 import 'account.dart';
@@ -17,7 +19,6 @@ class MainApp extends StatefulWidget {
 
 class MainAppState extends State<MainApp> {
   int currentTab = 1;
-  Stage stage = Stage.Not_Started;
   Map<int, GlobalKey<NavigatorState>> navigatorKeys = {
     0: GlobalKey<NavigatorState>(),
     1: GlobalKey<NavigatorState>(),
@@ -27,12 +28,6 @@ class MainAppState extends State<MainApp> {
   void _selectTab(int tabItem) {
     setState(() {
       currentTab = tabItem;
-    });
-  }
-
-  void _selectStage(Stage st) {
-    setState(() {
-      stage = st;
     });
   }
 
@@ -49,11 +44,11 @@ class MainAppState extends State<MainApp> {
           !await navigatorKeys[currentTab]!.currentState!.maybePop(),
       child: widget.isTab
           ?
-          // Side Nav menu of tablet
+          //Tab App
           Scaffold(
               body: Row(
                 children: [
-                  // Side Navigation Rail
+                  // Side Navigation Rail of App
                   // Navigation rail Widget not used due to the lack of proper trailing property
                   Container(
                     color: CustomColors.primary,
@@ -111,8 +106,10 @@ class MainAppState extends State<MainApp> {
                         flex: 30,
                         child: SideNavBar(
                           isTab: true,
-                          stage: stage,
-                          onchanged: _selectStage,
+                          onSelected: (Stage st) {
+                            Provider.of<ProviderModel>(context, listen: false)
+                                .changeStage(st);
+                          },
                         )),
                   Expanded(
                       flex: currentTab == 1 ? 78 : 108,
@@ -120,7 +117,10 @@ class MainAppState extends State<MainApp> {
                         padding: const EdgeInsets.all(15.0),
                         child: Stack(children: <Widget>[
                           _buildDashBoard(0),
-                          _buildOffstageNavigator(1, stage),
+                          _buildOffstageNavigator(
+                              1,
+                              Provider.of<ProviderModel>(context)
+                                  .stageSelection),
                           _buildRemarks(2),
                           _buildAccount(3),
                         ]),
@@ -130,7 +130,7 @@ class MainAppState extends State<MainApp> {
             )
           :
 
-          // Bottom Nav bar of Phone
+          // Phone App
           Scaffold(
               body: Stack(children: <Widget>[
                 _buildDashBoard(0),

@@ -89,7 +89,7 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
       ),
       crossFadeState:
           panelIsOpen ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 100),
     );
   }
 }

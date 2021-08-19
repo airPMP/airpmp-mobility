@@ -2,6 +2,7 @@ import 'package:airpmp_mobility/Components/CustomRoundedButton.dart';
 import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
+import 'package:airpmp_mobility/functions.dart';
 import 'package:flutter/material.dart';
 
 class TabJobScreen extends StatelessWidget {
@@ -15,19 +16,15 @@ class TabJobScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Icon(
-              Icons.notifications,
-              size: 30,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 40.0),
-            child: CircleAvatar(),
-          )
-        ],
+        title: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              "Job Screen",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
+            )),
       ),
       body: Stack(
         alignment: Alignment.bottomRight,
