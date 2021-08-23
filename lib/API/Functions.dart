@@ -31,7 +31,17 @@ Future<LoginDetails> login(
   return loginDetails;
 }
 
-FutureOr<void> saveToken(String token) async {
+//<==============Secure Storage=================>
 
-  
+final SecureStorage secureStorage = SecureStorage();
+
+FutureOr<void> saveToken(String token) async {
+  secureStorage.writeSecureData("token", token);
+  print("Token has been saved");
+}
+
+FutureOr<String> getToken() async {
+  String token =
+      await secureStorage.readSecureData("token") ?? "Token is invalid";
+  return token;
 }
