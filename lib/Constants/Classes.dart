@@ -1,3 +1,5 @@
+import 'package:airpmp_mobility/API/ApiClass.dart';
+import 'package:airpmp_mobility/API/Functions.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginDetails {
@@ -46,7 +48,7 @@ class MyJobCard {
   // assingedDate is createdDate
   late String assignedDate;
   late String tobeAchievedQTY;
- late DateTime convertedCreatedDateTime;
+  late DateTime convertedCreatedDateTime;
 
   MyJobCard.fromJson(Map<String, dynamic> json) {
     jobCardNumber = json['_id'];
@@ -57,11 +59,9 @@ class MyJobCard {
     assignedDate = json['assignedDate'];
     tobeAchievedQTY = json['tobeAchievedQTY'];
     convertedCreatedDateTime = DateTime.parse(assignedDate);
-    
   }
 }
 // <==============================================================>
-
 
 class MyProject {
   MyProject({required this.name, required this.id, required this.active});
@@ -73,5 +73,38 @@ class MyProject {
     name = json['name'];
     id = json['_id'];
     active = json['active'];
+  }
+}
+
+class JobCardData {
+  List<MyJobCard> _myJobCards = [];
+  String _token = '';
+
+  Future getJobCards() async {
+    _token = await getToken();
+    _myJobCards = await ApiClass().getMyJobCard(_token) ?? [];
+  }
+
+  List<MyJobCard> getInProgressJobCard(String token) {
+    print('geting in progress jsc');
+    List<MyJobCard> inProgressList = [];
+
+    for (MyJobCard aJC in _myJobCards) {
+      if (aJC.jcStatus == "In-Progress") {
+        inProgressList.add(aJC);
+      }
+    }
+    return inProgressList;
+  }
+
+  List<MyJobCard> getExecutedJobCard(String token) {
+    print('geting in progress jsc');
+    List<MyJobCard> inProgressList = [];
+    for (MyJobCard aJC in _myJobCards) {
+      if (aJC.jcStatus == "Executed") {
+        inProgressList.add(aJC);
+      }
+    }
+    return inProgressList;
   }
 }
