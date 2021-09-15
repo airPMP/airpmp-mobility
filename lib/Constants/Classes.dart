@@ -1,5 +1,6 @@
 import 'package:airpmp_mobility/API/ApiClass.dart';
 import 'package:airpmp_mobility/API/Functions.dart';
+import 'package:airpmp_mobility/API/ResourceClasses.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginDetails {
@@ -49,6 +50,10 @@ class MyJobCard {
   late String assignedDate;
   late String tobeAchievedQTY;
   late DateTime convertedCreatedDateTime;
+  List<ActualResource> actuals = [];
+  // List<PlannedResource> plannedResource = [];
+  // List<PlannedActualResource> plannedActualResource = [];
+  // List<UnplannedResource> unplannedResource = [];
 
   MyJobCard.fromJson(Map<String, dynamic> json) {
     jobCardNumber = json['_id'];
@@ -59,8 +64,29 @@ class MyJobCard {
     assignedDate = json['assignedDate'];
     tobeAchievedQTY = json['tobeAchievedQTY'];
     convertedCreatedDateTime = DateTime.parse(assignedDate);
+    actuals = List.generate((json['actuals'] ?? []).length,
+        (index) => ActualResource.fromJson(json['actuals'][index]));
+
+    // List<Map<String, dynamic>> justplannedlist = (json['planned'] ?? [])
+    //     .where((element) => (element['actualhours'] ?? 0) == 0);
+    // plannedResource = List.generate(justplannedlist.length,
+    //     (index) => PlannedResource.fromJson(justplannedlist[index]));
+
+    // List<Map<String, dynamic>> plannedactuallist = (json['planned'] ?? [])
+    //     .where((element) =>
+    //         (element['actualhours'] ?? 0) > 0 &&
+    //         !(element['unPlanned'] ?? false));
+    // plannedResource = List.generate(plannedactuallist.length,
+    //     (index) => PlannedResource.fromJson(plannedactuallist[index]));
+    // List<Map<String, dynamic>> unplannedactuallist = (json['planned'] ?? [])
+    //     .where((element) => (element['unPlanned'] ?? false));
+    // plannedResource = List.generate(unplannedactuallist.length,
+    //     (index) => PlannedResource.fromJson(unplannedactuallist[index]));
   }
+  // fg(){List ij = actuals.where((element) =>element[])}
 }
+// <==============================================================>
+
 // <==============================================================>
 
 class MyProject {

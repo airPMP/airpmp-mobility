@@ -112,8 +112,8 @@ class ApiClass {
     }
   }
 
-// <Not Complete -- UNDER CONSTRUCTION>
-  Future<Map<String, dynamic>?> addResources(String token) async {
+// < Not Complete -- UNDER CONSTRUCTION >
+  Future<Map<String, dynamic>?> addResources(List<MyJobCard> jobs) async {
     print('getting job card from internet..');
     var myJobCardsJson;
     var aJobCard;
@@ -130,6 +130,7 @@ class ApiClass {
     Map body = {
       "_id": projectID,
       "actuals": [
+        for (MyJobCard job in jobs) {},
         {
           "Id": "AT-EQ-EX-001",
           "designation": "Excavator",
