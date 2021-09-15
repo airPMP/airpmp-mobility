@@ -9,6 +9,7 @@ import 'Functions.dart';
 /// Call getIDs function to fetch IDs from local storage
 class ApiClass {
   String projectID = '', userID = '';
+  String _token = '';
 
   void getIDs() async {
     userID = await getUserId();
@@ -35,11 +36,13 @@ class ApiClass {
     debugPrint("response is working");
     int statuscode = response.statusCode;
     print(statuscode.toString());
-
-    var jsonResponse = json.decode(response.body);
-    print(jsonResponse);
-    LoginDetails loginDetails = LoginDetails.fromJson(jsonResponse);
-    return loginDetails;
+    if (statuscode == 200) {
+      var jsonResponse = json.decode(response.body);
+      LoginDetails loginDetails = LoginDetails.fromJson(jsonResponse);
+      return loginDetails;
+    } else
+      return (LoginDetails(
+          company: "", userid: "", token: "", statuscode: statuscode));
   }
 
 //<==============Get Project Details=================>

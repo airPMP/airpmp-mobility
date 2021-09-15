@@ -4,11 +4,15 @@ import 'package:airpmp_mobility/API/ResourceClasses.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginDetails {
+  int statuscode;
   String userid;
   String token;
   String company;
   LoginDetails(
-      {required this.userid, required this.token, required this.company});
+      {required this.userid,
+      required this.token,
+      required this.company,
+      this.statuscode = 200});
 
   static LoginDetails fromJson(jsonResponse) {
     return LoginDetails(
@@ -113,6 +117,10 @@ class JobCardData {
   Future getJobCards() async {
     _token = await getToken();
     _myJobCards = await ApiClass().getMyJobCard(_token) ?? [];
+  }
+
+  void updateToken(String token) {
+    _token = token;
   }
 
   List<MyJobCard> getInProgressJobCard(String token) {
