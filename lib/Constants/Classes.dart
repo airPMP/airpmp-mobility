@@ -51,22 +51,26 @@ class MyJobCard {
   late String tobeAchievedQTY;
   late DateTime convertedCreatedDateTime;
   List<ActualResource> actuals = [];
+  List<PlannedvsActualResource> plannedvsactuals = [];
   // List<PlannedResource> plannedResource = [];
   // List<PlannedActualResource> plannedActualResource = [];
   // List<UnplannedResource> unplannedResource = [];
 
   MyJobCard.fromJson(Map<String, dynamic> json) {
-    jobCardNumber = json['_id'];
-    activiyName = json['activityName'];
-    zone = json['zone'];
-    jcStatus = json['JCStatus'];
-    activityCode = json['activityCode'];
-    assignedDate = json['assignedDate'];
-    tobeAchievedQTY = json['tobeAchievedQTY'];
-    convertedCreatedDateTime = DateTime.parse(assignedDate);
+    jobCardNumber = json['_id'] ?? "";
+    activiyName = json['activityName'] ?? "";
+    zone = json['zone'] ?? "";
+    jcStatus = json['JCStatus'] ?? "";
+    activityCode = json['activityCode'] ?? "";
+    assignedDate = json['assignedDate'] ?? "";
+    tobeAchievedQTY = json['tobeAchievedQTY'] ?? "";
+    // convertedCreatedDateTime = DateTime.parse(assignedDate);
     actuals = List.generate((json['actuals'] ?? []).length,
         (index) => ActualResource.fromJson(json['actuals'][index]));
-
+    plannedvsactuals = List.generate(
+        (json['plannedVsAllowableVsActual'] ?? []).length,
+        (index) => PlannedvsActualResource.fromJson(
+            json['plannedVsAllowableVsActual'][index]));
     // List<Map<String, dynamic>> justplannedlist = (json['planned'] ?? [])
     //     .where((element) => (element['actualhours'] ?? 0) == 0);
     // plannedResource = List.generate(justplannedlist.length,

@@ -30,11 +30,11 @@ class ApiClass {
       "Accept": "application/json",
     };
 
-    Response response =
-        await post(url, headers: headers, body: credentialsJson);
+    Response response = await post(Uri.tryParse(url) ?? Uri(),
+        headers: headers, body: credentialsJson);
     debugPrint("response is working");
     int statuscode = response.statusCode;
-    print(statuscode);
+    print(statuscode.toString());
 
     var jsonResponse = json.decode(response.body);
     print(jsonResponse);
@@ -58,7 +58,7 @@ class ApiClass {
       'Accept': 'application/json',
       "Authorization": "Bearer " + token,
     };
-    Response response = await get(url, headers: headers);
+    Response response = await get(Uri.tryParse(url) ?? Uri(), headers: headers);
     print(response.body);
 
     if (response.statusCode == 200) {
@@ -91,9 +91,10 @@ class ApiClass {
       "Authorization": "Bearer " + token,
     };
     try {
-      Response response = await get(url, headers: headers);
+      Response response =
+          await get(Uri.tryParse(url) ?? Uri(), headers: headers);
       print(response.statusCode);
-      print(response.body);
+      // print(response.body);
 
       if (response.statusCode == 200) {
         print('sucessfully obtained jobcards....');
@@ -125,7 +126,7 @@ class ApiClass {
     Map<String, String> headers = {
       "Content-type": "application/json",
       'Accept': 'application/json',
-      "Authorization": "Bearer " + token,
+      // "Authorization": "Bearer " + token,
     };
     Map body = {
       "_id": projectID,
@@ -161,7 +162,8 @@ class ApiClass {
       ]
     };
     try {
-      Response response = await put(url, headers: headers, body: body);
+      Response response =
+          await put(Uri.tryParse(url) ?? Uri(), headers: headers, body: body);
       print(response.statusCode);
       print(response.body);
 

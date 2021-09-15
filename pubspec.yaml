@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   cuberto_bottom_bar:
-  http: any
+  http: ^0.13.3
   # flutter_inappwebview: any
   webview_flutter: ^0.3.19+9
   flutter_svg: ^0.22.0

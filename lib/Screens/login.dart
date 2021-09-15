@@ -1,3 +1,5 @@
+import 'package:airpmp_mobility/API/ApiClass.dart';
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
 import 'package:airpmp_mobility/Models/ProviderModel.dart';
@@ -109,21 +111,28 @@ class LoginPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    onPressed: () {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChangeNotifierProvider<
-                                                          ProviderModel>(
-                                                      create: (context) =>
-                                                          ProviderModel(),
-                                                      child: MainApp(
-                                                          isTab: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width >
-                                                              700))));
+                                    onPressed: () async {
+                                      //TESTING CODE. DELETE AFTER USE
+                                      //TODO: DELETE TEST CODE
+                                      LoginDetails log = await ApiClass().login(
+                                          username: "8281577013",
+                                          password: "8281577013");
+                                      debugPrint("finishedLogin");
+                                      await ApiClass().getMyJobCard(log.token);
+                                      // Navigator.pushReplacement(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             ChangeNotifierProvider<
+                                      //                     ProviderModel>(
+                                      //                 create: (context) =>
+                                      //                     ProviderModel(),
+                                      //                 child: MainApp(
+                                      //                     isTab: MediaQuery.of(
+                                      //                                 context)
+                                      //                             .size
+                                      //                             .width >
+                                      //                         700))));
                                     },
                                   ),
                                 )
