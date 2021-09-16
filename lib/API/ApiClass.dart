@@ -40,6 +40,8 @@ class ApiClass {
     if (statuscode == 200) {
       var jsonResponse = json.decode(response.body);
       LoginDetails loginDetails = LoginDetails.fromJson(jsonResponse);
+      _token = loginDetails.token;
+      print(_token);
       return loginDetails;
     } else
       return (LoginDetails(
