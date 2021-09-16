@@ -54,6 +54,7 @@ class MyJobCard {
   late String assignedDate;
   late String tobeAchievedQTY;
   late DateTime convertedCreatedDateTime;
+  double achievedQTY = 0;
   List<ActualResource> actuals = [];
   List<PlannedvsActualResource> plannedvsactuals = [];
   // List<PlannedResource> plannedResource = [];
@@ -115,7 +116,6 @@ class JobCardData {
   String _token = '';
 
   Future getJobCards() async {
-    _token = await getToken();
     _myJobCards = await ApiClass().getMyJobCard(_token) ?? [];
   }
 

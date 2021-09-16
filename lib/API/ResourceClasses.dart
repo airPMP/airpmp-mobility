@@ -32,6 +32,22 @@ class ActualResource {
     isEquipment = json['isEquipment'] ?? false;
     unPlanned = json['unPlanned'] ?? false;
   }
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {};
+
+    json['Id'] = iD;
+    json['designation'] = designation;
+    json['name'] = name;
+    json['actualHours'] = actualHours;
+    json['remarks'] = remarks;
+    json['hourlySalary'] = hourlySalary;
+    json['plannedTotHrs'] = plannedTotHrs;
+    json['isEquipment'] = isEquipment;
+    json['unPlanned'] = unPlanned;
+
+    return json;
+  }
 }
 
 //  --------------Classes to store resource details from "plannedVsAllowableVsActual" field----------------------
@@ -87,12 +103,33 @@ class PlannedvsActualResource {
     plannedTotCost = json['plannedTotCost'] ?? 0;
     spi = json['spi'] ?? 0;
     if (!(json['unPlanned'] ?? false)) {
+      planned = true;
       allowableResources = json['allowableResources'] ?? 0;
       allowableTotHrs = json['allowableTotHrs'] ?? 0;
       plannedTotHrs = json['plannedTotHrs'] ?? 0;
       plannedResources = json['plannedResources'] ?? 0;
       unit = json['unit'] ?? "";
-    }
+    } else
+      planned = true;
+  }
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {};
+    json['actualTotCost'] = actualTotCost;
+    json['actualTotHours'] = actualTotHours;
+    if (allowableResources != 0)
+      json['allowableResources'] = allowableResources;
+    json['allowableTotCost'] = allowableTotCost;
+    if (allowableTotHrs != 0) json['allowableTotHrs'] = allowableTotHrs;
+    json['cpi'] = cpi;
+    json['designation'] = designation;
+    if (plannedResources != 0) json['plannedResources'] = plannedResources;
+    json['plannedTotCost'] = plannedTotCost;
+    if (plannedTotHrs != 0) json['plannedTotHrs'] = plannedTotHrs;
+    json['spi'] = spi;
+    if (unit != "") json['unit'] = unit;
+    json['unPlanned'] = !planned;
+    return json;
   }
 }
 
