@@ -60,7 +60,6 @@ class MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    
     return WillPopScope(
       onWillPop: () async =>
           !await navigatorKeys[currentTab]!.currentState!.maybePop(),
@@ -163,23 +162,26 @@ class MainAppState extends State<MainApp> {
                             ))
                       ],
                     ),
-                  ):
-                
-
-                // Phone App
-                Scaffold(
-                    body: Stack(children: <Widget>[
-                      _buildDashBoard(0),
-                      _buildOffstageNavigator(1, null),
-                      _buildRemarks(2),
-                      _buildAccount(3),
-                    ]),
-                    bottomNavigationBar: BottomNavigation(
-                      currentTab: currentTab,
-                      onSelectTab: _selectTab,
-                    ),
                   ),
-          );
+                ],
+              ),
+            )
+          :
+
+          // Phone App
+          Scaffold(
+              body: Stack(children: <Widget>[
+                _buildDashBoard(0),
+                _buildOffstageNavigator(1, null),
+                _buildRemarks(2),
+                _buildAccount(3),
+              ]),
+              bottomNavigationBar: BottomNavigation(
+                currentTab: currentTab,
+                onSelectTab: _selectTab,
+              ),
+            ),
+    );
   }
 
   Widget _buildOffstageNavigator(int tabItem, Stage? st) {
