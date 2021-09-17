@@ -15,7 +15,6 @@ class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,
@@ -160,7 +159,7 @@ class _LoginFieldsState extends State<LoginFields> {
                     MaterialPageRoute(
                         builder: (context) =>
                             ChangeNotifierProvider<ProviderModel>(
-                                create: (context) => ProviderModel(log.token),
+                                create: (context) => ProviderModel(log),
                                 child: MainApp(
                                     isTab: MediaQuery.of(context).size.width >
                                         700))));

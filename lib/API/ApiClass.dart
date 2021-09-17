@@ -77,17 +77,16 @@ class ApiClass {
       return null;
   }
 
-  Future<List<MyJobCard>?> getMyJobCard(String token) async {
+  Future<List<MyJobCard>?> getMyJobCard(String token, String userID) async {
     print('getting job card from internet..');
     var myJobCardsJson;
     var aJobCard;
     List<MyJobCard> myJobCardsList = [];
 
     // -------------this will only get sama al jadaf 's job cards -------------------
-    print(userID);
-    print(projectID);
+
     String url =
-        'https://airpmo.herokuapp.com/api/jobcard/index?search=&userId=$userID&projectId=$projectID';
+        'https://airpmo.herokuapp.com/api/jobcard/index?search=&userId=$userID';
     Map<String, String> headers = {
       "Content-type": "application/json",
       'Accept': 'application/json',

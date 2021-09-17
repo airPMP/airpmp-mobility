@@ -11,9 +11,8 @@ class ProviderModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  ProviderModel(String token) {
-    _jobCardData.updateToken(token);
+  ProviderModel(LoginDetails details) {
+    _jobCardData.updateLogin(details);
   }
 
   Future<void> fetchJobCards() async {

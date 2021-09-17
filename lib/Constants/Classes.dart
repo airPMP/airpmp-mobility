@@ -113,18 +113,21 @@ class MyProject {
 
 class JobCardData {
   List<MyJobCard> _myJobCards = [];
-  String _token = '';
-
+  LoginDetails _loginDetails = LoginDetails(userid: "", token: "", company: "");
+  ProjectDetails _projectDetails = ProjectDetails();
   Future getJobCards() async {
-    _myJobCards = await ApiClass().getMyJobCard(_token) ?? [];
+    _myJobCards = await ApiClass()
+            .getMyJobCard(_loginDetails.token, _loginDetails.userid) ??
+        [];
+    // _projectDetails=await ApiClass().getMyProject(_loginDetails.token,_myJobCards[0]. )
   }
 
   Future addResources() async {
-    await ApiClass().addResources(_myJobCards[0], _token);
+    await ApiClass().addResources(_myJobCards[0], _loginDetails.token);
   }
 
-  void updateToken(String token) {
-    _token = token;
+  void updateLogin(LoginDetails details) {
+    _loginDetails = details;
   }
 
   List<MyJobCard> getInProgressJobCard(String token) {
@@ -149,4 +152,16 @@ class JobCardData {
     }
     return inProgressList;
   }
+}
+
+class ProjectDetails {
+  String projectName = "",
+      clientName = "",
+      projectDescription = "",
+      projectId = "";
+  ProjectDetails(
+      {this.projectName = "",
+      this.clientName = "",
+      this.projectDescription = "",
+      this.projectId = ""});
 }
