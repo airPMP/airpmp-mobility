@@ -60,16 +60,21 @@ class MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? Center(child: CircularProgressIndicator())
-        : WillPopScope(
-            onWillPop: () async =>
-                !await navigatorKeys[currentTab]!.currentState!.maybePop(),
-            child: widget.isTab
-                ?
-                //Tab App
-                Scaffold(
-                    body: Row(
+    
+    return WillPopScope(
+      onWillPop: () async =>
+          !await navigatorKeys[currentTab]!.currentState!.maybePop(),
+      child: widget.isTab
+          ?
+          //Tab App
+          Scaffold(
+              body: Row(
+                children: [
+                  // Side Navigation Rail of App
+                  // Navigation rail Widget not used due to the lack of proper trailing property
+                  Container(
+                    color: CustomColors.primary,
+                    child: Column(
                       children: [
                         // Side Navigation Rail of App
                         // Navigation rail Widget not used due to the lack of proper trailing property
@@ -158,8 +163,8 @@ class MainAppState extends State<MainApp> {
                             ))
                       ],
                     ),
-                  )
-                :
+                  ):
+                
 
                 // Phone App
                 Scaffold(
