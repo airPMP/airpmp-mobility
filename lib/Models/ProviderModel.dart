@@ -11,6 +11,7 @@ class ProviderModel extends ChangeNotifier {
     notifyListeners();
   }
 
+
   ProviderModel(String token) {
     _jobCardData.updateToken(token);
   }

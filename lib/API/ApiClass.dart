@@ -10,7 +10,6 @@ import 'ResourceClasses.dart';
 /// Call getIDs function to fetch IDs from local storage
 class ApiClass {
   String projectID = '', userID = '';
-  String _token = '';
 
   void getIDs() async {
     userID = await getUserId();
@@ -118,14 +117,16 @@ class ApiClass {
   }
 
 // < Complete -- UNDER TESTING >
-  Future<int> addResources(MyJobCard job) async {
-    String url = 'https://airpmo.herokuapp.com/api/jobcard/$projectID';
+  Future<int> addResources(MyJobCard job, String _token) async {
+    String url =
+        'https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66';
     Map<String, String> headers = {
       "Content-type": "application/json",
       'Accept': 'application/json',
       "Authorization": "Bearer " + _token,
     };
-    Map body = {
+    for (ActualResource ar in job.actuals) print(ar.iD);
+    var body = jsonEncode({
       "_id": job.jobCardNumber,
       "actuals": [
         for (ActualResource ar in job.actuals) ar.toJson(),
@@ -134,12 +135,11 @@ class ApiClass {
       "plannedVsAllowableVsActual": [
         for (PlannedvsActualResource par in job.plannedvsactuals) par.toJson(),
       ]
-    };
+    });
     try {
       Response response =
           await put(Uri.tryParse(url) ?? Uri(), headers: headers, body: body);
       print(response.statusCode);
-      print(response.body);
 
       if (response.statusCode == 200) {
         print('sucessfully added resources....');

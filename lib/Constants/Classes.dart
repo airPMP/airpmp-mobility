@@ -119,6 +119,10 @@ class JobCardData {
     _myJobCards = await ApiClass().getMyJobCard(_token) ?? [];
   }
 
+  Future addResources() async {
+    await ApiClass().addResources(_myJobCards[0], _token);
+  }
+
   void updateToken(String token) {
     _token = token;
   }

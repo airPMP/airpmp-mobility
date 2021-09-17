@@ -50,12 +50,6 @@ class MainAppState extends State<MainApp> {
     });
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   fetchthings();
-  // }
-
   @override
   void initState() {
     super.initState();
