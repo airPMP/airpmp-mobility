@@ -16,6 +16,23 @@ class ProviderModel extends ChangeNotifier {
   }
 
   Future<void> fetchJobCards() async {
-    await _jobCardData.getJobCards();
+    await _jobCardData.fetchJobCards();
+  }
+
+  List<MyJobCard> getJobCards() {
+    switch (stageSelection) {
+      case Stage.Approved:
+        return _jobCardData.getStatusCards("Executed");
+      case Stage.In_Progress:
+        return _jobCardData.getStatusCards("In-Progress");
+      case Stage.Waiting:
+        return _jobCardData.getStatusCards("Waiting-for-Approval");
+      case Stage.Not_Started:
+        return _jobCardData.getStatusCards("Not-started");
+    }
+  }
+
+  ProjectDetails get getProjectDetails {
+    return _jobCardData.getProjectDetails;
   }
 }

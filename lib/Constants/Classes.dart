@@ -50,6 +50,8 @@ class MyJobCard {
   late String zone;
   late String jcStatus;
   late String activityCode;
+  late String projectID;
+  late double spi, cpi;
   // assingedDate is createdDate
   late String assignedDate;
   late String tobeAchievedQTY;
@@ -69,6 +71,9 @@ class MyJobCard {
     activityCode = json['activityCode'] ?? "";
     assignedDate = json['assignedDate'] ?? "";
     tobeAchievedQTY = json['tobeAchievedQTY'] ?? "";
+    projectID = json['projectId'] ?? "";
+    spi = json['spi'] ?? 0;
+    cpi = json['cpi'] ?? 0;
     // convertedCreatedDateTime = DateTime.parse(assignedDate);
     actuals = List.generate((json['actuals'] ?? []).length,
         (index) => ActualResource.fromJson(json['actuals'][index]));
@@ -115,42 +120,43 @@ class JobCardData {
   List<MyJobCard> _myJobCards = [];
   LoginDetails _loginDetails = LoginDetails(userid: "", token: "", company: "");
   ProjectDetails _projectDetails = ProjectDetails();
-  Future getJobCards() async {
+  Future fetchJobCards() async {
     _myJobCards = await ApiClass()
             .getMyJobCard(_loginDetails.token, _loginDetails.userid) ??
         [];
-    // _projectDetails=await ApiClass().getMyProject(_loginDetails.token,_myJobCards[0]. )
+    if (_myJobCards.length > 0)
+      _projectDetails = await ApiClass().getMyProject(_loginDetails.token,
+              _myJobCards[0].projectID, _loginDetails.company) ??
+          ProjectDetails();
   }
 
   Future addResources() async {
     await ApiClass().addResources(_myJobCards[0], _loginDetails.token);
   }
 
+  ProjectDetails get getProjectDetails {
+    return _projectDetails;
+  }
+
+  List<MyJobCard> get getJobCards {
+    return _myJobCards;
+  }
+
   void updateLogin(LoginDetails details) {
     _loginDetails = details;
   }
 
-  List<MyJobCard> getInProgressJobCard(String token) {
+  List<MyJobCard> getStatusCards(String status) {
     print('geting in progress jsc');
-    List<MyJobCard> inProgressList = [];
+    List<MyJobCard> list = [];
 
     for (MyJobCard aJC in _myJobCards) {
-      if (aJC.jcStatus == "In-Progress") {
-        inProgressList.add(aJC);
+      print(aJC.jcStatus + " " + status);
+      if (aJC.jcStatus == status) {
+        list.add(aJC);
       }
     }
-    return inProgressList;
-  }
-
-  List<MyJobCard> getExecutedJobCard(String token) {
-    print('geting in progress jsc');
-    List<MyJobCard> inProgressList = [];
-    for (MyJobCard aJC in _myJobCards) {
-      if (aJC.jcStatus == "Executed") {
-        inProgressList.add(aJC);
-      }
-    }
-    return inProgressList;
+    return list;
   }
 }
 
@@ -164,4 +170,11 @@ class ProjectDetails {
       this.clientName = "",
       this.projectDescription = "",
       this.projectId = ""});
+
+  ProjectDetails.fromJson(Map json) {
+    projectName = json['name'] ?? "";
+    clientName = json['client']['name'] ?? "";
+    projectDescription = json['description'] ?? "";
+    projectId = json['_id'];
+  }
 }

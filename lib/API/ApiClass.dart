@@ -77,6 +77,34 @@ class ApiClass {
       return null;
   }
 
+  /// Get Details of the current project in which the user is working.
+  /// Condition: The user should only work on a single project at a time.
+  Future<ProjectDetails?> getMyProject(
+      String token, String projectID, String companyID) async {
+    var projectsJson;
+    var aProject;
+
+    String url =
+        "https://airpmo.herokuapp.com/api/projects/index?search=&company=" +
+            companyID;
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": "Bearer " + token,
+    };
+    Response response = await get(Uri.tryParse(url) ?? Uri(), headers: headers);
+
+    if (response.statusCode == 200) {
+      print('sucessfully obtained projects....');
+      projectsJson = jsonDecode(response.body);
+      for (aProject in projectsJson) {
+        if (aProject['_id'] == projectID)
+          return ProjectDetails.fromJson(aProject);
+      }
+    } else
+      return null;
+  }
+
   Future<List<MyJobCard>?> getMyJobCard(String token, String userID) async {
     print('getting job card from internet..');
     var myJobCardsJson;
@@ -96,7 +124,7 @@ class ApiClass {
       Response response =
           await get(Uri.tryParse(url) ?? Uri(), headers: headers);
       print(response.statusCode);
-      // print(response.body);
+      print(response.body);
 
       if (response.statusCode == 200) {
         print('sucessfully obtained jobcards....');
