@@ -1,8 +1,10 @@
+import 'package:airpmp_mobility/API/ResourceClasses.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:flutter/material.dart';
 
 class ScrollableTableElement extends StatelessWidget {
-  const ScrollableTableElement({Key? key}) : super(key: key);
+  final PlannedvsActualResource res;
+  const ScrollableTableElement({Key? key, required this.res}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,44 +20,44 @@ class ScrollableTableElement extends StatelessWidget {
           Container(
               width: 80,
               child: Text(
-                "Carpenter",
+                res.designation,
                 textAlign: TextAlign.center,
               )),
           VerticalDivider(),
           Container(
               width: 80,
               child: Text(
-                "0.833",
+                '${res.allowableResources}',
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "8.33",
+                "${res.allowableTotHrs}",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "0.7",
+                "${res.actualTotHours}",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "49.678",
+                "${res.actualTotCost}",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "0.8333",
+                "${res.spi}",
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "0.8333",
+                "${res.cpi}",
                 textAlign: TextAlign.center,
               )),
         ],

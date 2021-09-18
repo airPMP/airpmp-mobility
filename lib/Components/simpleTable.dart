@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class SimpleTableElement extends StatelessWidget {
   /// A Map of Column headings, with the key being the data in the column, and the value being its width ratio(flex).
   final List<TableValueElement> datas;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   const SimpleTableElement({
     Key? key,
     required this.datas,

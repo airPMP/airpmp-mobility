@@ -2,12 +2,15 @@ import 'package:airpmp_mobility/Components/CustomRoundedButton.dart';
 import 'package:airpmp_mobility/Components/JobDetailsDropdown.dart';
 import 'package:airpmp_mobility/Components/JobProceedButton.dart';
 import 'package:airpmp_mobility/Components/scrollableTable.dart';
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:flutter/material.dart';
 
 class JobPagePhone extends StatelessWidget {
   final Function onPush;
-  const JobPagePhone({Key? key, required this.onPush}) : super(key: key);
+  final MyJobCard jobCard;
+  const JobPagePhone({Key? key, required this.onPush, required this.jobCard})
+      : super(key: key);
   @override
   Widget build(BuildContext pageContext) {
     return Scaffold(
@@ -33,6 +36,7 @@ class JobPagePhone extends StatelessWidget {
         ),
         body: JobPageBody(
           onPush: onPush,
+          jobCard: jobCard,
         ), // implemented below this widget.
         floatingActionButton:
             JobFloatingPanel()); // implemented below this widget.
@@ -96,7 +100,9 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
 
 class JobPageBody extends StatefulWidget {
   final Function onPush;
-  const JobPageBody({Key? key, required this.onPush}) : super(key: key);
+  final MyJobCard jobCard;
+  const JobPageBody({Key? key, required this.onPush, required this.jobCard})
+      : super(key: key);
 
   @override
   _JobPageBodyState createState() => _JobPageBodyState();
@@ -129,7 +135,7 @@ class _JobPageBodyState extends State<JobPageBody> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 15, vertical: 5.0),
                             child: Text(
-                              "Seawater Fishhole Sidefilling 0-3 mtrSeawater Fishhole Sidefilling 0-3 mtr",
+                              widget.jobCard.activiyName,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(color: Colors.white),
@@ -169,7 +175,8 @@ class _JobPageBodyState extends State<JobPageBody> {
                       label: "Add Employee",
                       iconData: Icons.person_add,
                       onPressed: () {
-                        Navigator.pushNamed(context, "actual_Employees");
+                        widget.onPush(context, "actual_Employees",
+                            argument: widget.jobCard);
                       },
                     )),
                     Expanded(
@@ -177,7 +184,8 @@ class _JobPageBodyState extends State<JobPageBody> {
                       label: "Add Equipment",
                       iconData: Icons.add,
                       onPressed: () {
-                        widget.onPush(context, "actual_Equipments");
+                        widget.onPush(context, "actual_Equipments",
+                            argument: widget.jobCard);
                       },
                     ))
                   ],
@@ -188,7 +196,10 @@ class _JobPageBodyState extends State<JobPageBody> {
                 child: Text("Allowable vs Actual Resources",
                     style: TextStyle(fontSize: 18, color: Color(0xdd7B9990))),
               ),
-              Expanded(child: ScrollableTable())
+              Expanded(
+                  child: ScrollableTable(
+                jobCard: widget.jobCard,
+              ))
             ],
           ),
         ),
@@ -201,6 +212,7 @@ class _JobPageBodyState extends State<JobPageBody> {
                     detailsSheetOpen = !detailsSheetOpen;
                   });
                 },
+                jobCard: widget.jobCard,
               ),
               secondChild: Container(),
               crossFadeState: detailsSheetOpen

@@ -62,7 +62,7 @@ class MyJobCard {
   // List<PlannedResource> plannedResource = [];
   // List<PlannedActualResource> plannedActualResource = [];
   // List<UnplannedResource> unplannedResource = [];
-
+  MyJobCard();
   MyJobCard.fromJson(Map<String, dynamic> json) {
     jobCardNumber = json['_id'] ?? "";
     activiyName = json['activityName'] ?? "";

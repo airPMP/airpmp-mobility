@@ -1,7 +1,10 @@
 import 'package:airpmp_mobility/Components/scrollableTableElement.dart';
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:flutter/material.dart';
+
 class ScrollableTable extends StatelessWidget {
-  const ScrollableTable({Key? key}) : super(key: key);
+  final MyJobCard jobCard;
+  const ScrollableTable({Key? key, required this.jobCard}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +89,9 @@ class ScrollableTable extends StatelessWidget {
             child: Container(
               width: 600,
               child: ListView.builder(
-                itemBuilder: (context, index) => ScrollableTableElement(),
-                itemCount: 15,
+                itemBuilder: (context, index) => ScrollableTableElement(
+                    res: jobCard.plannedvsactuals[index]),
+                itemCount: jobCard.plannedvsactuals.length,
               ),
             ),
           )

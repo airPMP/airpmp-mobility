@@ -1,9 +1,12 @@
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:flutter/material.dart';
 
 class JobDetailsDropDown extends StatelessWidget {
   final VoidCallback onPressed;
-  const JobDetailsDropDown({Key? key, required this.onPressed})
+  final MyJobCard jobCard;
+  const JobDetailsDropDown(
+      {Key? key, required this.onPressed, required this.jobCard})
       : super(key: key);
 
   @override
@@ -28,7 +31,7 @@ class JobDetailsDropDown extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 5.0),
                         child: Text(
-                          "Seawater Fishhole Sidefilling 0-3 mtrSeawater Fishhole Sidefilling 0-3 mtr",
+                          jobCard.activiyName,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(color: Colors.white),
@@ -54,20 +57,20 @@ class JobDetailsDropDown extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text("Project"),
-                  ),
-                  Expanded(
-                      flex: 3,
-                      child:
-                          Text("Sama Al Jaddaf infrastructure works DS135/2"))
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
+            //   child: Row(
+            //     children: [
+            //       Expanded(
+            //         child: Text("Project"),
+            //       ),
+            //       Expanded(
+            //           flex: 3,
+            //           child:
+            //               Text("Sama Al Jaddaf infrastructure works DS135/2"))
+            //     ],
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
               child: Row(
@@ -75,7 +78,7 @@ class JobDetailsDropDown extends StatelessWidget {
                   Expanded(
                     child: Text("JC No"),
                   ),
-                  Expanded(flex: 3, child: Text("9485729485752748FF"))
+                  Expanded(flex: 3, child: Text(jobCard.jobCardNumber))
                 ],
               ),
             ),
@@ -86,7 +89,7 @@ class JobDetailsDropDown extends StatelessWidget {
                   Expanded(
                     child: Text("Zone"),
                   ),
-                  Expanded(flex: 3, child: Text("N/A"))
+                  Expanded(flex: 3, child: Text(jobCard.zone))
                 ],
               ),
             ),
@@ -97,7 +100,7 @@ class JobDetailsDropDown extends StatelessWidget {
                   Expanded(
                     child: Text("Code"),
                   ),
-                  Expanded(flex: 3, child: Text("4.10.1"))
+                  Expanded(flex: 3, child: Text(jobCard.activityCode))
                 ],
               ),
             ),
@@ -108,9 +111,7 @@ class JobDetailsDropDown extends StatelessWidget {
                   Expanded(
                     child: Text("Activity Name"),
                   ),
-                  Expanded(
-                      flex: 3,
-                      child: Text("Seawater Fishhole Sidefilling 0-3 mtr"))
+                  Expanded(flex: 3, child: Text(jobCard.activiyName))
                 ],
               ),
             )

@@ -1,5 +1,6 @@
 import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,12 @@ import 'package:flutter/material.dart';
 class TabActualResources extends StatelessWidget {
   final Function onPush;
   final Resource resource;
+  final MyJobCard jobCard;
   const TabActualResources(
-      {Key? key, required this.resource, required this.onPush})
+      {Key? key,
+      required this.resource,
+      required this.onPush,
+      required this.jobCard})
       : super(key: key);
 
   @override

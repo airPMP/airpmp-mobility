@@ -1,3 +1,4 @@
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Screens/login.dart';
 import 'package:flutter/material.dart';
 import 'Constants/Enums.dart';
@@ -20,21 +21,19 @@ class CustomNavigator extends StatelessWidget {
   final Stage? stage;
   final int tabItem;
 
-  void _push(
-    BuildContext context,
-    String path,
-  ) {
+  void _push(BuildContext context, String path, {MyJobCard? argument}) {
     Map routeBuilders;
     if (isTab)
-      routeBuilders = _tabRouteBuilders(context);
+      routeBuilders = _tabRouteBuilders(context, argument: argument);
     else
-      routeBuilders = _routeBuilders(context);
+      routeBuilders = _routeBuilders(context, argument: argument);
 
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => routeBuilders[path](context)));
   }
 
-  Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
+  Map<String, WidgetBuilder> _routeBuilders(BuildContext context,
+      {MyJobCard? argument}) {
     return {
       "not_Started_Screen": (context) =>
           MainPagePhone(stage: Stage.Not_Started, onPush: _push),
@@ -44,17 +43,23 @@ class CustomNavigator extends StatelessWidget {
           MainPagePhone(stage: Stage.Waiting, onPush: _push),
       "approved_Screen": (context) =>
           MainPagePhone(stage: Stage.Approved, onPush: _push),
-      "job_Card_Screen": (context) => JobPagePhone(onPush: _push),
-      "actual_Employees": (context) =>
-          ActualResourcesPhone(resource: Resource.Employee, onPush: _push),
-      "actual_Equipments": (context) =>
-          ActualResourcesPhone(resource: Resource.Equipment, onPush: _push),
+      "job_Card_Screen": (context) =>
+          JobPagePhone(onPush: _push, jobCard: argument ?? MyJobCard()),
+      "actual_Employees": (context) => ActualResourcesPhone(
+          resource: Resource.Employee,
+          onPush: _push,
+          jobCard: argument ?? MyJobCard()),
+      "actual_Equipments": (context) => ActualResourcesPhone(
+          resource: Resource.Equipment,
+          onPush: _push,
+          jobCard: argument ?? MyJobCard()),
       "login": (context) => LoginPage(),
       "account": (context) => AccountPage()
     };
   }
 
-  Map<String, WidgetBuilder> _tabRouteBuilders(BuildContext context) {
+  Map<String, WidgetBuilder> _tabRouteBuilders(BuildContext context,
+      {MyJobCard? argument}) {
     return {
       "not_Started_Screen": (context) =>
           TabMainScreen(stage: Stage.Not_Started, onPush: _push),
@@ -64,11 +69,16 @@ class CustomNavigator extends StatelessWidget {
           TabMainScreen(stage: Stage.Waiting, onPush: _push),
       "approved_Screen": (context) =>
           TabMainScreen(stage: Stage.Approved, onPush: _push),
-      "job_Card_Screen": (context) => TabJobScreen(onPush: _push),
-      "actual_Employees": (context) =>
-          TabActualResources(resource: Resource.Employee, onPush: _push),
-      "actual_Equipments": (context) =>
-          TabActualResources(resource: Resource.Equipment, onPush: _push),
+      "job_Card_Screen": (context) =>
+          TabJobScreen(onPush: _push, jobCard: argument ?? MyJobCard()),
+      "actual_Employees": (context) => TabActualResources(
+          resource: Resource.Employee,
+          onPush: _push,
+          jobCard: argument ?? MyJobCard()),
+      "actual_Equipments": (context) => TabActualResources(
+          resource: Resource.Equipment,
+          onPush: _push,
+          jobCard: argument ?? MyJobCard()),
       "login": (context) => LoginPage(),
       "account": (context) => AccountPage()
     };

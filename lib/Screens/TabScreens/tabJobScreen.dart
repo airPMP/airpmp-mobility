@@ -1,3 +1,4 @@
+import 'package:airpmp_mobility/API/ResourceClasses.dart';
 import 'package:airpmp_mobility/Components/CustomRoundedButton.dart';
 import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 class TabJobScreen extends StatelessWidget {
   // final Stage stage;
   final Function? onPush;
-  const TabJobScreen({Key? key, this.onPush}) : super(key: key);
+  final MyJobCard jobCard;
+  const TabJobScreen({Key? key, this.onPush, required this.jobCard})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +77,7 @@ class TabJobScreen extends StatelessWidget {
                                       left: Radius.circular(10))),
                               child: Center(
                                   child: Text(
-                                "4.10.1",
+                                jobCard.activityCode,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
@@ -92,7 +95,7 @@ class TabJobScreen extends StatelessWidget {
                               ),
                               child: Center(
                                   child: Text(
-                                "Sama Al Jaddaf infrastructure works DS135/2",
+                                jobCard.activiyName,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
@@ -109,7 +112,7 @@ class TabJobScreen extends StatelessWidget {
                               ),
                               child: Center(
                                   child: Text(
-                                "[NA]",
+                                jobCard.zone,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
@@ -160,7 +163,7 @@ class TabJobScreen extends StatelessWidget {
                             label: "Add Employee",
                             iconData: Icons.person_add,
                             onPressed: () {
-                              onPush!(context, "actual_Equipments");
+                              onPush!(context, "actual_Equipments", jobCard);
                             },
                           ),
                         ),
@@ -169,7 +172,7 @@ class TabJobScreen extends StatelessWidget {
                             label: "Add Equipents",
                             iconData: Icons.person_add,
                             onPressed: () {
-                              onPush!(context, "actual_Equipments");
+                              onPush!(context, "actual_Equipments", jobCard);
                             },
                           ),
                         )
@@ -181,43 +184,27 @@ class TabJobScreen extends StatelessWidget {
               Expanded(
                 flex: 48,
                 child: SimpleTable(headings: [
-                  TableElement("Activity ID", flex: 100),
-                  TableElement("Date", flex: 92),
-                  TableElement("Description", flex: 248),
-                  TableElement("Qty", flex: 40),
-                  TableElement("Zone", flex: 54),
-                  TableElement("Assigned", flex: 91),
-                  TableElement("SPI", flex: 40),
-                  TableElement("CPI", flex: 40),
+                  TableElement("Designation", flex: 1),
+                  TableElement("Allowable Resources", flex: 1),
+                  TableElement("Allowable Total Hrs", flex: 1),
+                  TableElement("Actual Total Hrs", flex: 1),
+                  TableElement("Actual Cost", flex: 1),
+                  TableElement("SPI", flex: 1),
+                  TableElement("CPI", flex: 1),
                 ], elements: [
-                  SimpleTableElement(
-                    onTap: () {},
-                    datas: [
-                      TableValueElement("3.1.2"),
-                      TableValueElement("2019-10-09"),
-                      TableValueElement(
-                          "Irrigation Excavation (Open areas) 0 -3 mtr"),
-                      TableValueElement("3"),
-                      TableValueElement("-"),
-                      TableValueElement("NO"),
-                      TableValueElement("-"),
-                      TableValueElement("-"),
-                    ],
-                  ),
-                  SimpleTableElement(
-                    onTap: () {},
-                    datas: [
-                      TableValueElement("3.1.2"),
-                      TableValueElement("2019-10-09"),
-                      TableValueElement(
-                          "Irrigation Excavation (Open areas) 0 -3 mtr"),
-                      TableValueElement("3"),
-                      TableValueElement("-"),
-                      TableValueElement("NO"),
-                      TableValueElement("-"),
-                      TableValueElement("-"),
-                    ],
-                  )
+                  for (PlannedvsActualResource res in jobCard.plannedvsactuals)
+                    SimpleTableElement(
+                      onTap: null,
+                      datas: [
+                        TableValueElement(res.designation),
+                        TableValueElement(res.allowableResources),
+                        TableValueElement(res.allowableTotHrs),
+                        TableValueElement(res.actualTotHours),
+                        TableValueElement(res.actualTotCost),
+                        TableValueElement(res.spi),
+                        TableValueElement(res.cpi),
+                      ],
+                    ),
                 ]),
               ),
             ],

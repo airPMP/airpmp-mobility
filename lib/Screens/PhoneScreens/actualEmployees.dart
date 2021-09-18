@@ -1,5 +1,7 @@
+import 'package:airpmp_mobility/API/ResourceClasses.dart';
 import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
@@ -8,8 +10,12 @@ import 'package:flutter/material.dart';
 class ActualResourcesPhone extends StatelessWidget {
   final Function onPush;
   final Resource resource;
+  final MyJobCard jobCard;
   const ActualResourcesPhone(
-      {Key? key, required this.resource, required this.onPush})
+      {Key? key,
+      required this.resource,
+      required this.onPush,
+      required this.jobCard})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -93,26 +99,17 @@ class ActualResourcesPhone extends StatelessWidget {
                 TableElement("Remarks", flex: 2),
               ],
               elements: [
-                SimpleTableElement(
-                  onTap: () {},
-                  datas: [
-                    TableValueElement("DA1079"),
-                    TableValueElement("PETER HAINE", maxLines: 2),
-                    TableValueElement("Technical Reporter", maxLines: 2),
-                    TableValueElement("5"),
-                    TableValueElement("-"),
-                  ],
-                ),
-                SimpleTableElement(
-                  onTap: () {},
-                  datas: [
-                    TableValueElement("DA1079"),
-                    TableValueElement("PETER HAINE", maxLines: 2),
-                    TableValueElement("Architect", maxLines: 2),
-                    TableValueElement("5"),
-                    TableValueElement("-"),
-                  ],
-                )
+                for (ActualResource resource in jobCard.actuals)
+                  SimpleTableElement(
+                    onTap: null,
+                    datas: [
+                      TableValueElement(resource.iD),
+                      TableValueElement(resource.name, maxLines: 2),
+                      TableValueElement(resource.designation, maxLines: 2),
+                      TableValueElement(resource.actualHours),
+                      TableValueElement(resource.remarks),
+                    ],
+                  ),
               ],
             ))
           ],
