@@ -144,7 +144,8 @@ class MainPagePhone extends StatelessWidget {
                       text: values.getJobCards()[i].activiyName,
                       iD: values.getJobCards()[i].activityCode,
                       onPressed: () {
-                        onPush!(context, "job_Card_Screen");
+                        onPush!(context, "job_Card_Screen",
+                            argument: values.getJobCards()[i]);
                       },
                     ));
               }, childCount: values.getJobCards().length)),
