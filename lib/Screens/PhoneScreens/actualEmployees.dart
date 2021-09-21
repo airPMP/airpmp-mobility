@@ -11,6 +11,15 @@ class ActualResourcesPhone extends StatelessWidget {
   final Function onPush;
   final Resource resource;
   final MyJobCard jobCard;
+  bool isSameResource(bool iseq) {
+    if (iseq && resource == Resource.Equipment)
+      return true;
+    else if (!iseq && resource == Resource.Employee)
+      return true;
+    else
+      return false;
+  }
+
   const ActualResourcesPhone(
       {Key? key,
       required this.resource,
@@ -100,16 +109,17 @@ class ActualResourcesPhone extends StatelessWidget {
               ],
               elements: [
                 for (ActualResource resource in jobCard.actuals)
-                  SimpleTableElement(
-                    onTap: null,
-                    datas: [
-                      TableValueElement(resource.iD),
-                      TableValueElement(resource.name, maxLines: 2),
-                      TableValueElement(resource.designation, maxLines: 2),
-                      TableValueElement(resource.actualHours),
-                      TableValueElement(resource.remarks),
-                    ],
-                  ),
+                  if (isSameResource(resource.isEquipment))
+                    SimpleTableElement(
+                      onTap: null,
+                      datas: [
+                        TableValueElement(resource.iD),
+                        TableValueElement(resource.name, maxLines: 2),
+                        TableValueElement(resource.designation, maxLines: 2),
+                        TableValueElement(resource.actualHours),
+                        TableValueElement(resource.remarks),
+                      ],
+                    ),
               ],
             ))
           ],

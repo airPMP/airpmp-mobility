@@ -28,14 +28,17 @@ class SimpleTableElement extends StatelessWidget {
             for (TableValueElement tbv in datas)
               Expanded(
                 flex: tbv.flex,
-                child: Container(
-                    child: Text(
-                  tbv.valueName,
-                  style:
-                      TextStyle(color: tbv.color, fontWeight: FontWeight.bold),
-                  textAlign: tbv.textAlign,
-                  maxLines: tbv.maxLines,
-                )),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: Container(
+                      child: Text(
+                    tbv.valueName,
+                    style: TextStyle(
+                        color: tbv.color, fontWeight: FontWeight.bold),
+                    textAlign: tbv.textAlign,
+                    maxLines: tbv.maxLines,
+                  )),
+                ),
               ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:airpmp_mobility/API/ResourceClasses.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,10 @@ class ProviderModel extends ChangeNotifier {
       case Stage.Not_Started:
         return _jobCardData.getStatusCards("Not-started");
     }
+  }
+
+  Future<List<SingleEquipment>> getEquipments() {
+    return _jobCardData.fetchEquipments();
   }
 
   ProjectDetails get getProjectDetails {

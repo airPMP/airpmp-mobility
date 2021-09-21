@@ -75,101 +75,97 @@ class MainAppState extends State<MainApp> {
                       children: [
                         // Side Navigation Rail of App
                         // Navigation rail Widget not used due to the lack of proper trailing property
+                        // Container(
+                        //   color: CustomColors.primary,
+                        // child: Column(
+                        //   children: [
+                        // Side Navigation Rail of App
+                        // Navigation rail Widget not used due to the lack of proper trailing property
                         Container(
                           color: CustomColors.primary,
                           child: Column(
                             children: [
-                              // Side Navigation Rail of App
-                              // Navigation rail Widget not used due to the lack of proper trailing property
                               Container(
-                                color: CustomColors.primary,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        width: 100,
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 25),
-                                        child: Image.asset(
-                                            "assets/images/airpmo.png")),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 25),
-                                      child: IconButton(
-                                        icon: Icon(Icons.dashboard,
-                                            color: _getColor(0)),
-                                        onPressed: () {
-                                          _selectTab(0);
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 25),
-                                      child: IconButton(
-                                        icon: Icon(Icons.workspaces,
-                                            color: _getColor(1)),
-                                        onPressed: () {
-                                          _selectTab(1);
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 25),
-                                      child: IconButton(
-                                        icon: Icon(Icons.edit,
-                                            color: _getColor(2)),
-                                        onPressed: () {
-                                          _selectTab(2);
-                                        },
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 25),
-                                      child: IconButton(
-                                        icon: Icon(Icons.person,
-                                            color: _getColor(3)),
-                                        onPressed: () {
-                                          _selectTab(3);
-                                        },
-                                      ),
-                                    )
-                                  ],
+                                  width: 100,
+                                  margin: EdgeInsets.symmetric(vertical: 25),
+                                  child:
+                                      Image.asset("assets/images/airpmo.png")),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 25),
+                                child: IconButton(
+                                  icon: Icon(Icons.dashboard,
+                                      color: _getColor(0)),
+                                  onPressed: () {
+                                    _selectTab(0);
+                                  },
                                 ),
                               ),
-
-                              // Below given is the side menu to acces different stages (Not Started, In Progress...)
-                              // It should be shown only if job cards is selected.
-                              if (currentTab == 1)
-                                Expanded(
-                                    flex: 30,
-                                    child: SideNavBar(
-                                      isTab: true,
-                                      onSelected: (Stage st) {
-                                        Provider.of<ProviderModel>(context,
-                                                listen: false)
-                                            .changeStage(st);
-                                      },
-                                    )),
-                              Expanded(
-                                  flex: currentTab == 1 ? 78 : 108,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Stack(children: <Widget>[
-                                      _buildDashBoard(0),
-                                      _buildOffstageNavigator(
-                                          1,
-                                          Provider.of<ProviderModel>(context)
-                                              .stageSelection),
-                                      _buildRemarks(2),
-                                      _buildAccount(3),
-                                    ]),
-                                  ))
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 25),
+                                child: IconButton(
+                                  icon: Icon(Icons.workspaces,
+                                      color: _getColor(1)),
+                                  onPressed: () {
+                                    _selectTab(1);
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 25),
+                                child: IconButton(
+                                  icon: Icon(Icons.edit, color: _getColor(2)),
+                                  onPressed: () {
+                                    _selectTab(2);
+                                  },
+                                ),
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 25),
+                                child: IconButton(
+                                  icon: Icon(Icons.person, color: _getColor(3)),
+                                  onPressed: () {
+                                    _selectTab(3);
+                                  },
+                                ),
+                              )
                             ],
                           ),
                         ),
+                        //   ],
+                        // ),
+                        // ),
+                        // Below given is the side menu to acces different stages (Not Started, In Progress...)
+                        // It should be shown only if job cards is selected.
+                        if (currentTab == 1)
+                          Expanded(
+                              flex: 30,
+                              child: SideNavBar(
+                                isTab: true,
+                                onSelected: (Stage st) {
+                                  Provider.of<ProviderModel>(context,
+                                          listen: false)
+                                      .changeStage(st);
+                                },
+                              )),
+                        Expanded(
+                            flex: currentTab == 1 ? 78 : 108,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Stack(children: <Widget>[
+                                _buildDashBoard(0),
+                                _buildOffstageNavigator(
+                                    1,
+                                    Provider.of<ProviderModel>(context)
+                                        .stageSelection),
+                                _buildRemarks(2),
+                                _buildAccount(3),
+                              ]),
+                            ))
                       ],
                     ),
                   )

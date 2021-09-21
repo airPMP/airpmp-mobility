@@ -133,6 +133,16 @@ class PlannedvsActualResource {
   }
 }
 
+class SingleEquipment {
+  String id = "", make = "", model = "", type = "";
+  SingleEquipment.fromJson(Map<String, dynamic> json) {
+    id = json["Id"];
+    make = json["Equipment Make"];
+    model = json["Equipment Model"];
+    type = json["Equipment Type"];
+  }
+}
+
 /// UnplannedvsActualResource Class: Fetched from the plannedVsAllowableVsActual field. Includes details of a resource in relation to the Project.
 ///
 /// This resource was not allowed, but has been added.

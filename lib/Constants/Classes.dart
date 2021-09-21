@@ -45,16 +45,16 @@ class SecureStorage {
 
 class MyJobCard {
   // MyJobCard({this.activiyName, this.zone});
-  late String jobCardNumber;
-  late String activiyName;
-  late String zone;
-  late String jcStatus;
-  late String activityCode;
-  late String projectID;
-  late double spi, cpi;
+  late String jobCardNumber = "";
+  late String activiyName = "";
+  late String zone = "";
+  late String jcStatus = "";
+  late String activityCode = "";
+  late String projectID = "";
+  late double spi = 0, cpi = 0;
   // assingedDate is createdDate
-  late String assignedDate;
-  late String tobeAchievedQTY;
+  late String assignedDate = "";
+  late String tobeAchievedQTY = "";
   late DateTime convertedCreatedDateTime;
   double achievedQTY = 0;
   List<ActualResource> actuals = [];
@@ -132,6 +132,10 @@ class JobCardData {
 
   Future addResources() async {
     await ApiClass().addResources(_myJobCards[0], _loginDetails.token);
+  }
+
+  Future<List<SingleEquipment>> fetchEquipments() async {
+    return ApiClass().fetchEquipments(_loginDetails.token);
   }
 
   ProjectDetails get getProjectDetails {

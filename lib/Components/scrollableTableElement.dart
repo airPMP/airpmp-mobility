@@ -9,13 +9,13 @@ class ScrollableTableElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12), color: CustomColors.primary),
       padding: EdgeInsets.all(8),
       margin: EdgeInsets.symmetric(vertical: 4),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
+
         children: [
           Container(
               width: 80,

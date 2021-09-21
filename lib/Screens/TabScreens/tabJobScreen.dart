@@ -163,7 +163,8 @@ class TabJobScreen extends StatelessWidget {
                             label: "Add Employee",
                             iconData: Icons.person_add,
                             onPressed: () {
-                              onPush!(context, "actual_Equipments", jobCard);
+                              onPush!(context, "actual_Equipments",
+                                  argument: jobCard);
                             },
                           ),
                         ),
@@ -172,7 +173,8 @@ class TabJobScreen extends StatelessWidget {
                             label: "Add Equipents",
                             iconData: Icons.person_add,
                             onPressed: () {
-                              onPush!(context, "actual_Equipments", jobCard);
+                              onPush!(context, "actual_Equipments",
+                                  argument: jobCard);
                             },
                           ),
                         )
@@ -197,16 +199,24 @@ class TabJobScreen extends StatelessWidget {
                       onTap: null,
                       datas: [
                         TableValueElement(res.designation),
-                        TableValueElement(res.allowableResources),
-                        TableValueElement(res.allowableTotHrs),
+                        TableValueElement(res.allowableResources.toString()),
+                        TableValueElement(res.allowableTotHrs.toString()),
                         TableValueElement(res.actualTotHours),
-                        TableValueElement(res.actualTotCost),
-                        TableValueElement(res.spi),
-                        TableValueElement(res.cpi),
+                        TableValueElement(res.actualTotCost.toString()),
+                        TableValueElement(res.spi.toString()),
+                        TableValueElement(res.cpi.toString()),
                       ],
                     ),
                 ]),
               ),
+              if (jobCard.plannedvsactuals.length == 0)
+                Expanded(
+                  flex: 48,
+                  child: Text(
+                    "No Resoures in PlannedvsAllowedvsActuals!",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
             ],
           ),
           Card(

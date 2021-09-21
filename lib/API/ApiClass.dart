@@ -188,4 +188,28 @@ class ApiClass {
       return 300;
     }
   }
+
+  Future<List<SingleEquipment>> fetchEquipments(String token) async {
+    String url =
+        'https://airpmo.herokuapp.com/api/hrms/getHRMSFromSpreadSheet?id=1LtpGuZdUivXEA4TqUvK9T3qRr1HER6TKzdSxTYPEAQ8&sheetId=AT+-+Equipment+List+format&apiKey=AIzaSyDoh4Gj_-xV033rPKneUFSpQSUpbqDqfDw';
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": "Bearer " + token,
+    };
+    try {
+      Response response =
+          await get(Uri.tryParse(url) ?? Uri(), headers: headers);
+      if (response.statusCode == 200) {
+        List jsonResponse = json.decode(response.body);
+        return jsonResponse
+            .map((data) => SingleEquipment.fromJson(data))
+            .toList();
+      } else {
+        throw Exception('Unexpected error occured!');
+      }
+    } catch (e) {
+      throw Exception('Unexpected error occured: ${e.toString()}!');
+    }
+  }
 }

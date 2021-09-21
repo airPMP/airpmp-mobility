@@ -117,7 +117,7 @@ class TabMainScreen extends StatelessWidget {
                   SimpleTableElement(
                     onTap: () {
                       // Navigator.pushNamed(context, "job_Card_Screen");
-                      onPush!(context, "job_Card_Screen");
+                      onPush!(context, "job_Card_Screen", argument: jobCard);
                     },
                     datas: [
                       TableValueElement(jobCard.activityCode),
@@ -126,12 +126,20 @@ class TabMainScreen extends StatelessWidget {
                       TableValueElement(jobCard.tobeAchievedQTY),
                       TableValueElement(jobCard.zone),
                       TableValueElement("YES"),
-                      TableValueElement(jobCard.spi),
-                      TableValueElement(jobCard.cpi),
+                      TableValueElement(jobCard.spi.toString()),
+                      TableValueElement(jobCard.cpi.toString()),
                     ],
                   ),
               ]),
             ),
+            if (values.getJobCards().length == 0)
+              Expanded(
+                flex: 48,
+                child: Text(
+                  "No Assigned ${stageToString(values.stageSelection) ?? "Not Started"} Job Cards",
+                  textAlign: TextAlign.center,
+                ),
+              ),
           ],
         ),
       ),

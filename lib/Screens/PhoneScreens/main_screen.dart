@@ -149,6 +149,14 @@ class MainPagePhone extends StatelessWidget {
                       },
                     ));
               }, childCount: values.getJobCards().length)),
+              if (values.getJobCards().length == 0)
+                SliverFillRemaining(
+                    child: Center(
+                  child: Text(
+                    "No Assigned ${stageToString(values.stageSelection) ?? "Not Started"} Job Cards",
+                    textAlign: TextAlign.center,
+                  ),
+                )),
             ],
           ),
           drawer: CustomDrawer());

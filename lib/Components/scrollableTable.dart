@@ -94,7 +94,15 @@ class ScrollableTable extends StatelessWidget {
                 itemCount: jobCard.plannedvsactuals.length,
               ),
             ),
-          )
+          ),
+          if (jobCard.plannedvsactuals.length == 0)
+            Expanded(
+                child: Center(
+              child: Text(
+                "No Resources in PlannedvsAllowedvsActuals",
+                textAlign: TextAlign.center,
+              ),
+            ))
         ],
       ),
     );
