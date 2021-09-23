@@ -151,11 +151,9 @@ class JobCardData {
   }
 
   List<MyJobCard> getStatusCards(String status) {
-    print('geting in progress jsc');
     List<MyJobCard> list = [];
 
     for (MyJobCard aJC in _myJobCards) {
-      print(aJC.jcStatus + " " + status);
       if (aJC.jcStatus == status) {
         list.add(aJC);
       }

@@ -26,6 +26,7 @@ dependencies:
   flutter_svg: ^0.22.0
   sizer: ^2.0.13
   provider: ^5.0.0
+  dropdown_search: ^1.0.0
   # for intercepting back button on nested routing
   
 

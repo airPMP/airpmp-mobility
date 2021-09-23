@@ -1,9 +1,13 @@
+import 'package:airpmp_mobility/API/ResourceClasses.dart';
 import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
+import 'package:airpmp_mobility/Models/ProviderModel.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TabActualResources extends StatelessWidget {
   final Function onPush;
@@ -15,6 +19,37 @@ class TabActualResources extends StatelessWidget {
       required this.onPush,
       required this.jobCard})
       : super(key: key);
+  bool isSameResource(bool iseq) {
+    if (iseq && resource == Resource.Equipment)
+      return true;
+    else if (!iseq && resource == Resource.Employee)
+      return true;
+    else
+      return false;
+  }
+
+  void openPopUp(SingleEquipment singleEquipment, BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            contentPadding: const EdgeInsets.all(15.0),
+            children: [
+              Text(singleEquipment.make + " " + singleEquipment.model),
+              Text(singleEquipment.id),
+              Container(
+                width: 50,
+                child: TextField(
+                  textAlignVertical: TextAlignVertical.bottom,
+                ),
+              ),
+              TextField(
+                textAlignVertical: TextAlignVertical.bottom,
+              )
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,13 +124,39 @@ class TabActualResources extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Container(
-                              margin: EdgeInsets.all(5),
-                              width: 200,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    hintText: "Search..",
-                                    suffixIcon: Icon(Icons.search)),
-                              )),
+                            margin: EdgeInsets.all(5),
+                            width: 200,
+                            child: FutureBuilder<List<SingleEquipment>>(
+                                future: Provider.of<ProviderModel>(context)
+                                    .getEquipments(),
+                                initialData: [],
+                                builder: (futcontext, snapshot) {
+                                  return DropdownSearch<SingleEquipment>(
+                                      mode: Mode.MENU,
+                                      dropdownSearchDecoration: InputDecoration(
+                                          // border: InputBorder.none,
+                                          suffixIcon: Icon(Icons.search),
+                                          enabled: true),
+                                      dropDownButton: Container(),
+                                      itemAsString: (SingleEquipment? se) {
+                                        return "[" + se!.id + "] " + se.type;
+                                      },
+                                      items: snapshot.data,
+                                      showSearchBox: true,
+                                      maxHeight: 300,
+                                      onChanged: (s) {
+                                        openPopUp(s!, context);
+                                      },
+                                      emptyBuilder: (context, e) {
+                                        return Center(
+                                            child: CircularProgressIndicator());
+                                      },
+                                      loadingBuilder: (context, e) {
+                                        return Center(
+                                            child: CircularProgressIndicator());
+                                      });
+                                }),
+                          ),
                         )),
                   ],
                 ),
@@ -105,43 +166,24 @@ class TabActualResources extends StatelessWidget {
           Expanded(
             flex: 48,
             child: SimpleTable(headings: [
-              TableElement("Activity ID", flex: 100),
-              TableElement("Date", flex: 92),
-              TableElement("Description", flex: 248),
-              TableElement("Qty", flex: 40),
-              TableElement("Zone", flex: 54),
-              TableElement("Assigned", flex: 91),
-              TableElement("SPI", flex: 40),
-              TableElement("CPI", flex: 40),
+              TableElement("ID", flex: 2),
+              TableElement("Name", flex: 3),
+              TableElement("Designation", flex: 3),
+              TableElement("Total Hrs", flex: 2, maxLines: 2),
+              TableElement("Remarks", flex: 2),
             ], elements: [
-              SimpleTableElement(
-                onTap: () {},
-                datas: [
-                  TableValueElement("3.1.2"),
-                  TableValueElement("2019-10-09"),
-                  TableValueElement(
-                      "Irrigation Excavation (Open areas) 0 -3 mtr"),
-                  TableValueElement("3"),
-                  TableValueElement("-"),
-                  TableValueElement("NO"),
-                  TableValueElement("-"),
-                  TableValueElement("-"),
-                ],
-              ),
-              SimpleTableElement(
-                onTap: () {},
-                datas: [
-                  TableValueElement("3.1.2"),
-                  TableValueElement("2019-10-09"),
-                  TableValueElement(
-                      "Irrigation Excavation (Open areas) 0 -3 mtr"),
-                  TableValueElement("3"),
-                  TableValueElement("-"),
-                  TableValueElement("NO"),
-                  TableValueElement("-"),
-                  TableValueElement("-"),
-                ],
-              )
+              for (ActualResource resource in jobCard.actuals)
+                if (isSameResource(resource.isEquipment))
+                  SimpleTableElement(
+                    onTap: null,
+                    datas: [
+                      TableValueElement(resource.iD),
+                      TableValueElement(resource.name, maxLines: 2),
+                      TableValueElement(resource.designation, maxLines: 2),
+                      TableValueElement(resource.actualHours),
+                      TableValueElement(resource.remarks),
+                    ],
+                  ),
             ]),
           ),
         ],
