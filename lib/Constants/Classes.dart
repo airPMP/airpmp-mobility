@@ -3,6 +3,8 @@ import 'package:airpmp_mobility/API/Functions.dart';
 import 'package:airpmp_mobility/API/ResourceClasses.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../functions.dart';
+
 class LoginDetails {
   int statuscode;
   String userid;
@@ -72,8 +74,8 @@ class MyJobCard {
     assignedDate = json['assignedDate'] ?? "";
     tobeAchievedQTY = json['tobeAchievedQTY'] ?? "";
     projectID = json['projectId'] ?? "";
-    spi = json['spi'] ?? 0;
-    cpi = json['cpi'] ?? 0;
+    spi = intToDouble(json['spi']);
+    cpi = intToDouble(json['cpi']);
     // convertedCreatedDateTime = DateTime.parse(assignedDate);
     actuals = List.generate((json['actuals'] ?? []).length,
         (index) => ActualResource.fromJson(json['actuals'][index]));
@@ -134,8 +136,8 @@ class JobCardData {
     await ApiClass().addResources(_myJobCards[0], _loginDetails.token);
   }
 
-  Future<List<SingleEquipment>> fetchEquipments() async {
-    return ApiClass().fetchEquipments(_loginDetails.token);
+  Future<List> fetchEquipments(bool iseq) async {
+    return ApiClass().fetchEquipments(_loginDetails.token, iseq);
   }
 
   ProjectDetails get getProjectDetails {

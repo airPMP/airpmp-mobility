@@ -1,5 +1,7 @@
 //  --------------Classes to store resource details from "actuals" field----------------------
 
+import '../functions.dart';
+
 /// Actual Resource Class: Fetched from the actuals field. Contains details of a resource which has been added.
 class ActualResource {
   /// Variable names are the same as the api fields.
@@ -27,8 +29,8 @@ class ActualResource {
     name = json['name'] ?? "";
     actualHours = json['actualHours'] ?? "";
     remarks = json['remarks'] ?? "";
-    hourlySalary = json['hourlySalary'] ?? 0;
-    plannedTotHrs = json['plannedTotHrs'] ?? 0;
+    hourlySalary = intToDouble(json['hourlySalary']);
+    plannedTotHrs = intToDouble(json['plannedTotHrs']);
     isEquipment = json['isEquipment'] ?? false;
     unPlanned = json['unPlanned'] ?? false;
   }
@@ -95,19 +97,19 @@ class PlannedvsActualResource {
       {this.planned = false});
 
   PlannedvsActualResource.fromJson(Map<String, dynamic> json) {
-    actualTotCost = json['actualTotCost'] ?? 0;
+    actualTotCost = intToDouble(json['actualTotCost']);
     actualTotHours = (json['actualTotHours'] ?? 0).toString();
-    allowableTotCost = json['allowableTotCost'] ?? 0;
-    cpi = json['cpi'] ?? 0;
+    allowableTotCost = intToDouble(json['allowableTotCost']);
+    cpi = intToDouble(json['cpi']);
     designation = json['designation'] ?? "";
-    plannedTotCost = json['plannedTotCost'] ?? 0;
-    spi = json['spi'] ?? 0;
+    plannedTotCost = intToDouble(json['plannedTotCost']);
+    spi = intToDouble(json['spi']);
     if (!(json['unPlanned'] ?? false)) {
       planned = true;
-      allowableResources = json['allowableResources'] ?? 0;
-      allowableTotHrs = json['allowableTotHrs'] ?? 0;
-      plannedTotHrs = json['plannedTotHrs'] ?? 0;
-      plannedResources = json['plannedResources'] ?? 0;
+      allowableResources = intToDouble(json['allowableResources']);
+      allowableTotHrs = intToDouble(json['allowableTotHrs']);
+      plannedTotHrs = intToDouble(json['plannedTotHrs']);
+      plannedResources = intToDouble(json['plannedResources']);
       unit = json['unit'] ?? "";
     } else
       planned = true;
@@ -140,6 +142,16 @@ class SingleEquipment {
     make = json["Equipment Make"];
     model = json["Equipment Model"];
     type = json["Equipment Type"];
+  }
+}
+
+class SingleEmployee {
+  String id = "", fname = "", lname = "", desig = "";
+  SingleEmployee.fromJson(Map<String, dynamic> json) {
+    id = json["Id"];
+    fname = json["Employee First Name"];
+    lname = json["Employee Last Name"];
+    desig = json["Designations"];
   }
 }
 

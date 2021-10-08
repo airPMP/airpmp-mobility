@@ -33,8 +33,8 @@ class ProviderModel extends ChangeNotifier {
     }
   }
 
-  Future<List<SingleEquipment>> getEquipments() {
-    return _jobCardData.fetchEquipments();
+  Future<List> getEquipments(Resource res) {
+    return _jobCardData.fetchEquipments(res == Resource.Equipment);
   }
 
   ProjectDetails get getProjectDetails {

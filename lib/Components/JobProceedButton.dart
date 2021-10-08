@@ -59,23 +59,7 @@ class JobProceedButton extends StatelessWidget {
                         Container(width: 80, child: TextField())
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.remove, color: Colors.white),
-                        ),
-                        Container(
-                          width: 50,
-                          child: TextField(),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.add, color: Colors.white),
-                        )
-                      ],
-                    ),
+                    Text("50"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

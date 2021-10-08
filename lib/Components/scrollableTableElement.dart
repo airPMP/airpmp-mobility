@@ -27,13 +27,13 @@ class ScrollableTableElement extends StatelessWidget {
           Container(
               width: 80,
               child: Text(
-                '${res.allowableResources}',
+                '${res.allowableResources ?? "-"}',
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "${res.allowableTotHrs}",
+                "${res.allowableTotHrs ?? "-"}",
                 textAlign: TextAlign.center,
               )),
           Container(

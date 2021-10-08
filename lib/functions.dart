@@ -12,3 +12,7 @@ String? stageToString(Stage stage) {
       return "Approved";
   }
 }
+
+double intToDouble(i) {
+  return i == null ? 0.0 : i.toDouble();
+}

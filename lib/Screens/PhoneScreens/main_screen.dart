@@ -110,13 +110,13 @@ class MainPagePhone extends StatelessWidget {
 
               // Project name above the list
               SliverAppBar(
-                toolbarHeight: 80,
-                leadingWidth: 0,
+                // toolbarHeight: 30,
+                leadingWidth: 10,
                 leading: Container(),
                 backgroundColor: Colors.transparent,
                 title: Row(
                   children: [
-                    SizedBox(width: 10),
+                    // SizedBox(width: 10),
                     Text("Project:  ",
                         style: TextStyle(
                             color: CustomColors.textcolor,
@@ -153,7 +153,7 @@ class MainPagePhone extends StatelessWidget {
                 SliverFillRemaining(
                     child: Center(
                   child: Text(
-                    "No Assigned ${stageToString(values.stageSelection) ?? "Not Started"} Job Cards",
+                    "No Assigned Job cards in \"${stageToString(values.stageSelection) ?? "Not Started"}\" state",
                     textAlign: TextAlign.center,
                   ),
                 )),

@@ -53,7 +53,7 @@ class AddEmpDropDown extends StatelessWidget {
             ),
             Expanded(
               child: FutureBuilder<List<SingleEquipment>>(
-                future: Provider.of<ProviderModel>(context).getEquipments(),
+                // future: Provider.of<ProviderModel>(context).getEquipments(res),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<SingleEquipment> data = snapshot.data ?? [];

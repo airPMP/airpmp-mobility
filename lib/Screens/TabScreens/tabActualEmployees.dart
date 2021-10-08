@@ -126,19 +126,19 @@ class TabActualResources extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.all(5),
                             width: 200,
-                            child: FutureBuilder<List<SingleEquipment>>(
+                            child: FutureBuilder<List>(
                                 future: Provider.of<ProviderModel>(context)
-                                    .getEquipments(),
+                                    .getEquipments(resource),
                                 initialData: [],
                                 builder: (futcontext, snapshot) {
-                                  return DropdownSearch<SingleEquipment>(
+                                  return DropdownSearch<dynamic>(
                                       mode: Mode.MENU,
                                       dropdownSearchDecoration: InputDecoration(
                                           // border: InputBorder.none,
                                           suffixIcon: Icon(Icons.search),
                                           enabled: true),
                                       dropDownButton: Container(),
-                                      itemAsString: (SingleEquipment? se) {
+                                      itemAsString: (se) {
                                         return "[" + se!.id + "] " + se.type;
                                       },
                                       items: snapshot.data,

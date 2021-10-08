@@ -23,50 +23,55 @@ class LoginPage extends StatelessWidget {
           "assets/images/bgsvg.svg",
           fit: BoxFit.cover,
         ),
-        Column(
-          children: [
-            Spacer(
-              flex: 1,
-            ),
-            Expanded(
-              flex: 4,
-              child: Row(
-                children: [
-                  Spacer(
-                    flex: 1,
-                  ),
-                  Expanded(
-                      flex: 9,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        color: Colors.white,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image:
-                                  AssetImage("assets/images/loginbgdesign.png"),
-                              fit: BoxFit.cover,
+        SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              children: [
+                Spacer(
+                  flex: 1,
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Row(
+                    children: [
+                      Spacer(
+                        flex: 1,
+                      ),
+                      Expanded(
+                          flex: 9,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
                             ),
-                          ),
-                          child: FractionallySizedBox(
-                            heightFactor: 1,
-                            widthFactor: 0.7,
-                            child: LoginFields(),
-                          ),
-                        ),
-                      )),
-                  Spacer(
-                    flex: 1,
-                  )
-                ],
-              ),
+                            color: Colors.white,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/loginbgdesign.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              child: FractionallySizedBox(
+                                heightFactor: 1,
+                                widthFactor: 0.7,
+                                child: LoginFields(),
+                              ),
+                            ),
+                          )),
+                      Spacer(
+                        flex: 1,
+                      )
+                    ],
+                  ),
+                ),
+                Spacer(
+                  flex: 1,
+                ),
+              ],
             ),
-            Spacer(
-              flex: 1,
-            ),
-          ],
+          ),
         ),
       ],
     ));

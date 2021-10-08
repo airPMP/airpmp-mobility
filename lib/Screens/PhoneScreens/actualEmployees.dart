@@ -28,18 +28,29 @@ class ActualResourcesPhone extends StatelessWidget {
         context: context,
         builder: (context) {
           return SimpleDialog(
-            contentPadding: const EdgeInsets.all(15.0),
+            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 35),
+            title: Text(
+              resource == Resource.Equipment ? "Add Equipment" : "Add Employee",
+              textAlign: TextAlign.center,
+            ),
+            // contentPadding: const EdgeInsets.all(15.0),
             children: [
-              Text(singleEquipment.make + " " + singleEquipment.model),
-              Text(singleEquipment.id),
+              Text(
+                singleEquipment.make + " " + singleEquipment.model,
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                singleEquipment.id,
+              ),
               Container(
-                width: 50,
                 child: TextField(
                   textAlignVertical: TextAlignVertical.bottom,
+                  decoration: InputDecoration(hintText: "Number of Hours"),
                 ),
               ),
               TextField(
                 textAlignVertical: TextAlignVertical.bottom,
+                decoration: InputDecoration(hintText: "Remarks"),
               )
             ],
           );
@@ -89,18 +100,18 @@ class ActualResourcesPhone extends StatelessWidget {
                     Expanded(
                       flex: 4,
                       child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: FutureBuilder<List<SingleEquipment>>(
+                        padding: const EdgeInsets.all(14.0),
+                        child: FutureBuilder<List>(
                             future: Provider.of<ProviderModel>(context)
-                                .getEquipments(),
+                                .getEquipments(resource),
                             initialData: [],
                             builder: (futcontext, snapshot) {
-                              return DropdownSearch<SingleEquipment>(
+                              return DropdownSearch<dynamic>(
                                   mode: Mode.MENU,
                                   dropdownSearchDecoration: InputDecoration(
                                       border: InputBorder.none, enabled: true),
                                   dropDownButton: Container(),
-                                  itemAsString: (SingleEquipment? se) {
+                                  itemAsString: (se) {
                                     return "[" + se!.id + "] " + se.type;
                                   },
                                   items: snapshot.data,
@@ -159,11 +170,11 @@ class ActualResourcesPhone extends StatelessWidget {
                     SimpleTableElement(
                       onTap: null,
                       datas: [
-                        TableValueElement(resource.iD),
+                        TableValueElement(resource.iD, maxLines: 2),
                         TableValueElement(resource.name, maxLines: 2),
                         TableValueElement(resource.designation, maxLines: 2),
-                        TableValueElement(resource.actualHours),
-                        TableValueElement(resource.remarks),
+                        TableValueElement(resource.actualHours, maxLines: 2),
+                        TableValueElement(resource.remarks, maxLines: 2),
                       ],
                     ),
               ],
