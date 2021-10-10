@@ -1,3 +1,4 @@
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,10 @@ import 'CustomRoundedButton.dart';
 
 class JobProceedButton extends StatelessWidget {
   final VoidCallback onClosed;
-  const JobProceedButton({Key? key, required this.onClosed}) : super(key: key);
+  final MyJobCard jobCard;
+  const JobProceedButton(
+      {Key? key, required this.jobCard, required this.onClosed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +63,7 @@ class JobProceedButton extends StatelessWidget {
                         Container(width: 80, child: TextField())
                       ],
                     ),
-                    Text("50"),
+                    Text(jobCard.tobeAchievedQTY),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

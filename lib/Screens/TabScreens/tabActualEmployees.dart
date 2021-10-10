@@ -131,30 +131,48 @@ class TabActualResources extends StatelessWidget {
                                     .getEquipments(resource),
                                 initialData: [],
                                 builder: (futcontext, snapshot) {
-                                  return DropdownSearch<dynamic>(
-                                      mode: Mode.MENU,
-                                      dropdownSearchDecoration: InputDecoration(
-                                          // border: InputBorder.none,
-                                          suffixIcon: Icon(Icons.search),
-                                          enabled: true),
-                                      dropDownButton: Container(),
-                                      itemAsString: (se) {
-                                        return "[" + se!.id + "] " + se.type;
-                                      },
-                                      items: snapshot.data,
-                                      showSearchBox: true,
-                                      maxHeight: 300,
-                                      onChanged: (s) {
-                                        openPopUp(s!, context);
-                                      },
-                                      emptyBuilder: (context, e) {
-                                        return Center(
-                                            child: CircularProgressIndicator());
-                                      },
-                                      loadingBuilder: (context, e) {
-                                        return Center(
-                                            child: CircularProgressIndicator());
-                                      });
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    print(snapshot.data!.length);
+                                    return DropdownSearch<dynamic>(
+                                        mode: Mode.MENU,
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+
+                                                // border: InputBorder.none,
+                                                suffixIcon: Icon(Icons.search),
+                                                enabled: true),
+                                        dropDownButton: Container(),
+                                        itemAsString: (se) {
+                                          if (resource == Resource.Equipment)
+                                            return "[" +
+                                                se!.id +
+                                                "] " +
+                                                se.type;
+                                          else
+                                            return "[" +
+                                                se!.id +
+                                                "] " +
+                                                se.desig;
+                                        },
+                                        items: snapshot.data,
+                                        showSearchBox: true,
+                                        maxHeight: 300,
+                                        onChanged: (s) {
+                                          openPopUp(s!, context);
+                                        },
+                                        emptyBuilder: (context, e) {
+                                          return Center(
+                                              child: Icon(Icons.hourglass_top));
+                                        },
+                                        loadingBuilder: (context, e) {
+                                          return Center(
+                                              child:
+                                                  CircularProgressIndicator());
+                                        });
+                                  } else
+                                    return Center(
+                                        child: CircularProgressIndicator());
                                 }),
                           ),
                         )),

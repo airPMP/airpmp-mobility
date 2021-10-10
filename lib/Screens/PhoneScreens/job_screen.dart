@@ -38,15 +38,15 @@ class JobPagePhone extends StatelessWidget {
           onPush: onPush,
           jobCard: jobCard,
         ), // implemented below this widget.
-        floatingActionButton:
-            JobFloatingPanel()); // implemented below this widget.
+        floatingActionButton: JobFloatingPanel(
+          jobCard: jobCard,
+        )); // implemented below this widget.
   }
 }
 
 class JobFloatingPanel extends StatefulWidget {
-  const JobFloatingPanel({
-    Key? key,
-  }) : super(key: key);
+  final MyJobCard jobCard;
+  const JobFloatingPanel({Key? key, required this.jobCard}) : super(key: key);
 
   @override
   _JobFloatingPanelState createState() => _JobFloatingPanelState();
@@ -85,6 +85,7 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
             )),
       ),
       secondChild: JobProceedButton(
+        jobCard: widget.jobCard,
         onClosed: () {
           setState(() {
             panelIsOpen = false;

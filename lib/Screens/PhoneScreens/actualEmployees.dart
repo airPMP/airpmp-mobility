@@ -122,7 +122,7 @@ class ActualResourcesPhone extends StatelessWidget {
                                   },
                                   emptyBuilder: (context, e) {
                                     return Center(
-                                        child: CircularProgressIndicator());
+                                        child: LinearProgressIndicator());
                                   },
                                   loadingBuilder: (context, e) {
                                     return Center(

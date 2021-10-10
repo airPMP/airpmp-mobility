@@ -14,6 +14,54 @@ class TabJobScreen extends StatelessWidget {
   const TabJobScreen({Key? key, this.onPush, required this.jobCard})
       : super(key: key);
 
+  String totalAllowableResources() {
+    double total = 0;
+    for (PlannedvsActualResource res in jobCard.plannedvsactuals) {
+      total += res.allowableResources ?? 0;
+    }
+    return total.toString();
+  }
+
+  String totalAllowableTotHrs() {
+    double total = 0;
+    for (PlannedvsActualResource res in jobCard.plannedvsactuals) {
+      total += res.allowableResources ?? 0;
+    }
+    return total.toString();
+  }
+
+  String totalActualTotHours() {
+    double total = 0;
+    for (PlannedvsActualResource res in jobCard.plannedvsactuals) {
+      total += res.allowableResources ?? 0;
+    }
+    return total.toString();
+  }
+
+  String totalActualTotCost() {
+    double total = 0;
+    for (PlannedvsActualResource res in jobCard.plannedvsactuals) {
+      total += res.allowableResources ?? 0;
+    }
+    return total.toString();
+  }
+
+  String totalSpi() {
+    double total = 0;
+    for (PlannedvsActualResource res in jobCard.plannedvsactuals) {
+      total += res.allowableResources ?? 0;
+    }
+    return total.toString();
+  }
+
+  String totalCpi() {
+    double total = 0;
+    for (PlannedvsActualResource res in jobCard.plannedvsactuals) {
+      total += res.allowableResources ?? 0;
+    }
+    return total.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,7 +211,7 @@ class TabJobScreen extends StatelessWidget {
                             label: "Add Employee",
                             iconData: Icons.person_add,
                             onPressed: () {
-                              onPush!(context, "actual_Equipments",
+                              onPush!(context, "actual_Employees",
                                   argument: jobCard);
                             },
                           ),
@@ -207,6 +255,18 @@ class TabJobScreen extends StatelessWidget {
                         TableValueElement(res.cpi.toString()),
                       ],
                     ),
+                  // SimpleTableElement(
+                  //   onTap: null,
+                  //   datas: [
+                  //     TableValueElement("Total"),
+                  //     TableValueElement(totalAllowableResources()),
+                  //     TableValueElement(totalAllowableTotHrs()),
+                  //     TableValueElement(totalActualTotHours()),
+                  //     TableValueElement(totalActualTotCost()),
+                  //     TableValueElement(totalSpi()),
+                  //     TableValueElement(totalCpi()),
+                  //   ],
+                  // ),
                 ]),
               ),
               if (jobCard.plannedvsactuals.length == 0)
@@ -245,7 +305,8 @@ class TabJobScreen extends StatelessWidget {
                     Container(
                         width: 100,
                         child: Padding(
-                            padding: EdgeInsets.all(8), child: TextField())),
+                            padding: EdgeInsets.all(8),
+                            child: Text(jobCard.tobeAchievedQTY))),
                     CircleButton(
                         icon: Icon(
                       Icons.save,

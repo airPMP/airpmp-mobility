@@ -205,14 +205,16 @@ class ApiClass {
           await get(Uri.tryParse(url) ?? Uri(), headers: headers);
       if (response.statusCode == 200) {
         List jsonResponse = json.decode(response.body);
-        if (iseq)
+        if (iseq) {
           return jsonResponse
               .map((data) => SingleEquipment.fromJson(data))
               .toList();
-        else
+        } else {
+          print(SingleEmployee.fromJson(jsonResponse[0]));
           return jsonResponse
               .map((data) => SingleEmployee.fromJson(data))
               .toList();
+        }
       } else {
         throw Exception('Unexpected error occured!');
       }

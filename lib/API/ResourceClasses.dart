@@ -151,7 +151,7 @@ class SingleEmployee {
     id = json["Id"];
     fname = json["Employee First Name"];
     lname = json["Employee Last Name"];
-    desig = json["Designations"];
+    desig = json["Designation"];
   }
 }
 

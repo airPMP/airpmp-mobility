@@ -88,97 +88,105 @@ class LoginFields extends StatefulWidget {
 }
 
 class _LoginFieldsState extends State<LoginFields> {
+  bool isloading = false;
   String email = "", _password = "";
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Image.asset("assets/images/airpmo.png"),
-        // SvgPicture.asset(
-        //   "assets/images/AIRPMO_2.svg",
-        //   fit: BoxFit.contain,
-        // ),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: Text("LOGIN", style: CustomTextStyles.Main_title)),
-        Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Email or Mobile",
-                hintStyle: CustomTextStyles.Hint_style,
-              ),
-              textAlignVertical: TextAlignVertical.bottom,
-              onChanged: (text) {
-                email = text;
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Password",
-                hintStyle: CustomTextStyles.Hint_style,
-              ),
-              textAlignVertical: TextAlignVertical.bottom,
-              obscureText: true,
-              onChanged: (text) {
-                _password = text;
-              },
-            ),
-          ],
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-              CustomColors.secondary,
-            )),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
+    return isloading
+        ? Center(child: CircularProgressIndicator.adaptive())
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset("assets/images/airpmo.png"),
+              // SvgPicture.asset(
+              //   "assets/images/AIRPMO_2.svg",
+              //   fit: BoxFit.contain,
+              // ),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("LOGIN", style: CustomTextStyles.Main_title)),
+              Column(
                 children: [
-                  Text(
-                    "LOGIN ",
-                    style: CustomTextStyles.Button_subtitle,
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "Email or Mobile",
+                      hintStyle: CustomTextStyles.Hint_style,
+                    ),
+                    textAlignVertical: TextAlignVertical.bottom,
+                    onChanged: (text) {
+                      email = text;
+                    },
                   ),
-                  Icon(
-                    Icons.send,
-                    color: Colors.white,
-                  )
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      hintStyle: CustomTextStyles.Hint_style,
+                    ),
+                    textAlignVertical: TextAlignVertical.bottom,
+                    obscureText: true,
+                    onChanged: (text) {
+                      _password = text;
+                    },
+                  ),
                 ],
               ),
-            ),
-            onPressed: () async {
-              //TODO: Loading Spinner
-              LoginDetails log =
-                  await ApiClass().login(username: email, password: _password);
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                    CustomColors.secondary,
+                  )),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "LOGIN ",
+                          style: CustomTextStyles.Button_subtitle,
+                        ),
+                        Icon(
+                          Icons.send,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                  onPressed: () async {
+                    //TODO: Loading Spinner
+                    setState(() {
+                      isloading = true;
+                    });
+                    LoginDetails log = await ApiClass()
+                        .login(username: email, password: _password);
 
-              if (log.statuscode == 200) {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ChangeNotifierProvider<ProviderModel>(
-                                create: (context) => ProviderModel(log),
-                                child: MainApp(
-                                    isTab: MediaQuery.of(context).size.width >
-                                        700))));
-              } else if (log.statuscode == 403) {
-                print("Wrong Credentials...");
-                //TODO: Display Wrong Credentials Message
-              } else {
-                print("Error");
-                //TODO: Display error message
-              }
-            },
-          ),
-        )
-      ],
-    );
+                    if (log.statuscode == 200) {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ChangeNotifierProvider<ProviderModel>(
+                                      create: (context) => ProviderModel(log),
+                                      child: MainApp(
+                                          isTab: MediaQuery.of(context)
+                                                  .size
+                                                  .width >
+                                              700))));
+                    } else if (log.statuscode == 403) {
+                      print("Wrong Credentials...");
+                      //TODO: Display Wrong Credentials Message
+                    } else {
+                      print("Error");
+                      //TODO: Display error message
+                    }
+                  },
+                ),
+              )
+            ],
+          );
   }
 }
