@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'Screens/login.dart';
 
 
-
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
