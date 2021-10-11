@@ -221,3 +221,19 @@ class ApiClass {
     }
   }
 }
+//<===========PUT RESOURCES===============>
+// https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66
+Future<http.Response> putResources(actuals)  {
+  return http.put(
+    Uri.parse('https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      "_id": "5d9db979c108b30004207c66",
+      "actuals": [
+        for (ActualResource ar in actuals) ar.toJson(),
+      ],
+    }),
+  );
+}
