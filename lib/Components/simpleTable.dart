@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 class SimpleTableElement extends StatelessWidget {
   /// A Map of Column headings, with the key being the data in the column, and the value being its width ratio(flex).
   final List<TableValueElement> datas;
+  final Color color;
   final VoidCallback? onTap;
   const SimpleTableElement({
     Key? key,
     required this.datas,
     required this.onTap,
+    this.color = CustomColors.primary,
   }) : super(key: key);
 
   @override
@@ -19,8 +21,7 @@ class SimpleTableElement extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: CustomColors.primary),
+            borderRadius: BorderRadius.circular(12), color: color),
         padding: EdgeInsets.all(8),
         margin: EdgeInsets.symmetric(vertical: 4),
         child: Row(

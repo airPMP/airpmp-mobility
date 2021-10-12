@@ -1,5 +1,6 @@
 import 'package:airpmp_mobility/Components/scrollableTableElement.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
+import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:flutter/material.dart';
 
 class ScrollableTable extends StatelessWidget {
@@ -89,9 +90,51 @@ class ScrollableTable extends StatelessWidget {
             child: Container(
               width: 600,
               child: ListView.builder(
-                itemBuilder: (context, index) => ScrollableTableElement(
-                    res: jobCard.plannedvsactuals[index]),
-                itemCount: jobCard.plannedvsactuals.length,
+                itemBuilder: (context, index) {
+                  if (index == jobCard.plannedvsactuals.length)
+                    return Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: CustomColors.icon_not_selected),
+                          padding: EdgeInsets.all(8),
+                          margin: EdgeInsets.symmetric(vertical: 4),
+                          child: Row(
+                            // crossAxisAlignment: CrossAxisAlignment.stretch,
+
+                            children: [
+                              Container(
+                                  width: 400,
+                                  child: Text(
+                                    "Quantity to be acheived : ${jobCard.tobeAchievedQTY}",
+                                    textAlign: TextAlign.left,
+                                  )),
+                              VerticalDivider(),
+                              Container(
+                                  width: 80,
+                                  child: Text(
+                                    "spi",
+                                    textAlign: TextAlign.center,
+                                  )),
+                              Container(
+                                  width: 80,
+                                  child: Text(
+                                    "cpi",
+                                    textAlign: TextAlign.center,
+                                  )),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 100,
+                        )
+                      ],
+                    );
+                  return ScrollableTableElement(
+                      res: jobCard.plannedvsactuals[index]);
+                },
+                itemCount: jobCard.plannedvsactuals.length + 1,
               ),
             ),
           ),

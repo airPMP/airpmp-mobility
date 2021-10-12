@@ -247,26 +247,32 @@ class TabJobScreen extends StatelessWidget {
                       onTap: null,
                       datas: [
                         TableValueElement(res.designation),
-                        TableValueElement(res.allowableResources.toString()),
-                        TableValueElement(res.allowableTotHrs.toString()),
+                        TableValueElement(
+                            (res.allowableResources ?? "-").toString()),
+                        TableValueElement(
+                            (res.allowableTotHrs ?? "-").toString()),
                         TableValueElement(res.actualTotHours),
                         TableValueElement(res.actualTotCost.toString()),
                         TableValueElement(res.spi.toString()),
                         TableValueElement(res.cpi.toString()),
                       ],
                     ),
-                  // SimpleTableElement(
-                  //   onTap: null,
-                  //   datas: [
-                  //     TableValueElement("Total"),
-                  //     TableValueElement(totalAllowableResources()),
-                  //     TableValueElement(totalAllowableTotHrs()),
-                  //     TableValueElement(totalActualTotHours()),
-                  //     TableValueElement(totalActualTotCost()),
-                  //     TableValueElement(totalSpi()),
-                  //     TableValueElement(totalCpi()),
-                  //   ],
-                  // ),
+                  SimpleTableElement(
+                    color: CustomColors.backgroundcolor,
+                    onTap: null,
+                    datas: [
+                      TableValueElement(
+                        "Quantity to be acheived : ${jobCard.tobeAchievedQTY}",
+                        flex: 5,
+                        useCustomflex: true,
+                        textAlign: TextAlign.left,
+                      ),
+                      TableValueElement(totalSpi(),
+                          flex: 1, useCustomflex: true, color: Colors.green),
+                      TableValueElement(totalCpi(),
+                          flex: 1, useCustomflex: true, color: Colors.red),
+                    ],
+                  ),
                 ]),
               ),
               if (jobCard.plannedvsactuals.length == 0)
