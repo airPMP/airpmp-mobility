@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:flutter/material.dart';
@@ -222,4 +223,30 @@ class ApiClass {
       throw Exception('Unexpected error occured: ${e.toString()}!');
     }
   }
+}
+
+//<===========PUT RESOURCES===============>
+// https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66
+
+Future<int> putResources(List<ActualResource> actuals, String token) async {
+  String url =
+      'https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66';
+  Map<String, String> headers = {
+    "Content-type": "application/json",
+    'Accept': 'application/json',
+    "Authorization": "Bearer " + token,
+  };
+  var body = jsonEncode({
+    "actuals": [
+      for (ActualResource ar in actuals) ar.toJson(),
+    ],
+  });
+  try {
+    Response response =
+        await put(Uri.tryParse(url) ?? Uri(), headers: headers, body: body);
+  } catch (e) {
+    print(e);
+  }
+
+  return 1;
 }

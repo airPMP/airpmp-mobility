@@ -35,16 +35,52 @@ class TabActualResources extends StatelessWidget {
           return SimpleDialog(
             contentPadding: const EdgeInsets.all(15.0),
             children: [
-              Text(singleEquipment.make + " " + singleEquipment.model),
-              Text(singleEquipment.id),
+              Text(
+                singleEquipment.make + " " + singleEquipment.model,
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                singleEquipment.id,
+              ),
               Container(
-                width: 50,
                 child: TextField(
                   textAlignVertical: TextAlignVertical.bottom,
+                  decoration: InputDecoration(hintText: "Number of Hours"),
                 ),
               ),
               TextField(
                 textAlignVertical: TextAlignVertical.bottom,
+                decoration: InputDecoration(hintText: "Remarks"),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: 25,
+                  ),
+                  TextButton(
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text(
+                      "Add",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: CustomColors.secondary,
+                    onPressed: () {
+                      //TODO: PUT FUNTION HERE
+                    },
+                  ),
+                ],
               )
             ],
           );

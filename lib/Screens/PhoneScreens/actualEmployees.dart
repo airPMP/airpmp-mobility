@@ -51,6 +51,36 @@ class ActualResourcesPhone extends StatelessWidget {
               TextField(
                 textAlignVertical: TextAlignVertical.bottom,
                 decoration: InputDecoration(hintText: "Remarks"),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: 25,
+                  ),
+                  TextButton(
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text(
+                      "Add",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: CustomColors.secondary,
+                    onPressed: () {
+                       //TODO: PUT FUNTION HERE
+                    },
+                  ),
+                ],
               )
             ],
           );
