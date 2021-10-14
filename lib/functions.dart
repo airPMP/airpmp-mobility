@@ -16,3 +16,7 @@ String? stageToString(Stage stage) {
 double intToDouble(i) {
   return i == null ? 0.0 : i.toDouble();
 }
+
+String dateToString(DateTime dt) {
+  return "${dt.day}-${dt.month}-${dt.year}";
+}

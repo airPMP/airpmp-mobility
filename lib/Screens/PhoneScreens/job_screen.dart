@@ -4,6 +4,8 @@ import 'package:airpmp_mobility/Components/JobProceedButton.dart';
 import 'package:airpmp_mobility/Components/scrollableTable.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
+import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class JobPagePhone extends StatelessWidget {
@@ -46,6 +48,7 @@ class JobPagePhone extends StatelessWidget {
 
 class JobFloatingPanel extends StatefulWidget {
   final MyJobCard jobCard;
+
   const JobFloatingPanel({Key? key, required this.jobCard}) : super(key: key);
 
   @override
@@ -53,39 +56,62 @@ class JobFloatingPanel extends StatefulWidget {
 }
 
 class _JobFloatingPanelState extends State<JobFloatingPanel> {
+  TextEditingController tc = TextEditingController(text: "0");
+  double quantity = 0;
   bool panelIsOpen = false;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossFade(
-      firstChild: InkWell(
-        onTap: () {
-          setState(() {
-            panelIsOpen = true;
-          });
-        },
-        child: Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                color: CustomColors.secondary,
-                borderRadius: BorderRadius.circular(24)),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.arrow_back_ios,
-                  size: 30,
-                  color: Colors.white,
+      firstChild: Container(
+          margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              color: CustomColors.secondary,
+              borderRadius: BorderRadius.circular(24)),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text("Quantity Achieved: ", style: CustomTextStyles.CardText),
+              Container(
+                  width: 60,
+                  child: TextField(
+                    onChanged: (s) {
+                      quantity = double.tryParse(s) ?? quantity;
+                    },
+                    controller: tc,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(),
+                    style: CustomTextStyles.CardText.copyWith(fontSize: 21),
+                  )),
+              Text(
+                " / ${widget.jobCard.tobeAchievedQTY}",
+                style: CustomTextStyles.CardText,
+              ),
+              Spacer(),
+              CircleButton(
+                onPressed: () {
+                  setState(() {
+                    panelIsOpen = true;
+                  });
+                },
+                icon: Icon(
+                  Icons.arrow_upward_rounded,
+                  color: CustomColors.secondary,
                 ),
-                Icon(
-                  Icons.save,
-                  size: 30,
-                  color: Colors.white,
-                )
-              ],
-            )),
-      ),
+                bgColor: Colors.white,
+              )
+            ],
+          )),
       secondChild: JobProceedButton(
+        qty: quantity,
         jobCard: widget.jobCard,
+        onqtyChanged: (double qty) {
+          quantity = qty;
+
+          tc = TextEditingController(text: "$quantity");
+        },
         onClosed: () {
           setState(() {
             panelIsOpen = false;
@@ -94,7 +120,7 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
       ),
       crossFadeState:
           panelIsOpen ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-      duration: Duration(milliseconds: 100),
+      duration: Duration(milliseconds: 500),
     );
   }
 }

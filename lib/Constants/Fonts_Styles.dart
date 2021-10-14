@@ -18,6 +18,11 @@ abstract class CustomTextStyles {
     color: Colors.white,
   );
 
+  static const TextStyle CardText = TextStyle(
+    fontSize: 17,
+    color: Colors.white,
+  );
+
   static const White_title = TextStyle(
     fontSize: 25.0,
     color: Colors.white,
@@ -45,5 +50,4 @@ abstract class CustomTextStyles {
 
   static const TextStyle Listtile_Title = TextStyle();
   static const TextStyle Appbar_title = TextStyle();
-  
 }

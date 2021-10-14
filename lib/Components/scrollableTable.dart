@@ -114,14 +114,20 @@ class ScrollableTable extends StatelessWidget {
                               Container(
                                   width: 80,
                                   child: Text(
-                                    "spi",
+                                    "1",
                                     textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold),
                                   )),
                               Container(
                                   width: 80,
                                   child: Text(
-                                    "cpi",
+                                    "1.65",
                                     textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold),
                                   )),
                             ],
                           ),
@@ -138,14 +144,6 @@ class ScrollableTable extends StatelessWidget {
               ),
             ),
           ),
-          if (jobCard.plannedvsactuals.length == 0)
-            Expanded(
-                child: Center(
-              child: Text(
-                "No Resources in PlannedvsAllowedvsActuals",
-                textAlign: TextAlign.center,
-              ),
-            ))
         ],
       ),
     );
