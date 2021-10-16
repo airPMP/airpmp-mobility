@@ -148,8 +148,18 @@ class JobCardData {
     return _myJobCards;
   }
 
-  void updateLogin(LoginDetails details) async {
-    await saveToken(details.token);
+  void updateLogin(LoginDetails? details) async {
+    if (details == null) {
+      details = LoginDetails(
+        token: await getToken(),
+        userid: await getUserId(),
+        company: await getCompanyId(),
+      );
+    } else {
+      await saveToken(details.token);
+      await saveCompanyId(details.company);
+      await saveUserId(details.userid);
+    }
     _loginDetails = details;
   }
 
