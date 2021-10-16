@@ -148,7 +148,8 @@ class JobCardData {
     return _myJobCards;
   }
 
-  void updateLogin(LoginDetails details) {
+  void updateLogin(LoginDetails details) async {
+    await saveToken(details.token);
     _loginDetails = details;
   }
 

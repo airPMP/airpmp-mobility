@@ -40,12 +40,14 @@ class _JobProceedButtonState extends State<JobProceedButton> {
   @override
   void initState() {
     super.initState();
-
-    tc = TextEditingController(text: "${widget.qty}");
+    print("${widget.qty}");
+    // tc = TextEditingController(text: "${widget.qty}");
   }
 
   @override
   Widget build(BuildContext context) {
+    print("${widget.qty}");
+    tc.value = TextEditingValue(text: "${widget.qty}");
     return Container(
       //Floating button has a default padding from right and bottom, so left padding should be adjusted to that
       margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
