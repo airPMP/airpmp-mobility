@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Models/ProviderModel.dart';
+import 'package:airpmp_mobility/Screens/phoneApp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'API/Functions.dart';
 import 'Screens/login.dart';
 
 
@@ -25,7 +29,14 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: LoginPage());
+        home:getToken()=="" ? LoginPage():ChangeNotifierProvider<ProviderModel>(
+                                      create: (context) => ProviderModel(log),
+                                      child: MainApp(
+                                          isTab: MediaQuery.of(context)
+                                                  .size
+                                                  .width >
+                                              700)),
+        );
   }
 }
 

@@ -14,7 +14,7 @@ FutureOr<void> saveToken(String token) async {
 
 FutureOr<String> getToken() async {
   String token =
-      await secureStorage.readSecureData("token") ?? "Token is invalid";
+      await secureStorage.readSecureData("token") ?? "";
   return token;
 }
 
