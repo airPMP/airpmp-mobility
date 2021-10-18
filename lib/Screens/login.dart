@@ -183,6 +183,9 @@ class _LoginFieldsState extends State<LoginFields> {
                         content: Text("Your Username or Password is incorrect!!"),
                         duration: Duration(seconds: 2),
                       ));
+                      setState(() {
+                        isloading = false;
+                      });
                       //TODO: Display Wrong Credentials Message
                     } else {
                       print("Error");
