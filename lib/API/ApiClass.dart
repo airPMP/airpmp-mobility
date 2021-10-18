@@ -227,7 +227,7 @@ class ApiClass {
 //<===========PUT RESOURCES===============>
 // https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66
 
-  Future<int> putResources(List<ActualResource> actuals, String token) async {
+  Future<int> putResources(List<ActualResource> actuals, String token,String acheivedqty ) async {
     String url =
         'https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66';
     Map<String, String> headers = {
@@ -236,9 +236,12 @@ class ApiClass {
       "Authorization": "Bearer " + token,
     };
     var body = jsonEncode({
+      "_id": "5d9db979c108b30004207c66",
       "actuals": [
         for (ActualResource ar in actuals) ar.toJson(),
       ],
+      "achievedQTY": acheivedqty,
+      //plannedvsallocatedvsactual???
     });
     try {
       Response response =
