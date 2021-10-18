@@ -1,4 +1,6 @@
+import 'package:airpmp_mobility/API/Functions.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
+import 'package:airpmp_mobility/Screens/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,7 +26,14 @@ class AccountPage extends StatelessWidget {
                 width: w * 0.5,
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>   
+                          LoginPage()));
+                  saveToken("");
+                },
                 icon: Icon(
                   Icons.logout,
                   color: Colors.white,
