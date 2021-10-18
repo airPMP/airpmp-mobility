@@ -28,11 +28,28 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: getToken() == ""
-          ? LoginPage()
-          : ChangeNotifierProvider<ProviderModel>(
-              create: (context) => ProviderModel(null),
-              child: MainApp(isTab: MediaQuery.of(context).size.width > 700)),
+      home: LoginChecker(),
     );
+  }
+}
+
+class LoginChecker extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<LoginDetails>(
+        future: getLoginDetais(),
+        builder: (context, snapshot) {
+          return snapshot.hasData
+              ? snapshot.data!.token == ""
+                  ? LoginPage()
+                  : Builder(builder: (context) {
+                      return ChangeNotifierProvider<ProviderModel>(
+                          create: (ccontext) =>
+                              ProviderModel(snapshot.data as LoginDetails),
+                          child: MainApp(
+                              isTab: MediaQuery.of(context).size.width > 700));
+                    })
+              : Center(child: CircularProgressIndicator(color: Colors.orange));
+        });
   }
 }

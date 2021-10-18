@@ -12,7 +12,7 @@ class ProviderModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  ProviderModel(LoginDetails? details) {
+  ProviderModel(LoginDetails details) {
     _jobCardData.updateLogin(details);
   }
 

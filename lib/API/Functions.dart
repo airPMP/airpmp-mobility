@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:airpmp_mobility/API/ApiClass.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -12,10 +13,32 @@ FutureOr<void> saveToken(String token) async {
   print("Token has been saved");
 }
 
-FutureOr<String> getToken() async {
-  String token =
-      await secureStorage.readSecureData("token") ?? "";
+Future<String> getToken() async {
+  String token = await secureStorage.readSecureData("token") ?? "";
   return token;
+}
+
+FutureOr<void> saveCredentials(String username, String password) async {
+  secureStorage.writeSecureData("password", password);
+  secureStorage.writeSecureData("username", username);
+}
+
+Future<Map<String, String>> getCredentials() async {
+  ///Username: ["username"] , Password: ["password"]
+  String password = await secureStorage.readSecureData("password") ?? "";
+  String user = await secureStorage.readSecureData("username") ?? "";
+  return {"username": user, "password": password};
+}
+
+Future<LoginDetails>? getLoginDetais() async {
+  String token = await secureStorage.readSecureData("token") ?? "";
+  if (token != "") {
+    Map<String, String> cred = await getCredentials();
+    LoginDetails log = await ApiClass().login(
+        username: cred["username"] ?? "", password: cred["password"] ?? "");
+    return log;
+  }
+  return LoginDetails.empty();
 }
 
 FutureOr<void> saveCompanyId(String companyId) async {

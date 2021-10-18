@@ -37,6 +37,7 @@ class ApiClass {
     int statuscode = response.statusCode;
     print(statuscode.toString());
     if (statuscode == 200) {
+      saveCredentials(username, password);
       var jsonResponse = json.decode(response.body);
       LoginDetails loginDetails = LoginDetails.fromJson(jsonResponse);
       return loginDetails;

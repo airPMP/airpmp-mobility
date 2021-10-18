@@ -1,20 +1,30 @@
+import 'dart:async';
+
 import 'package:airpmp_mobility/API/ApiClass.dart';
 import 'package:airpmp_mobility/API/Functions.dart';
 import 'package:airpmp_mobility/API/ResourceClasses.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../functions.dart';
 
 class LoginDetails {
-  int statuscode;
-  String userid;
-  String token;
-  String company;
+  late int statuscode;
+  late String userid;
+  late String token;
+  late String company;
   LoginDetails(
       {required this.userid,
       required this.token,
       required this.company,
       this.statuscode = 200});
+  LoginDetails.empty() {
+    this.token = "";
+    this.userid = "";
+    this.company = "";
+    this.statuscode = 200;
+  }
 
   static LoginDetails fromJson(jsonResponse) {
     return LoginDetails(
@@ -119,9 +129,12 @@ class MyProject {
 }
 
 class JobCardData {
+  ValueNotifier<bool> valueNotifier = ValueNotifier(false);
+  FutureOr<bool>? completed;
   List<MyJobCard> _myJobCards = [];
   LoginDetails _loginDetails = LoginDetails(userid: "", token: "", company: "");
   ProjectDetails _projectDetails = ProjectDetails();
+
   Future fetchJobCards() async {
     _myJobCards = await ApiClass()
             .getMyJobCard(_loginDetails.token, _loginDetails.userid) ??
@@ -148,19 +161,23 @@ class JobCardData {
     return _myJobCards;
   }
 
-  void updateLogin(LoginDetails? details) async {
-    if (details == null) {
-      details = LoginDetails(
-        token: await getToken(),
-        userid: await getUserId(),
-        company: await getCompanyId(),
-      );
-    } else {
-      await saveToken(details.token);
-      await saveCompanyId(details.company);
-      await saveUserId(details.userid);
-    }
+  void updateLogin(LoginDetails details) async {
     _loginDetails = details;
+    // if (details.company == "") {
+    //   details = LoginDetails(
+    //     token: details.token,
+    //     userid: await getUserId(),
+    //     company: await getCompanyId(),
+    //   );
+    //   _loginDetails = details;
+    //   completed = true;
+    // } else {
+    //   completed = true;
+
+    await saveToken(details.token);
+    await saveCompanyId(details.company);
+    await saveUserId(details.userid);
+    // }
   }
 
   List<MyJobCard> getStatusCards(String status) {
