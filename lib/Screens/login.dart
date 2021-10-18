@@ -179,6 +179,10 @@ class _LoginFieldsState extends State<LoginFields> {
                                               700))));
                     } else if (log.statuscode == 403) {
                       print("Wrong Credentials...");
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Your Username or Password is incorrect!!"),
+                        duration: Duration(seconds: 2),
+                      ));
                       //TODO: Display Wrong Credentials Message
                     } else {
                       print("Error");
