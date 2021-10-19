@@ -40,4 +40,8 @@ class ProviderModel extends ChangeNotifier {
   ProjectDetails get getProjectDetails {
     return _jobCardData.getProjectDetails;
   }
+
+  void putResources(MyJobCard myJobCard, dynamic addResource, bool iseq) {
+    _jobCardData.addResources(myJobCard, addResource, iseq);
+  }
 }
