@@ -23,10 +23,10 @@ class ActualResourcesPhone extends StatelessWidget {
       return false;
   }
 
-  void openPopUp(SingleEquipment singleEquipment, BuildContext context) {
+  void openPopUp(dynamic singleEquipment, BuildContext context) {
     showDialog(
         context: context,
-        builder: (context) {
+        builder: (ccontext) {
           return SimpleDialog(
             contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 35),
             title: Text(
@@ -36,7 +36,9 @@ class ActualResourcesPhone extends StatelessWidget {
             // contentPadding: const EdgeInsets.all(15.0),
             children: [
               Text(
-                singleEquipment.make + " " + singleEquipment.model,
+                resource == Resource.Equipment
+                    ? singleEquipment.make + " " + singleEquipment.model
+                    : singleEquipment.fname + " " + singleEquipment.lname,
                 style: TextStyle(fontSize: 18),
               ),
               Text(
@@ -45,12 +47,19 @@ class ActualResourcesPhone extends StatelessWidget {
               Container(
                 child: TextField(
                   textAlignVertical: TextAlignVertical.bottom,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                   decoration: InputDecoration(hintText: "Number of Hours"),
+                  onChanged: (str) {
+                    singleEquipment.acthours = double.tryParse(str) ?? 0;
+                  },
                 ),
               ),
               TextField(
                 textAlignVertical: TextAlignVertical.bottom,
                 decoration: InputDecoration(hintText: "Remarks"),
+                onChanged: (str) {
+                  singleEquipment.remarks = str;
+                },
               ),
               SizedBox(
                 height: 25,
@@ -67,17 +76,21 @@ class ActualResourcesPhone extends StatelessWidget {
                       style: TextStyle(color: Colors.grey),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(ccontext).pop();
                     },
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text(
                       "Add",
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: CustomColors.secondary,
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateColor.resolveWith(
+                            (states) => CustomColors.secondary)),
                     onPressed: () {
-                       //TODO: PUT FUNTION HERE
+                      Provider.of<ProviderModel>(context, listen: false)
+                          .putResources(jobCard, singleEquipment,
+                              resource == Resource.Equipment);
                     },
                   ),
                 ],
@@ -130,34 +143,45 @@ class ActualResourcesPhone extends StatelessWidget {
                     Expanded(
                       flex: 4,
                       child: Padding(
-                        padding: const EdgeInsets.all(14.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
                         child: FutureBuilder<List>(
                             future: Provider.of<ProviderModel>(context)
                                 .getEquipments(resource),
                             initialData: [],
                             builder: (futcontext, snapshot) {
-                              return DropdownSearch<dynamic>(
-                                  mode: Mode.MENU,
-                                  dropdownSearchDecoration: InputDecoration(
-                                      border: InputBorder.none, enabled: true),
-                                  dropDownButton: Container(),
-                                  itemAsString: (se) {
-                                    return "[" + se!.id + "] " + se.type;
-                                  },
-                                  items: snapshot.data,
-                                  showSearchBox: true,
-                                  maxHeight: 300,
-                                  onChanged: (s) {
-                                    openPopUp(s!, context);
-                                  },
-                                  emptyBuilder: (context, e) {
-                                    return Center(
-                                        child: LinearProgressIndicator());
-                                  },
-                                  loadingBuilder: (context, e) {
-                                    return Center(
-                                        child: CircularProgressIndicator());
-                                  });
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                print(snapshot.data!.length);
+                                return DropdownSearch<dynamic>(
+                                    mode: Mode.MENU,
+                                    dropdownSearchDecoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        enabled: true),
+                                    dropDownButton: Container(),
+                                    itemAsString: (se) {
+                                      if (resource == Resource.Equipment)
+                                        return "[" + se!.id + "] " + se.type;
+                                      else
+                                        return "[" + se!.id + "] " + se.desig;
+                                    },
+                                    items: snapshot.data,
+                                    showSearchBox: true,
+                                    maxHeight: 300,
+                                    onChanged: (s) {
+                                      openPopUp(s!, context);
+                                    },
+                                    emptyBuilder: (context, e) {
+                                      return Center(
+                                          child: Icon(
+                                              Icons.hourglass_empty_outlined));
+                                    },
+                                    loadingBuilder: (context, e) {
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    });
+                              } else
+                                return Center(
+                                    child: CircularProgressIndicator());
                             }),
                       ),
                     ),

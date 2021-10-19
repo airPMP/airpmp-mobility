@@ -145,29 +145,69 @@ class ApiClass {
   }
 
 // < Complete -- UNDER TESTING >
-  Future<int> addResources(MyJobCard job, String _token) async {
+  Future<int> addResources(
+      MyJobCard job, String _token, dynamic resource, bool iseq) async {
     String url =
-        'https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66';
+        'https://airpmo.herokuapp.com/api/jobcard/${job.jobCardNumber}';
     Map<String, String> headers = {
       "Content-type": "application/json",
       'Accept': 'application/json',
       "Authorization": "Bearer " + _token,
     };
-    for (ActualResource ar in job.actuals) print(ar.iD);
-    var body = jsonEncode({
-      "_id": job.jobCardNumber,
-      "actuals": [
-        for (ActualResource ar in job.actuals) ar.toJson(),
-      ],
-      "achievedQTY": job.achievedQTY,
-      "plannedVsAllowableVsActual": [
-        for (PlannedvsActualResource par in job.plannedvsactuals) par.toJson(),
-      ]
-    });
+    String body;
+    if (iseq) {
+      body = jsonEncode({
+        "_id": job.jobCardNumber,
+        "actuals": [
+          for (ActualResource ar in job.actuals) ar.toJson(),
+          ActualResource(
+              resource.id,
+              "${resource.acthours}",
+              resource.type,
+              5.7, //TODO: Replace Hardcoded Value
+              false,
+              "${resource.make} ${resource.model}",
+              6, //TODO: Replace Hardcoded Value
+              resource.remarks,
+              true)
+        ],
+        "achievedQTY": job.achievedQTY,
+        "plannedVsAllowableVsActual": [
+          for (PlannedvsActualResource par in job.plannedvsactuals)
+            par.toJson(),
+          PlannedvsActualResource(4, "5.7", 0, 0, 0, 0, "Developer", 1, 2, 3, 0,
+              "") //TODO: Replace Hardcoded Value
+        ]
+      });
+    } else {
+      body = body = jsonEncode({
+        "_id": job.jobCardNumber,
+        "actuals": [
+          for (ActualResource ar in job.actuals) ar.toJson(),
+          ActualResource(
+              resource.id,
+              "${resource.acthours}",
+              resource.type,
+              5.7, //TODO: Replace Hardcoded Value
+              false,
+              "${resource.make} ${resource.model}",
+              6, //TODO: Replace Hardcoded Value
+              resource.remarks,
+              true)
+        ],
+        "achievedQTY": job.achievedQTY,
+        "plannedVsAllowableVsActual": [
+          for (PlannedvsActualResource par in job.plannedvsactuals)
+            par.toJson(),
+          PlannedvsActualResource(4, "5.7", 0, 0, 0, 0, "Developer", 1, 2, 3, 0,
+              "") //TODO: Replace Hardcoded Value
+        ]
+      });
+    }
     try {
       Response response =
           await put(Uri.tryParse(url) ?? Uri(), headers: headers, body: body);
-      print(response.statusCode);
+      print(response.statusCode.toString() + " " + url + " " + body.toString());
 
       if (response.statusCode == 200) {
         print('sucessfully added resources....');

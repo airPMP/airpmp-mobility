@@ -136,7 +136,8 @@ class PlannedvsActualResource {
 }
 
 class SingleEquipment {
-  String id = "", make = "", model = "", type = "";
+  String id = "", make = "", model = "", type = "", remarks = "";
+  double acthours = 0;
   SingleEquipment.fromJson(Map<String, dynamic> json) {
     id = json["Id"];
     make = json["Equipment Make"];
@@ -146,7 +147,8 @@ class SingleEquipment {
 }
 
 class SingleEmployee {
-  String id = "", fname = "", lname = "", desig = "";
+  String id = "", fname = "", lname = "", desig = "", remarks = "";
+  double acthours = 0;
   SingleEmployee.fromJson(Map<String, dynamic> json) {
     id = json["Id"];
     fname = json["Employee First Name"];
