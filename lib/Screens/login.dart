@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:airpmp_mobility/API/ApiClass.dart';
+import 'package:airpmp_mobility/API/Functions.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
@@ -178,6 +179,14 @@ class _LoginFieldsState extends State<LoginFields> {
                                               700))));
                     } else if (log.statuscode == 403) {
                       print("Wrong Credentials...");
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Your Username or Password is incorrect!!",style: TextStyle(color: Colors.red),),
+                        backgroundColor: Colors.white,
+                        duration: Duration(seconds: 2),
+                      ));
+                      setState(() {
+                        isloading = false;
+                      });
                       //TODO: Display Wrong Credentials Message
                     } else {
                       print("Error");

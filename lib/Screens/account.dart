@@ -1,4 +1,6 @@
+import 'package:airpmp_mobility/API/Functions.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
+import 'package:airpmp_mobility/Screens/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,9 +16,30 @@ class AccountPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Color(0x00000000),
-          title: Text(
-            'Account',
-            style: CustomTextStyles.White_title,
+          title: Row(
+            children: [
+              Text(
+                'Account',
+                style: CustomTextStyles.White_title,
+              ),
+              SizedBox(
+                width: w * 0.5,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>   
+                          LoginPage()));
+                  saveToken("");
+                },
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
         ),
         body: Stack(
@@ -63,7 +86,7 @@ class AccountPage extends StatelessWidget {
                                     CircleAvatar(
                                       backgroundImage: NetworkImage(
                                           'https://completeconcussions.com/drive/uploads/2017/10/detail-john-doe.jpg'),
-                                      radius: w * 0.15,
+                                      radius: w * 0.13,
                                     ),
                                     Align(
                                       alignment: Alignment.center,
@@ -82,7 +105,7 @@ class AccountPage extends StatelessWidget {
                                     Container(
                                       width: w,
                                       padding: EdgeInsets.symmetric(
-                                          vertical: w * 0.05,
+                                          vertical: w * 0.025,
                                           horizontal: w * 0.01),
                                       decoration: BoxDecoration(
                                         //color: Color(0xff57D1AF),
@@ -115,7 +138,7 @@ class AccountPage extends StatelessWidget {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: h * 0.05,
+                                            height: h * 0.025,
                                           ),
                                           Row(
                                             mainAxisAlignment:
@@ -140,7 +163,7 @@ class AccountPage extends StatelessWidget {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: h * 0.05,
+                                            height: h * 0.025,
                                           ),
                                           Row(
                                             mainAxisAlignment:
