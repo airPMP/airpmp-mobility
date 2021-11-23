@@ -127,7 +127,8 @@ class MainAppState extends State<MainApp> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 25),
                                 child: IconButton(
-                                  icon: Icon(Icons.person, color: _getColor(3)),
+                                  icon: Icon(Icons.person_rounded,
+                                      color: _getColor(3)),
                                   onPressed: () {
                                     _selectTab(3);
                                   },

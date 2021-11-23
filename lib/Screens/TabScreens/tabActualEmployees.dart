@@ -1,4 +1,5 @@
 import 'package:airpmp_mobility/API/ResourceClasses.dart';
+import 'package:airpmp_mobility/Components/LoaderDots.dart';
 import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
@@ -28,19 +29,19 @@ class TabActualResources extends StatelessWidget {
       return false;
   }
 
-  void openPopUp(SingleEquipment singleEquipment, BuildContext context) {
+  void openPopUp(SingleResource singleResource, BuildContext context) {
     showDialog(
         context: context,
-        builder: (context) {
+        builder: (ccontext) {
           return SimpleDialog(
             contentPadding: const EdgeInsets.all(15.0),
             children: [
               Text(
-                singleEquipment.make + " " + singleEquipment.model,
+                singleResource.fname + " " + singleResource.lname,
                 style: TextStyle(fontSize: 18),
               ),
               Text(
-                singleEquipment.id,
+                singleResource.id,
               ),
               Container(
                 child: TextField(
@@ -67,17 +68,21 @@ class TabActualResources extends StatelessWidget {
                       style: TextStyle(color: Colors.grey),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(ccontext).pop();
                     },
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text(
                       "Add",
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: CustomColors.secondary,
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateColor.resolveWith(
+                            (states) => CustomColors.secondary)),
                     onPressed: () {
-                      //TODO: PUT FUNTION HERE
+                      Provider.of<ProviderModel>(context, listen: false)
+                          .putResources(jobCard, singleResource);
+                      Navigator.pop(ccontext);
                     },
                   ),
                 ],
@@ -171,6 +176,9 @@ class TabActualResources extends StatelessWidget {
                                       ConnectionState.done) {
                                     print(snapshot.data!.length);
                                     return DropdownSearch<dynamic>(
+                                        hint: resource == Resource.Equipment
+                                            ? "Select Equipment"
+                                            : "Select Employee",
                                         mode: Mode.MENU,
                                         dropdownSearchDecoration:
                                             InputDecoration(
@@ -207,8 +215,7 @@ class TabActualResources extends StatelessWidget {
                                                   CircularProgressIndicator());
                                         });
                                   } else
-                                    return Center(
-                                        child: CircularProgressIndicator());
+                                    return LoaderDots();
                                 }),
                           ),
                         )),

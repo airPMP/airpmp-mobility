@@ -135,27 +135,36 @@ class PlannedvsActualResource {
   }
 }
 
-class SingleEquipment {
-  String id = "", make = "", model = "", type = "", remarks = "";
-  double acthours = 0;
-  SingleEquipment.fromJson(Map<String, dynamic> json) {
-    id = json["Id"];
-    make = json["Equipment Make"];
-    model = json["Equipment Model"];
-    type = json["Equipment Type"];
-  }
-}
-
-class SingleEmployee {
+class SingleResource {
   String id = "", fname = "", lname = "", desig = "", remarks = "";
   double acthours = 0;
-  SingleEmployee.fromJson(Map<String, dynamic> json) {
+  late bool isequipment;
+  SingleResource.employeeFromJson(Map<String, dynamic> json) {
     id = json["Id"];
     fname = json["Employee First Name"];
     lname = json["Employee Last Name"];
     desig = json["Designation"];
+    isequipment = false;
+  }
+  SingleResource.equipmentFromJson(Map<String, dynamic> json) {
+    id = json["Id"];
+    fname = json["Equipment Make"];
+    lname = json["Equipment Model"];
+    desig = json["Equipment Type"];
+    isequipment = true;
   }
 }
+
+// class SingleEmployee {
+//   String id = "", fname = "", lname = "", desig = "", remarks = "";
+//   double acthours = 0;
+//   SingleEmployee.fromJson(Map<String, dynamic> json) {
+//     id = json["Id"];
+//     fname = json["Employee First Name"];
+//     lname = json["Employee Last Name"];
+//     desig = json["Designation"];
+//   }
+// }
 
 /// UnplannedvsActualResource Class: Fetched from the plannedVsAllowableVsActual field. Includes details of a resource in relation to the Project.
 ///

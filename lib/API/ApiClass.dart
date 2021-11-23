@@ -20,6 +20,7 @@ class ApiClass {
   Future<LoginDetails> login(
       {required String username, required String password}) async {
     String url = 'https://airpmo.herokuapp.com/api/auth/login';
+
     Map<String, String> body = {
       "email": username,
       "password": password,
@@ -30,10 +31,14 @@ class ApiClass {
       "Content-type": "application/json",
       "Accept": "application/json",
     };
-
-    Response response = await post(Uri.tryParse(url) ?? Uri(),
-        headers: headers, body: credentialsJson);
-    debugPrint("response is working");
+    Response response;
+    try {
+      response = await post(Uri.tryParse(url) ?? Uri(),
+          headers: headers, body: credentialsJson);
+    } catch (e) {
+      return (LoginDetails(
+          company: "", userid: "", token: "", statuscode: 500));
+    }
     int statuscode = response.statusCode;
     print(statuscode.toString());
     if (statuscode == 200) {
@@ -62,9 +67,12 @@ class ApiClass {
       'Accept': 'application/json',
       "Authorization": "Bearer " + token,
     };
-    Response response = await get(Uri.tryParse(url) ?? Uri(), headers: headers);
-    print(response.body);
-
+    Response response;
+    try {
+      response = await get(Uri.tryParse(url) ?? Uri(), headers: headers);
+    } catch (e) {
+      return null;
+    }
     if (response.statusCode == 200) {
       print('sucessfully obtained projects....');
       projectsJson = jsonDecode(response.body);
@@ -93,8 +101,12 @@ class ApiClass {
       'Accept': 'application/json',
       "Authorization": "Bearer " + token,
     };
-    Response response = await get(Uri.tryParse(url) ?? Uri(), headers: headers);
-
+    Response response;
+    try {
+      response = await get(Uri.tryParse(url) ?? Uri(), headers: headers);
+    } catch (e) {
+      return null;
+    }
     if (response.statusCode == 200) {
       print('sucessfully obtained projects....');
       projectsJson = jsonDecode(response.body);
@@ -107,7 +119,6 @@ class ApiClass {
   }
 
   Future<List<MyJobCard>?> getMyJobCard(String token, String userID) async {
-    print('getting job card from internet..');
     var myJobCardsJson;
     var aJobCard;
     List<MyJobCard> myJobCardsList = [];
@@ -146,7 +157,7 @@ class ApiClass {
 
 // < Complete -- UNDER TESTING >
   Future<int> addResources(
-      MyJobCard job, String _token, dynamic resource, bool iseq) async {
+      MyJobCard job, String _token, SingleResource resource) async {
     String url =
         'https://airpmo.herokuapp.com/api/jobcard/${job.jobCardNumber}';
     Map<String, String> headers = {
@@ -155,55 +166,57 @@ class ApiClass {
       "Authorization": "Bearer " + _token,
     };
     String body;
-    if (iseq) {
-      body = jsonEncode({
-        "_id": job.jobCardNumber,
-        "actuals": [
-          for (ActualResource ar in job.actuals) ar.toJson(),
-          ActualResource(
-              resource.id,
-              "${resource.acthours}",
-              resource.type,
-              5.7, //TODO: Replace Hardcoded Value
-              false,
-              "${resource.make} ${resource.model}",
-              6, //TODO: Replace Hardcoded Value
-              resource.remarks,
-              true)
-        ],
-        "achievedQTY": job.achievedQTY,
-        "plannedVsAllowableVsActual": [
-          for (PlannedvsActualResource par in job.plannedvsactuals)
-            par.toJson(),
-          PlannedvsActualResource(4, "5.7", 0, 0, 0, 0, "Developer", 1, 2, 3, 0,
-              "") //TODO: Replace Hardcoded Value
-        ]
-      });
-    } else {
-      body = body = jsonEncode({
-        "_id": job.jobCardNumber,
-        "actuals": [
-          for (ActualResource ar in job.actuals) ar.toJson(),
-          ActualResource(
-              resource.id,
-              "${resource.acthours}",
-              resource.type,
-              5.7, //TODO: Replace Hardcoded Value
-              false,
-              "${resource.make} ${resource.model}",
-              6, //TODO: Replace Hardcoded Value
-              resource.remarks,
-              true)
-        ],
-        "achievedQTY": job.achievedQTY,
-        "plannedVsAllowableVsActual": [
-          for (PlannedvsActualResource par in job.plannedvsactuals)
-            par.toJson(),
-          PlannedvsActualResource(4, "5.7", 0, 0, 0, 0, "Developer", 1, 2, 3, 0,
-              "") //TODO: Replace Hardcoded Value
-        ]
-      });
+    bool unplanned = true, newresource = true;
+
+    // Find whether a resource of the same designation has been already added to the plannedvsactuals.
+    for (int i = 0; i < job.plannedvsactuals.length; i++) {
+      if (job.plannedvsactuals[i].designation.toLowerCase() ==
+          resource.desig.toLowerCase()) {
+        job.plannedvsactuals[i].actualTotHours = ((double.tryParse(
+                        job.plannedvsactuals[i].actualTotHours) ??
+                    0) +
+                (resource.acthours))
+            .toString(); //add current hours to the total hours of the designation.
+        unplanned = job.plannedvsactuals[i].planned;
+        newresource = false;
+        break;
+      }
     }
+    body = jsonEncode({
+      "_id": job.jobCardNumber,
+      "actuals": [
+        for (ActualResource ar in job.actuals) ar.toJson(),
+        ActualResource(
+            resource.id,
+            "${resource.acthours}",
+            resource.desig,
+            5.7, //TODO: Replace Hardcoded Value
+            resource.isequipment,
+            "${resource.fname} ${resource.lname}",
+            6, //TODO: Replace Hardcoded Value
+            resource.remarks,
+            unplanned)
+      ],
+      "achievedQTY": job.achievedQTY,
+      "plannedVsAllowableVsActual": [
+        for (PlannedvsActualResource par in job.plannedvsactuals) par.toJson(),
+        if (newresource) // New value should be added only if the same designation has not been added before.
+          PlannedvsActualResource(
+              4, //TODO: Replace Hardcoded Value
+              resource.acthours.toString(),
+              0,
+              0,
+              0,
+              0, //TODO: Replace Hardcoded Value
+              resource.desig,
+              1,
+              2,
+              3,
+              0,
+              "" //TODO: Replace Hardcoded Value
+              )
+      ]
+    });
     try {
       Response response =
           await put(Uri.tryParse(url) ?? Uri(), headers: headers, body: body);
@@ -211,26 +224,15 @@ class ApiClass {
 
       if (response.statusCode == 200) {
         print('sucessfully added resources....');
-        // myJobCardsJson = jsonDecode(response.body);
-        // for (aJobCard in myJobCardsJson) {
-        //   myJobCardsList.add(MyJobCard.fromJson(aJobCard));
-        // }
       }
       return response.statusCode;
-      // int len = myJobCardsList.length;
-      // print("number of jc in obtained = $len");
-      // // return myJobCardsList;
-      // return {
-      //   'myJobCardList': myJobCardsList,
-      //   'numberOfJCs': myJobCardsList.length
-      // };
     } catch (e) {
       print(e);
       return 300;
     }
   }
 
-  Future<List> fetchEquipments(String token, bool iseq) async {
+  Future<List<SingleResource>> fetchEquipments(String token, bool iseq) async {
     String url =
         "https://airpmo.herokuapp.com/api/hrms/getHRMSFromSpreadSheet?id=1LtpGuZdUivXEA4TqUvK9T3qRr1HER6TKzdSxTYPEAQ8&sheetId=AT+-+HRMS+format&apiKey=AIzaSyDoh4Gj_-xV033rPKneUFSpQSUpbqDqfDw";
     if (iseq)
@@ -248,12 +250,11 @@ class ApiClass {
         List jsonResponse = json.decode(response.body);
         if (iseq) {
           return jsonResponse
-              .map((data) => SingleEquipment.fromJson(data))
+              .map((data) => SingleResource.equipmentFromJson(data))
               .toList();
         } else {
-          print(SingleEmployee.fromJson(jsonResponse[0]));
           return jsonResponse
-              .map((data) => SingleEmployee.fromJson(data))
+              .map((data) => SingleResource.employeeFromJson(data))
               .toList();
         }
       } else {
@@ -267,7 +268,8 @@ class ApiClass {
 //<===========PUT RESOURCES===============>
 // https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66
 
-  Future<int> putResources(List<ActualResource> actuals, String token,String acheivedqty ) async {
+  Future<int> putResources(
+      List<ActualResource> actuals, String token, String acheivedqty) async {
     String url =
         'https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66';
     Map<String, String> headers = {

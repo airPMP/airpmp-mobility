@@ -1,4 +1,5 @@
 import 'package:airpmp_mobility/API/ResourceClasses.dart';
+import 'package:airpmp_mobility/Components/LoaderDots.dart';
 import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
@@ -23,7 +24,7 @@ class ActualResourcesPhone extends StatelessWidget {
       return false;
   }
 
-  void openPopUp(dynamic singleEquipment, BuildContext context) {
+  void openPopUp(SingleResource singleResource, BuildContext context) {
     showDialog(
         context: context,
         builder: (ccontext) {
@@ -36,13 +37,11 @@ class ActualResourcesPhone extends StatelessWidget {
             // contentPadding: const EdgeInsets.all(15.0),
             children: [
               Text(
-                resource == Resource.Equipment
-                    ? singleEquipment.make + " " + singleEquipment.model
-                    : singleEquipment.fname + " " + singleEquipment.lname,
+                singleResource.fname + " " + singleResource.lname,
                 style: TextStyle(fontSize: 18),
               ),
               Text(
-                singleEquipment.id,
+                singleResource.id,
               ),
               Container(
                 child: TextField(
@@ -50,7 +49,7 @@ class ActualResourcesPhone extends StatelessWidget {
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
                   decoration: InputDecoration(hintText: "Number of Hours"),
                   onChanged: (str) {
-                    singleEquipment.acthours = double.tryParse(str) ?? 0;
+                    singleResource.acthours = double.tryParse(str) ?? 0;
                   },
                 ),
               ),
@@ -58,7 +57,7 @@ class ActualResourcesPhone extends StatelessWidget {
                 textAlignVertical: TextAlignVertical.bottom,
                 decoration: InputDecoration(hintText: "Remarks"),
                 onChanged: (str) {
-                  singleEquipment.remarks = str;
+                  singleResource.remarks = str;
                 },
               ),
               SizedBox(
@@ -89,8 +88,8 @@ class ActualResourcesPhone extends StatelessWidget {
                             (states) => CustomColors.secondary)),
                     onPressed: () {
                       Provider.of<ProviderModel>(context, listen: false)
-                          .putResources(jobCard, singleEquipment,
-                              resource == Resource.Equipment);
+                          .putResources(jobCard, singleResource);
+                      Navigator.pop(ccontext);
                     },
                   ),
                 ],
@@ -144,7 +143,7 @@ class ActualResourcesPhone extends StatelessWidget {
                       flex: 4,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                        child: FutureBuilder<List>(
+                        child: FutureBuilder<List<SingleResource>>(
                             future: Provider.of<ProviderModel>(context)
                                 .getEquipments(resource),
                             initialData: [],
@@ -153,16 +152,17 @@ class ActualResourcesPhone extends StatelessWidget {
                                   ConnectionState.done) {
                                 print(snapshot.data!.length);
                                 return DropdownSearch<dynamic>(
+                                    hint: "Select " +
+                                        (resource == Resource.Equipment
+                                            ? "Equipment"
+                                            : "Employee"),
                                     mode: Mode.MENU,
                                     dropdownSearchDecoration: InputDecoration(
                                         border: InputBorder.none,
                                         enabled: true),
                                     dropDownButton: Container(),
                                     itemAsString: (se) {
-                                      if (resource == Resource.Equipment)
-                                        return "[" + se!.id + "] " + se.type;
-                                      else
-                                        return "[" + se!.id + "] " + se.desig;
+                                      return "[" + se!.id + "] " + se.desig;
                                     },
                                     items: snapshot.data,
                                     showSearchBox: true,
@@ -180,8 +180,7 @@ class ActualResourcesPhone extends StatelessWidget {
                                           child: CircularProgressIndicator());
                                     });
                               } else
-                                return Center(
-                                    child: CircularProgressIndicator());
+                                return LoaderDots();
                             }),
                       ),
                     ),

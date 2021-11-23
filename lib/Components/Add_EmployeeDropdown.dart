@@ -52,11 +52,11 @@ class AddEmpDropDown extends StatelessWidget {
               height: 15,
             ),
             Expanded(
-              child: FutureBuilder<List<SingleEquipment>>(
+              child: FutureBuilder<List<SingleResource>>(
                 // future: Provider.of<ProviderModel>(context).getEquipments(res),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<SingleEquipment> data = snapshot.data ?? [];
+                    List<SingleResource> data = snapshot.data ?? [];
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -79,7 +79,7 @@ class AddEmpDropDown extends StatelessWidget {
                                       ),
                                       Align(
                                         alignment: Alignment.centerRight,
-                                        child: Text(data[index].type,
+                                        child: Text(data[index].desig,
                                             style: CustomTextStyles
                                                 .Listtile_Title),
                                       ),

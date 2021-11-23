@@ -4,6 +4,7 @@ import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Models/ProviderModel.dart';
 import 'package:airpmp_mobility/Screens/phoneApp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'API/Functions.dart';
 import 'Screens/login.dart';
@@ -13,6 +14,10 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

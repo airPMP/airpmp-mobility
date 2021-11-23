@@ -8,15 +8,17 @@ import 'CustomRoundedButton.dart';
 
 class JobProceedButton extends StatefulWidget {
   final VoidCallback onClosed;
-  final Function onqtyChanged;
+  final Function(String) onqtyChanged;
   final double qty;
   final MyJobCard jobCard;
+  final TextEditingController textController;
   JobProceedButton(
       {Key? key,
       required this.qty,
       required this.jobCard,
       required this.onClosed,
-      required this.onqtyChanged})
+      required this.onqtyChanged,
+      required this.textController})
       : super(key: key);
 
   @override
@@ -24,7 +26,6 @@ class JobProceedButton extends StatefulWidget {
 }
 
 class _JobProceedButtonState extends State<JobProceedButton> {
-  TextEditingController tc = TextEditingController();
   DateTime date = DateTime.now();
 
   Future<DateTime?> dateSelector(DateTime dt) {
@@ -40,14 +41,12 @@ class _JobProceedButtonState extends State<JobProceedButton> {
   @override
   void initState() {
     super.initState();
-    print("${widget.qty}");
     // tc = TextEditingController(text: "${widget.qty}");
   }
 
   @override
   Widget build(BuildContext context) {
-    print("${widget.qty}");
-    tc.value = TextEditingValue(text: "${widget.qty}");
+    // tc.value = TextEditingValue(text: "${widget.qty}");
     return Container(
       //Floating button has a default padding from right and bottom, so left padding should be adjusted to that
       margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
@@ -132,11 +131,8 @@ class _JobProceedButtonState extends State<JobProceedButton> {
                       Container(
                           width: 60,
                           child: TextField(
-                            controller: tc,
-                            onChanged: (s) {
-                              widget.onqtyChanged(
-                                  double.tryParse(s) ?? widget.qty);
-                            },
+                            controller: widget.textController, // tc,
+                            onChanged: widget.onqtyChanged,
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.number,
                             decoration:

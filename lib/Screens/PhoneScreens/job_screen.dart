@@ -8,11 +8,25 @@ import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class JobPagePhone extends StatelessWidget {
+class JobPagePhone extends StatefulWidget {
   final Function onPush;
   final MyJobCard jobCard;
   const JobPagePhone({Key? key, required this.onPush, required this.jobCard})
       : super(key: key);
+
+  @override
+  State<JobPagePhone> createState() => _JobPagePhoneState();
+}
+
+class _JobPagePhoneState extends State<JobPagePhone> {
+  late MyJobCard jobcard;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    jobcard = widget.jobCard;
+  }
+
   @override
   Widget build(BuildContext pageContext) {
     return Scaffold(
@@ -37,26 +51,33 @@ class JobPagePhone extends StatelessWidget {
           ),
         ),
         body: JobPageBody(
-          onPush: onPush,
-          jobCard: jobCard,
+          onPush: widget.onPush,
+          jobCard: widget.jobCard,
         ), // implemented below this widget.
         floatingActionButton: JobFloatingPanel(
-          jobCard: jobCard,
+          onChanged: (qty) {
+            jobcard.achievedQTY = qty;
+          },
+          jobCard: widget.jobCard,
         )); // implemented below this widget.
   }
 }
 
 class JobFloatingPanel extends StatefulWidget {
   final MyJobCard jobCard;
+  final Function(double) onChanged;
 
-  const JobFloatingPanel({Key? key, required this.jobCard}) : super(key: key);
+  const JobFloatingPanel(
+      {Key? key, required this.jobCard, required this.onChanged})
+      : super(key: key);
 
   @override
   _JobFloatingPanelState createState() => _JobFloatingPanelState();
 }
 
 class _JobFloatingPanelState extends State<JobFloatingPanel> {
-  TextEditingController tc = TextEditingController(text: "0");
+  TextEditingController tc = TextEditingController(text: "0"),
+      tc2 = TextEditingController(text: "0");
   double quantity = 0;
   bool panelIsOpen = false;
 
@@ -76,8 +97,11 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
               Container(
                   width: 60,
                   child: TextField(
-                    onChanged: (s) {
-                      quantity = double.tryParse(s) ?? quantity;
+                    onChanged: (qty) {
+                      quantity = double.tryParse(qty) ?? quantity;
+                      widget.onChanged(quantity);
+
+                      tc2 = TextEditingController(text: "$quantity");
                     },
                     controller: tc,
                     textAlign: TextAlign.center,
@@ -107,11 +131,13 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
       secondChild: JobProceedButton(
         qty: quantity,
         jobCard: widget.jobCard,
-        onqtyChanged: (double qty) {
-          quantity = qty;
+        onqtyChanged: (qty) {
+          quantity = double.tryParse(qty) ?? quantity;
+          widget.onChanged(quantity);
 
           tc = TextEditingController(text: "$quantity");
         },
+        textController: tc2,
         onClosed: () {
           setState(() {
             panelIsOpen = false;

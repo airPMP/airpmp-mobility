@@ -33,7 +33,7 @@ class ProviderModel extends ChangeNotifier {
     }
   }
 
-  Future<List> getEquipments(Resource res) {
+  Future<List<SingleResource>> getEquipments(Resource res) {
     return _jobCardData.fetchEquipments(res == Resource.Equipment);
   }
 
@@ -41,7 +41,7 @@ class ProviderModel extends ChangeNotifier {
     return _jobCardData.getProjectDetails;
   }
 
-  void putResources(MyJobCard myJobCard, dynamic addResource, bool iseq) {
-    _jobCardData.addResources(myJobCard, addResource, iseq);
+  void putResources(MyJobCard myJobCard, dynamic addResource) {
+    _jobCardData.addResources(myJobCard, addResource);
   }
 }
