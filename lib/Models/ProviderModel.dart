@@ -44,4 +44,13 @@ class ProviderModel extends ChangeNotifier {
   void putResources(MyJobCard myJobCard, dynamic addResource) {
     _jobCardData.addResources(myJobCard, addResource);
   }
+
+  void fetchDesignations() {
+    _jobCardData.fetchDesigs();
+  }
+
+  void updateQty(double qty, String jcno) {
+    _jobCardData.updateQuatity(qty, jcno);
+    notifyListeners();
+  }
 }

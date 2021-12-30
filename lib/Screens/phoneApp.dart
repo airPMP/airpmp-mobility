@@ -48,6 +48,7 @@ class MainAppState extends State<MainApp> {
     setState(() {
       loading = false;
     });
+    Provider.of<ProviderModel>(context, listen: false).fetchDesignations();
   }
 
   @override

@@ -27,37 +27,41 @@ class ScrollableTableElement extends StatelessWidget {
           Container(
               width: 80,
               child: Text(
-                '${res.allowableResources ?? "-"}',
+                res.allowableResources == null
+                    ? "-"
+                    : res.allowableResources!.toStringAsFixed(2),
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "${res.allowableTotHrs ?? "-"}",
+                res.allowableTotHrs == null
+                    ? "-"
+                    : res.allowableTotHrs!.toStringAsFixed(2),
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "${res.actualTotHours}",
+                res.actualTotHours,
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "${res.actualTotCost}",
+                res.actualTotCost.toStringAsFixed(2),
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "${res.spi}",
+                res.spi.toStringAsFixed(2),
                 textAlign: TextAlign.center,
               )),
           Container(
               width: 80,
               child: Text(
-                "${res.cpi}",
+                res.cpi.toStringAsFixed(2),
                 textAlign: TextAlign.center,
               )),
         ],

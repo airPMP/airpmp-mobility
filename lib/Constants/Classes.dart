@@ -129,9 +129,10 @@ class MyProject {
 }
 
 class JobCardData {
-  ValueNotifier<bool> valueNotifier = ValueNotifier(false);
+  // ValueNotifier<bool> valueNotifier = ValueNotifier(false);
   FutureOr<bool>? completed;
   List<MyJobCard> _myJobCards = [];
+  Map<String, double> salaries = {};
   LoginDetails _loginDetails = LoginDetails(userid: "", token: "", company: "");
   ProjectDetails _projectDetails = ProjectDetails();
 
@@ -189,6 +190,42 @@ class JobCardData {
       }
     }
     return list;
+  }
+
+  void fetchDesigs() async {
+    salaries = await ApiClass().fetchDesignations(_loginDetails.token, true);
+    Map<String, double> entries =
+        await ApiClass().fetchDesignations(_loginDetails.token, false);
+    salaries.addAll(entries);
+  }
+
+  void updateQuatity(double qty, String jcno) {
+    int index =
+        _myJobCards.indexWhere((element) => element.jobCardNumber == jcno);
+    double allowqty = double.tryParse(_myJobCards[index].tobeAchievedQTY) ?? 0;
+    double totcost = 0, acttotcost = 0;
+
+    _myJobCards[index].achievedQTY = qty;
+    _myJobCards[index].spi = (qty / allowqty);
+    _myJobCards[index].plannedvsactuals.forEach((element) {
+      totcost += ((salaries[element.designation.toLowerCase()] ?? 0) *
+          (element.allowableTotHrs ?? 0));
+      acttotcost += element.actualTotCost;
+
+      element.allowableResources =
+          (element.plannedResources ?? 0) * (qty / allowqty);
+      element.allowableTotHrs = (element.plannedTotHrs ?? 0) * (qty / allowqty);
+      print(element.planned);
+      element.spi = element.planned ? (qty / allowqty) : 0;
+      element.cpi =
+          ((((salaries[element.designation.toLowerCase()] ?? 0) / 310) *
+                  (element.allowableTotHrs ?? 0)) /
+              (element.actualTotCost));
+    });
+    if (acttotcost != 0)
+      _myJobCards[index].cpi = totcost / acttotcost;
+    else
+      _myJobCards[index].cpi = 0;
   }
 }
 

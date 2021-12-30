@@ -112,7 +112,7 @@ class PlannedvsActualResource {
       plannedResources = intToDouble(json['plannedResources']);
       unit = json['unit'] ?? "";
     } else
-      planned = true;
+      planned = false;
   }
 
   Map<String, dynamic> toJson() {
@@ -137,6 +137,7 @@ class PlannedvsActualResource {
 
 class SingleResource {
   String id = "", fname = "", lname = "", desig = "", remarks = "";
+  double ctc = -1;
   double acthours = 0;
   late bool isequipment;
   SingleResource.employeeFromJson(Map<String, dynamic> json) {
@@ -145,6 +146,7 @@ class SingleResource {
     lname = json["Employee Last Name"];
     desig = json["Designation"];
     isequipment = false;
+    ctc = json["CTC"];
   }
   SingleResource.equipmentFromJson(Map<String, dynamic> json) {
     id = json["Id"];
@@ -152,6 +154,7 @@ class SingleResource {
     lname = json["Equipment Model"];
     desig = json["Equipment Type"];
     isequipment = true;
+    ctc = json["CTC"];
   }
 }
 

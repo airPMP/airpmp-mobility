@@ -5,8 +5,10 @@ import 'package:airpmp_mobility/Components/scrollableTable.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
+import 'package:airpmp_mobility/Models/ProviderModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class JobPagePhone extends StatefulWidget {
   final Function onPush;
@@ -56,6 +58,8 @@ class _JobPagePhoneState extends State<JobPagePhone> {
         ), // implemented below this widget.
         floatingActionButton: JobFloatingPanel(
           onChanged: (qty) {
+            Provider.of<ProviderModel>(context, listen: false)
+                .updateQty(qty, jobcard.jobCardNumber);
             jobcard.achievedQTY = qty;
           },
           jobCard: widget.jobCard,

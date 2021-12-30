@@ -167,7 +167,7 @@ class ApiClass {
     };
     String body;
     bool unplanned = true, newresource = true;
-
+    double hoursal = resource.ctc / 310, plannedtotal = 0;
     // Find whether a resource of the same designation has been already added to the plannedvsactuals.
     for (int i = 0; i < job.plannedvsactuals.length; i++) {
       if (job.plannedvsactuals[i].designation.toLowerCase() ==
@@ -177,6 +177,8 @@ class ApiClass {
                     0) +
                 (resource.acthours))
             .toString(); //add current hours to the total hours of the designation.
+        plannedtotal = job.plannedvsactuals[i].plannedResources ?? 0;
+        job.plannedvsactuals[i].actualTotCost += (hoursal * resource.acthours);
         unplanned = job.plannedvsactuals[i].planned;
         newresource = false;
         break;
@@ -187,34 +189,34 @@ class ApiClass {
       "actuals": [
         for (ActualResource ar in job.actuals) ar.toJson(),
         ActualResource(
-            resource.id,
-            "${resource.acthours}",
-            resource.desig,
-            5.7, //TODO: Replace Hardcoded Value
-            resource.isequipment,
-            "${resource.fname} ${resource.lname}",
-            6, //TODO: Replace Hardcoded Value
-            resource.remarks,
-            unplanned)
+                resource.id,
+                "${resource.acthours}",
+                resource.desig,
+                hoursal,
+                resource.isequipment,
+                "${resource.fname} ${resource.lname}",
+                plannedtotal,
+                resource.remarks,
+                unplanned)
+            .toJson()
       ],
       "achievedQTY": job.achievedQTY,
       "plannedVsAllowableVsActual": [
         for (PlannedvsActualResource par in job.plannedvsactuals) par.toJson(),
         if (newresource) // New value should be added only if the same designation has not been added before.
           PlannedvsActualResource(
-              4, //TODO: Replace Hardcoded Value
+              hoursal * resource.acthours,
               resource.acthours.toString(),
               0,
               0,
               0,
-              0, //TODO: Replace Hardcoded Value
-              resource.desig,
-              1,
-              2,
-              3,
               0,
-              "" //TODO: Replace Hardcoded Value
-              )
+              resource.desig,
+              0,
+              0,
+              0,
+              0,
+              "")
       ]
     });
     try {
@@ -262,6 +264,46 @@ class ApiClass {
       }
     } catch (e) {
       throw Exception('Unexpected error occured: ${e.toString()}!');
+    }
+  }
+
+  Future<Map<String, double>> fetchDesignations(String token, bool iseq) async {
+    Map<String, double> values = {};
+    String url =
+        "https://airpmo.herokuapp.com/api/hrms/getHRMSFromSpreadSheet?id=1LtpGuZdUivXEA4TqUvK9T3qRr1HER6TKzdSxTYPEAQ8&sheetId=AT+-+HRMS+Std+Salaries&apiKey=AIzaSyDoh4Gj_-xV033rPKneUFSpQSUpbqDqfDw";
+    if (iseq)
+      url =
+          'https://airpmo.herokuapp.com/api/hrms/getHRMSFromSpreadSheet?id=1LtpGuZdUivXEA4TqUvK9T3qRr1HER6TKzdSxTYPEAQ8&sheetId=AT+-+HRMS+Std+Rentals&apiKey=AIzaSyDoh4Gj_-xV033rPKneUFSpQSUpbqDqfDw';
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": "Bearer " + token,
+    };
+    try {
+      Response response =
+          await get(Uri.tryParse(url) ?? Uri(), headers: headers);
+      if (response.statusCode == 200) {
+        print(response.body.length);
+        List<dynamic> jsonResponse = json.decode(response.body);
+        if (iseq) {
+          for (Map data in jsonResponse) {
+            values[data['Equipment Type'].toString().toLowerCase()] =
+                double.tryParse(data['CTC']) ?? 0;
+          }
+        } else {
+          for (Map data in jsonResponse) {
+            values[data['Designation'].toString().toLowerCase()] =
+                double.tryParse(data['CTC']) ?? 0;
+          }
+        }
+        return values;
+      } else {
+        print('Unexpected error occured!');
+        return {};
+      }
+    } catch (e) {
+      print('Unexpected error occured: ${e.toString()}!');
+      return {};
     }
   }
 
