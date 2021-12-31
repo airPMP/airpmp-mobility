@@ -121,22 +121,24 @@ class ScrollableTable extends StatelessWidget {
                                         .toStringAsFixed(2),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: (jobCard.achievedQTY /
-                                                    (double.tryParse(jobCard
-                                                            .tobeAchievedQTY) ??
-                                                        1)) >=
-                                                1
+                                        color: jobCard.spi > 1
                                             ? Colors.green
-                                            : Colors.red,
+                                            : jobCard.spi < 1
+                                                ? Colors.red
+                                                : Colors.black,
                                         fontWeight: FontWeight.bold),
                                   )),
                               Container(
                                   width: 80,
                                   child: Text(
-                                    "1.65",
+                                    jobCard.cpi.toStringAsFixed(2),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: Colors.red,
+                                        color: jobCard.cpi > 1
+                                            ? Colors.green
+                                            : jobCard.cpi < 1
+                                                ? Colors.red
+                                                : Colors.black,
                                         fontWeight: FontWeight.bold),
                                   )),
                             ],

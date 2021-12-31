@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:airpmp_mobility/API/ApiClass.dart';
 import 'package:airpmp_mobility/API/Functions.dart';
@@ -210,14 +211,13 @@ class JobCardData {
     _myJobCards[index].achievedQTY = qty;
     _myJobCards[index].spi = (qty / allowqty);
     _myJobCards[index].plannedvsactuals.forEach((element) {
-      totcost += ((salaries[element.designation.toLowerCase()] ?? 0) *
+      totcost += (((salaries[element.designation.toLowerCase()] ?? 0) / 310) *
           (element.allowableTotHrs ?? 0));
       acttotcost += element.actualTotCost;
 
       element.allowableResources =
           (element.plannedResources ?? 0) * (qty / allowqty);
       element.allowableTotHrs = (element.plannedTotHrs ?? 0) * (qty / allowqty);
-      print(element.planned);
       element.spi = element.planned ? (qty / allowqty) : 0;
       element.cpi =
           ((((salaries[element.designation.toLowerCase()] ?? 0) / 310) *
