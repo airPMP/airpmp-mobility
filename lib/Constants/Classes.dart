@@ -153,6 +153,13 @@ class JobCardData {
     fetchJobCards();
   }
 
+  Future<int> execute(MyJobCard myJobCard) async {
+    int i = await ApiClass()
+        .execute(token: _loginDetails.token, jobCard: myJobCard);
+    fetchJobCards();
+    return i;
+  }
+
   Future<List<SingleResource>> fetchEquipments(bool iseq) async {
     return ApiClass().fetchEquipments(_loginDetails.token, iseq);
   }

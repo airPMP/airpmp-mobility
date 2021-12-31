@@ -5,7 +5,7 @@ import '../functions.dart';
 /// Actual Resource Class: Fetched from the actuals field. Contains details of a resource which has been added.
 class ActualResource {
   /// Variable names are the same as the api fields.
-  late String iD, actualHours, designation, name, remarks;
+  late String iD, actualHours, designation, name, remarks, date;
 
   /// Variable names are the same as the api fields.
   late double plannedTotHrs, hourlySalary;
@@ -22,7 +22,8 @@ class ActualResource {
       this.name,
       this.plannedTotHrs,
       this.remarks,
-      this.unPlanned);
+      this.unPlanned,
+      this.date);
   ActualResource.fromJson(Map<String, dynamic> json) {
     iD = json['Id'] ?? "";
     designation = json['designation'] ?? "";
@@ -31,13 +32,14 @@ class ActualResource {
     remarks = json['remarks'] ?? "";
     hourlySalary = intToDouble(json['hourlySalary']);
     plannedTotHrs = intToDouble(json['plannedTotHrs']);
+    date = json['date'];
     isEquipment = json['isEquipment'] ?? false;
     unPlanned = json['unPlanned'] ?? false;
   }
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
-
+    json['date'] = date;
     json['Id'] = iD;
     json['designation'] = designation;
     json['name'] = name;

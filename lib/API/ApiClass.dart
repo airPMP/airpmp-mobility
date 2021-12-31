@@ -16,6 +16,11 @@ class ApiClass {
     projectID = await getProjectId();
   }
 
+  String getDateasYYYYMMDD() {
+    DateTime dt = DateTime.now();
+    return "${dt.year}-${dt.month.toString().padLeft(2, '0')}-${dt.day.toString().padLeft(2, '0')}";
+  }
+
 //<===========   Get Login Details     ==============>
   Future<LoginDetails> login(
       {required String username, required String password}) async {
@@ -49,6 +54,36 @@ class ApiClass {
     } else
       return (LoginDetails(
           company: "", userid: "", token: "", statuscode: statuscode));
+  }
+
+  Future<int> execute(
+      {required String token, required MyJobCard jobCard}) async {
+    String url =
+        'https://airpmo.herokuapp.com/api/jobcard/${jobCard.jobCardNumber}';
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": "Bearer " + token,
+    };
+    String body;
+
+    body = jsonEncode({
+      "JCStatus": "Executed",
+      "actuals": [
+        for (ActualResource ar in jobCard.actuals) ar.toJson(),
+      ],
+      "executedDate": getDateasYYYYMMDD(),
+      "_id": jobCard.jobCardNumber
+    });
+    try {
+      Response response =
+          await put(Uri.tryParse(url) ?? Uri(), headers: headers, body: body);
+
+      return response.statusCode;
+    } catch (e) {
+      print(e);
+      return 300;
+    }
   }
 
 //<==============Get Project Details=================>
@@ -155,7 +190,6 @@ class ApiClass {
     }
   }
 
-// < Complete -- UNDER TESTING >
   Future<int> addResources(
       MyJobCard job, String _token, SingleResource resource, double sal) async {
     String url =
@@ -186,6 +220,7 @@ class ApiClass {
     }
     body = jsonEncode({
       "_id": job.jobCardNumber,
+      "JCStatus": "In-Progress",
       "actuals": [
         for (ActualResource ar in job.actuals) ar.toJson(),
         ActualResource(
@@ -197,7 +232,8 @@ class ApiClass {
                 "${resource.fname} ${resource.lname}",
                 plannedtotal,
                 resource.remarks,
-                unplanned)
+                unplanned,
+                getDateasYYYYMMDD())
             .toJson()
       ],
       "achievedQTY": job.achievedQTY,
@@ -328,7 +364,7 @@ class ApiClass {
 
 //<===========PUT RESOURCES===============>
 // https://airpmo.herokuapp.com/api/jobcard/5d9db979c108b30004207c66
-
+/*
   Future<int> putResources(
       List<ActualResource> actuals, String token, String acheivedqty) async {
     String url =
@@ -355,4 +391,5 @@ class ApiClass {
 
     return 1;
   }
+  */
 }

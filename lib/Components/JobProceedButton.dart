@@ -1,7 +1,9 @@
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
+import 'package:airpmp_mobility/Models/ProviderModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../functions.dart';
 import 'CustomRoundedButton.dart';
@@ -246,7 +248,36 @@ class _JobProceedButtonState extends State<JobProceedButton> {
                         style: TextStyle(
                             fontSize: 18, color: CustomColors.secondary),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showAboutDialog(context: context, children: [
+                          Text('Are you sure you want to execute?'),
+                          Row(
+                            children: [
+                              TextButton(
+                                child: Text("No"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Yes"),
+                                onPressed: () async {
+                                  int stat =
+                                      await Provider.of<ProviderModel>(context)
+                                          .execute(widget.jobCard);
+                                  if (stat == 200)
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content:
+                                          Text("JobCard Succesfully Executed!"),
+                                    ));
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          )
+                        ]);
+                      },
                     ),
                   ),
                   CircleButton(

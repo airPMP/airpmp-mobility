@@ -20,6 +20,12 @@ class ProviderModel extends ChangeNotifier {
     await _jobCardData.fetchJobCards();
   }
 
+  Future<int> execute(MyJobCard jobCard) async {
+    int i = await _jobCardData.execute(jobCard);
+    getJobCards();
+    return i;
+  }
+
   List<MyJobCard> getJobCards() {
     switch (stageSelection) {
       case Stage.Approved:

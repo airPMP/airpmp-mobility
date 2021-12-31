@@ -325,11 +325,42 @@ class TabJobScreen extends StatelessWidget {
                             padding: EdgeInsets.all(8),
                             child: Text(jobCard.tobeAchievedQTY))),
                     CircleButton(
-                        icon: Icon(
-                      Icons.save,
-                      size: 30,
-                      color: CustomColors.secondary,
-                    )),
+                      icon: Icon(
+                        Icons.save,
+                        size: 30,
+                        color: CustomColors.secondary,
+                      ),
+                      onPressed: () {
+                        showAboutDialog(context: context, children: [
+                          Text('Are you sure you want to execute?'),
+                          Row(
+                            children: [
+                              TextButton(
+                                child: Text("No"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Yes"),
+                                onPressed: () async {
+                                  int stat =
+                                      await Provider.of<ProviderModel>(context)
+                                          .execute(jobCard);
+                                  if (stat == 200)
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content:
+                                          Text("JobCard Succesfully Executed!"),
+                                    ));
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          )
+                        ]);
+                      },
+                    ),
                   ],
                 ),
               ))
