@@ -146,8 +146,10 @@ class JobCardData {
           ProjectDetails();
   }
 
-  Future addResources(MyJobCard myJobCard, dynamic resource) async {
-    await ApiClass().addResources(myJobCard, _loginDetails.token, resource);
+  Future addResources(MyJobCard myJobCard, SingleResource resource) async {
+    await ApiClass().addResources(myJobCard, _loginDetails.token, resource,
+        salaries[resource.desig] ?? 0);
+    fetchJobCards();
   }
 
   Future<List<SingleResource>> fetchEquipments(bool iseq) async {

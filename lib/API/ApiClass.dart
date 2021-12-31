@@ -157,7 +157,7 @@ class ApiClass {
 
 // < Complete -- UNDER TESTING >
   Future<int> addResources(
-      MyJobCard job, String _token, SingleResource resource) async {
+      MyJobCard job, String _token, SingleResource resource, double sal) async {
     String url =
         'https://airpmo.herokuapp.com/api/jobcard/${job.jobCardNumber}';
     Map<String, String> headers = {
@@ -202,21 +202,40 @@ class ApiClass {
       ],
       "achievedQTY": job.achievedQTY,
       "plannedVsAllowableVsActual": [
-        for (PlannedvsActualResource par in job.plannedvsactuals) par.toJson(),
+        for (PlannedvsActualResource par in job.plannedvsactuals)
+          if (par.designation.compareTo(resource.desig) != 0)
+            par.toJson()
+          else
+            PlannedvsActualResource(
+                    par.actualTotCost + hoursal * resource.acthours,
+                    par.actualTotHours + resource.acthours.toString(),
+                    par.allowableResources,
+                    par.allowableTotCost,
+                    par.allowableTotHrs,
+                    (sal * (par.allowableTotHrs ?? 0)) /
+                        (par.actualTotCost + hoursal * resource.acthours),
+                    resource.desig,
+                    par.plannedResources,
+                    par.plannedTotCost,
+                    par.plannedTotHrs,
+                    par.spi,
+                    par.unit)
+                .toJson(),
         if (newresource) // New value should be added only if the same designation has not been added before.
           PlannedvsActualResource(
-              hoursal * resource.acthours,
-              resource.acthours.toString(),
-              0,
-              0,
-              0,
-              0,
-              resource.desig,
-              0,
-              0,
-              0,
-              0,
-              "")
+                  hoursal * resource.acthours,
+                  resource.acthours.toString(),
+                  0,
+                  0,
+                  0,
+                  0,
+                  resource.desig,
+                  0,
+                  0,
+                  0,
+                  0,
+                  "")
+              .toJson()
       ]
     });
     try {
