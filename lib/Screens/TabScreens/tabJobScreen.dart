@@ -4,8 +4,10 @@ import 'package:airpmp_mobility/Components/simpleTable.dart';
 import 'package:airpmp_mobility/Components/tableElement.dart';
 import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
+import 'package:airpmp_mobility/Models/ProviderModel.dart';
 import 'package:airpmp_mobility/functions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TabJobScreen extends StatelessWidget {
   // final Stage stage;
@@ -296,13 +298,22 @@ class TabJobScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
-                      child: Text("Qty to be achieved",
+                      child: Text("Qty achieved",
                           style: TextStyle(fontSize: 18, color: Colors.white)),
                     ),
                     Container(
                         width: 100,
                         child: Padding(
-                            padding: EdgeInsets.all(8), child: TextField())),
+                            padding: EdgeInsets.all(8),
+                            child: TextField(
+                              onChanged: (str) {
+                                Provider.of<ProviderModel>(context,
+                                        listen: false)
+                                    .updateQty(double.tryParse(str) ?? 0,
+                                        jobCard.jobCardNumber);
+                                jobCard.achievedQTY = double.tryParse(str) ?? 0;
+                              },
+                            ))),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Text("Qty to be achieved",
