@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 
 class JobPagePhone extends StatefulWidget {
   final Function onPush;
-  final MyJobCard jobCard;
-  const JobPagePhone({Key? key, required this.onPush, required this.jobCard})
+  final int index;
+  const JobPagePhone({Key? key, required this.onPush, required this.index})
       : super(key: key);
 
   @override
@@ -21,12 +21,12 @@ class JobPagePhone extends StatefulWidget {
 }
 
 class _JobPagePhoneState extends State<JobPagePhone> {
-  late MyJobCard jobcard;
+  late int index;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    jobcard = widget.jobCard;
+    index = widget.index;
   }
 
   @override
@@ -54,15 +54,14 @@ class _JobPagePhoneState extends State<JobPagePhone> {
         ),
         body: JobPageBody(
           onPush: widget.onPush,
-          jobCard: widget.jobCard,
+          index: index,
         ), // implemented below this widget.
         floatingActionButton: JobFloatingPanel(
           onChanged: (qty) {
             Provider.of<ProviderModel>(context, listen: false)
-                .updateQty(qty, jobcard.jobCardNumber);
-            jobcard.achievedQTY = qty;
+                .updateQty(qty, index);
           },
-          jobCard: widget.jobCard,
+          jobCard: Provider.of<ProviderModel>(context).getJC(index),
         )); // implemented below this widget.
   }
 }
@@ -157,8 +156,8 @@ class _JobFloatingPanelState extends State<JobFloatingPanel> {
 
 class JobPageBody extends StatefulWidget {
   final Function onPush;
-  final MyJobCard jobCard;
-  const JobPageBody({Key? key, required this.onPush, required this.jobCard})
+  final int index;
+  const JobPageBody({Key? key, required this.onPush, required this.index})
       : super(key: key);
 
   @override
@@ -192,7 +191,9 @@ class _JobPageBodyState extends State<JobPageBody> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 15, vertical: 5.0),
                             child: Text(
-                              widget.jobCard.activiyName,
+                              Provider.of<ProviderModel>(context, listen: false)
+                                  .getJC(widget.index)
+                                  .activiyName,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(color: Colors.white),
@@ -233,7 +234,7 @@ class _JobPageBodyState extends State<JobPageBody> {
                       iconData: Icons.person_add,
                       onPressed: () {
                         widget.onPush(context, "actual_Employees",
-                            argument: widget.jobCard);
+                            argument: widget.index);
                       },
                     )),
                     Expanded(
@@ -242,7 +243,7 @@ class _JobPageBodyState extends State<JobPageBody> {
                       iconData: Icons.add,
                       onPressed: () {
                         widget.onPush(context, "actual_Equipments",
-                            argument: widget.jobCard);
+                            argument: widget.index);
                       },
                     ))
                   ],
@@ -255,7 +256,8 @@ class _JobPageBodyState extends State<JobPageBody> {
               ),
               Expanded(
                   child: ScrollableTable(
-                jobCard: widget.jobCard,
+                jobCard:
+                    Provider.of<ProviderModel>(context).getJC(widget.index),
               ))
             ],
           ),
@@ -269,7 +271,8 @@ class _JobPageBodyState extends State<JobPageBody> {
                     detailsSheetOpen = !detailsSheetOpen;
                   });
                 },
-                jobCard: widget.jobCard,
+                jobCard: Provider.of<ProviderModel>(context, listen: false)
+                    .getJC(widget.index),
               ),
               secondChild: Container(),
               crossFadeState: detailsSheetOpen

@@ -262,9 +262,10 @@ class _JobProceedButtonState extends State<JobProceedButton> {
                               TextButton(
                                 child: Text("Yes"),
                                 onPressed: () async {
-                                  int stat =
-                                      await Provider.of<ProviderModel>(context)
-                                          .execute(widget.jobCard);
+                                  int stat = await Provider.of<ProviderModel>(
+                                          context,
+                                          listen: false)
+                                      .execute(widget.jobCard);
                                   if (stat == 200)
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(

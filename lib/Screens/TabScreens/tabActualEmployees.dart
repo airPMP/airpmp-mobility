@@ -13,12 +13,12 @@ import 'package:provider/provider.dart';
 class TabActualResources extends StatelessWidget {
   final Function onPush;
   final Resource resource;
-  final MyJobCard jobCard;
+  final int index;
   const TabActualResources(
       {Key? key,
       required this.resource,
       required this.onPush,
-      required this.jobCard})
+      required this.index})
       : super(key: key);
   bool isSameResource(bool iseq) {
     if (iseq && resource == Resource.Equipment)
@@ -81,7 +81,7 @@ class TabActualResources extends StatelessWidget {
                             (states) => CustomColors.secondary)),
                     onPressed: () {
                       Provider.of<ProviderModel>(context, listen: false)
-                          .putResources(jobCard, singleResource);
+                          .putResources(index, singleResource);
                       Navigator.pop(ccontext);
                     },
                   ),
@@ -233,7 +233,8 @@ class TabActualResources extends StatelessWidget {
               TableElement("Total Hrs", flex: 2, maxLines: 2),
               TableElement("Remarks", flex: 2),
             ], elements: [
-              for (ActualResource resource in jobCard.actuals)
+              for (ActualResource resource
+                  in Provider.of<ProviderModel>(context).getJC(index).actuals)
                 if (isSameResource(resource.isEquipment))
                   SimpleTableElement(
                     onTap: null,

@@ -12,6 +12,10 @@ class ProviderModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  MyJobCard getJC(int index) {
+    return _jobCardData.getJobCards[index];
+  }
+
   ProviderModel(LoginDetails details) {
     _jobCardData.updateLogin(details);
   }
@@ -26,7 +30,7 @@ class ProviderModel extends ChangeNotifier {
     return i;
   }
 
-  List<MyJobCard> getJobCards() {
+  Map<int, MyJobCard> getJobCards() {
     switch (stageSelection) {
       case Stage.Approved:
         return _jobCardData.getStatusCards("Executed");
@@ -47,16 +51,17 @@ class ProviderModel extends ChangeNotifier {
     return _jobCardData.getProjectDetails;
   }
 
-  void putResources(MyJobCard myJobCard, dynamic addResource) {
-    _jobCardData.addResources(myJobCard, addResource);
+  void putResources(int index, dynamic addResource) {
+    _jobCardData.addResources(index, addResource);
+    notifyListeners();
   }
 
   void fetchDesignations() {
     _jobCardData.fetchDesigs();
   }
 
-  void updateQty(double qty, String jcno) {
-    _jobCardData.updateQuatity(qty, jcno);
+  void updateQty(double qty, int index) {
+    _jobCardData.updateQuatity(qty, index);
     notifyListeners();
   }
 }

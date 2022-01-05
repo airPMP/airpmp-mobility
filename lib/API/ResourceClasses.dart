@@ -32,7 +32,7 @@ class ActualResource {
     remarks = json['remarks'] ?? "";
     hourlySalary = intToDouble(json['hourlySalary']);
     plannedTotHrs = intToDouble(json['plannedTotHrs']);
-    date = json['date'];
+    date = json['date'] ?? "2022-01-01";
     isEquipment = json['isEquipment'] ?? false;
     unPlanned = json['unPlanned'] ?? false;
   }
@@ -148,7 +148,7 @@ class SingleResource {
     lname = json["Employee Last Name"];
     desig = json["Designation"];
     isequipment = false;
-    ctc = json["CTC"];
+    ctc = double.tryParse(json["CTC"] ?? "0") ?? 0;
   }
   SingleResource.equipmentFromJson(Map<String, dynamic> json) {
     id = json["Id"];
@@ -156,7 +156,7 @@ class SingleResource {
     lname = json["Equipment Model"];
     desig = json["Equipment Type"];
     isequipment = true;
-    ctc = json["CTC"];
+    ctc = double.tryParse(json["CTC"] ?? "0") ?? 0;
   }
 }
 

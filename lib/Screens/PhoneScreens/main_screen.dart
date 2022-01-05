@@ -1,5 +1,6 @@
 import 'package:airpmp_mobility/Components/Drawer.dart';
 import 'package:airpmp_mobility/Components/JobListTile.dart';
+import 'package:airpmp_mobility/Constants/Classes.dart';
 import 'package:airpmp_mobility/Constants/Colors.dart';
 import 'package:airpmp_mobility/Constants/Enums.dart';
 import 'package:airpmp_mobility/Constants/Fonts_Styles.dart';
@@ -138,14 +139,15 @@ class MainPagePhone extends StatelessWidget {
               ),
               SliverList(
                   delegate: SliverChildBuilderDelegate((context, i) {
+                Map<int, MyJobCard> list = values.getJobCards();
                 return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                     child: JobListTile(
-                      text: values.getJobCards()[i].activiyName,
-                      iD: values.getJobCards()[i].activityCode,
+                      text: list.values.elementAt(i).activiyName,
+                      iD: list.values.elementAt(i).activityCode,
                       onPressed: () {
                         onPush!(context, "job_Card_Screen",
-                            argument: values.getJobCards()[i]);
+                            argument: list.keys.elementAt(i));
                       },
                     ));
               }, childCount: values.getJobCards().length)),

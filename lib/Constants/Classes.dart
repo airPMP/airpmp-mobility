@@ -75,6 +75,42 @@ class MyJobCard {
   // List<PlannedResource> plannedResource = [];
   // List<PlannedActualResource> plannedActualResource = [];
   // List<UnplannedResource> unplannedResource = [];
+
+  void addResource(SingleResource res, double sal) {
+    bool planned = false;
+    double plannedtotal = 0, hoursal = res.ctc / 310;
+    for (int i = 0; i < plannedvsactuals.length; i++) {
+      if (plannedvsactuals[i].designation.toLowerCase() ==
+          res.desig.toLowerCase()) {
+        plannedvsactuals[i].actualTotHours =
+            ((double.tryParse(plannedvsactuals[i].actualTotHours) ?? 0) +
+                    (res.acthours))
+                .toString();
+        plannedvsactuals[i].actualTotCost += (hoursal * res.acthours);
+        plannedvsactuals[i].cpi =
+            (sal * (plannedvsactuals[i].allowableTotHrs ?? 0)) /
+                (plannedvsactuals[i].actualTotCost + hoursal * res.acthours);
+        planned = true;
+        plannedtotal = plannedvsactuals[i].plannedResources ?? 0;
+        break;
+      }
+    }
+    if (!planned)
+      plannedvsactuals.add(PlannedvsActualResource(hoursal * res.acthours,
+          res.acthours.toString(), 0, 0, 0, 0, res.desig, 0, 0, 0, 0, ""));
+    actuals.add(ActualResource(
+        res.id,
+        "${res.acthours}",
+        res.desig,
+        hoursal,
+        res.isequipment,
+        "${res.fname} ${res.lname}",
+        plannedtotal,
+        res.remarks,
+        !planned,
+        ApiClass().getDateasYYYYMMDD()));
+  }
+
   MyJobCard();
   MyJobCard.fromJson(Map<String, dynamic> json) {
     jobCardNumber = json['_id'] ?? "";
@@ -147,10 +183,10 @@ class JobCardData {
           ProjectDetails();
   }
 
-  Future addResources(MyJobCard myJobCard, SingleResource resource) async {
-    await ApiClass().addResources(myJobCard, _loginDetails.token, resource,
-        salaries[resource.desig] ?? 0);
-    fetchJobCards();
+  Future addResources(int index, SingleResource resource) async {
+    _myJobCards[index].addResource(resource, salaries[resource.desig] ?? 0);
+    await ApiClass().addResources(_myJobCards[index], _loginDetails.token,
+        resource, salaries[resource.desig] ?? 0);
   }
 
   Future<int> execute(MyJobCard myJobCard) async {
@@ -191,12 +227,12 @@ class JobCardData {
     // }
   }
 
-  List<MyJobCard> getStatusCards(String status) {
-    List<MyJobCard> list = [];
+  Map<int, MyJobCard> getStatusCards(String status) {
+    Map<int, MyJobCard> list = {};
 
-    for (MyJobCard aJC in _myJobCards) {
-      if (aJC.jcStatus == status) {
-        list.add(aJC);
+    for (int i = 0; i < _myJobCards.length; i++) {
+      if (_myJobCards[i].jcStatus == status) {
+        list[i] = _myJobCards[i];
       }
     }
     return list;
@@ -209,9 +245,7 @@ class JobCardData {
     salaries.addAll(entries);
   }
 
-  void updateQuatity(double qty, String jcno) {
-    int index =
-        _myJobCards.indexWhere((element) => element.jobCardNumber == jcno);
+  void updateQuatity(double qty, int index) {
     double allowqty = double.tryParse(_myJobCards[index].tobeAchievedQTY) ?? 0;
     double totcost = 0, acttotcost = 0;
 
@@ -226,10 +260,13 @@ class JobCardData {
           (element.plannedResources ?? 0) * (qty / allowqty);
       element.allowableTotHrs = (element.plannedTotHrs ?? 0) * (qty / allowqty);
       element.spi = element.planned ? (qty / allowqty) : 0;
-      element.cpi =
-          ((((salaries[element.designation.toLowerCase()] ?? 0) / 310) *
-                  (element.allowableTotHrs ?? 0)) /
-              (element.actualTotCost));
+      if (element.actualTotCost == 0)
+        element.cpi = 0;
+      else
+        element.cpi =
+            ((((salaries[element.designation.toLowerCase()] ?? 0) / 310) *
+                    (element.allowableTotHrs ?? 0)) /
+                (element.actualTotCost));
     });
     if (acttotcost != 0)
       _myJobCards[index].cpi = totcost / acttotcost;

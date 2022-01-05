@@ -200,78 +200,17 @@ class ApiClass {
       "Authorization": "Bearer " + _token,
     };
     String body;
-    bool unplanned = true, newresource = true;
-    double hoursal = resource.ctc / 310, plannedtotal = 0;
-    // Find whether a resource of the same designation has been already added to the plannedvsactuals.
-    for (int i = 0; i < job.plannedvsactuals.length; i++) {
-      if (job.plannedvsactuals[i].designation.toLowerCase() ==
-          resource.desig.toLowerCase()) {
-        job.plannedvsactuals[i].actualTotHours = ((double.tryParse(
-                        job.plannedvsactuals[i].actualTotHours) ??
-                    0) +
-                (resource.acthours))
-            .toString(); //add current hours to the total hours of the designation.
-        plannedtotal = job.plannedvsactuals[i].plannedResources ?? 0;
-        job.plannedvsactuals[i].actualTotCost += (hoursal * resource.acthours);
-        unplanned = job.plannedvsactuals[i].planned;
-        newresource = false;
-        break;
-      }
-    }
+
     body = jsonEncode({
       "_id": job.jobCardNumber,
       "JCStatus": "In-Progress",
       "actuals": [
         for (ActualResource ar in job.actuals) ar.toJson(),
-        ActualResource(
-                resource.id,
-                "${resource.acthours}",
-                resource.desig,
-                hoursal,
-                resource.isequipment,
-                "${resource.fname} ${resource.lname}",
-                plannedtotal,
-                resource.remarks,
-                unplanned,
-                getDateasYYYYMMDD())
-            .toJson()
       ],
       "achievedQTY": job.achievedQTY,
       "plannedVsAllowableVsActual": [
         for (PlannedvsActualResource par in job.plannedvsactuals)
-          if (par.designation.compareTo(resource.desig) != 0)
-            par.toJson()
-          else
-            PlannedvsActualResource(
-                    par.actualTotCost + hoursal * resource.acthours,
-                    par.actualTotHours + resource.acthours.toString(),
-                    par.allowableResources,
-                    par.allowableTotCost,
-                    par.allowableTotHrs,
-                    (sal * (par.allowableTotHrs ?? 0)) /
-                        (par.actualTotCost + hoursal * resource.acthours),
-                    resource.desig,
-                    par.plannedResources,
-                    par.plannedTotCost,
-                    par.plannedTotHrs,
-                    par.spi,
-                    par.unit)
-                .toJson(),
-        if (newresource) // New value should be added only if the same designation has not been added before.
-          PlannedvsActualResource(
-                  hoursal * resource.acthours,
-                  resource.acthours.toString(),
-                  0,
-                  0,
-                  0,
-                  0,
-                  resource.desig,
-                  0,
-                  0,
-                  0,
-                  0,
-                  "")
-              .toJson()
+          if (par.designation.compareTo(resource.desig) != 0) par.toJson()
       ]
     });
     try {

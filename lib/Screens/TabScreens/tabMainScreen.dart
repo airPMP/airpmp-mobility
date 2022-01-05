@@ -113,21 +113,24 @@ class TabMainScreen extends StatelessWidget {
                 TableElement("SPI", flex: 40),
                 TableElement("CPI", flex: 40),
               ], elements: [
-                for (MyJobCard jobCard in values.getJobCards())
+                for (int i in values.getJobCards().keys)
                   SimpleTableElement(
                     onTap: () {
                       // Navigator.pushNamed(context, "job_Card_Screen");
-                      onPush!(context, "job_Card_Screen", argument: jobCard);
+                      onPush!(context, "job_Card_Screen", argument: i);
                     },
                     datas: [
-                      TableValueElement(jobCard.activityCode),
-                      TableValueElement("2019-10-09"),
-                      TableValueElement(jobCard.activiyName),
-                      TableValueElement(jobCard.tobeAchievedQTY),
-                      TableValueElement(jobCard.zone),
+                      TableValueElement(values.getJobCards()[i]!.activityCode),
+                      TableValueElement(values.getJobCards()[i]!.assignedDate),
+                      TableValueElement(values.getJobCards()[i]!.activiyName),
+                      TableValueElement(
+                          values.getJobCards()[i]!.tobeAchievedQTY),
+                      TableValueElement(values.getJobCards()[i]!.zone),
                       TableValueElement("YES"),
-                      TableValueElement(jobCard.spi.toString()),
-                      TableValueElement(jobCard.cpi.toString()),
+                      TableValueElement(
+                          values.getJobCards()[i]!.spi.toString()),
+                      TableValueElement(
+                          values.getJobCards()[i]!.cpi.toString()),
                     ],
                   ),
               ]),
