@@ -35,6 +35,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
             BottomNavigationBarItem(icon: Icon(Icons.edit), label: "Remarks"),
             BottomNavigationBarItem(
                 icon: CircleAvatar(
+                  backgroundImage:
+                      AssetImage('assets/images/8_404 Error_Tab.png'),
                   maxRadius: 14,
                 ),
                 label: "Account"),

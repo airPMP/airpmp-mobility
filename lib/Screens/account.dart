@@ -84,8 +84,8 @@ class AccountPage extends StatelessWidget {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          'https://completeconcussions.com/drive/uploads/2017/10/detail-john-doe.jpg'),
+                                      backgroundImage: AssetImage(
+                                          'assets/images/8_404 Error_Tab.png'),
                                       radius: w * 0.13,
                                     ),
                                     Align(
