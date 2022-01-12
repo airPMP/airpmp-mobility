@@ -239,24 +239,24 @@ class ActualResourcesPhone extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Container(
-          // width: 100,
-          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-          decoration: BoxDecoration(
-              color: CustomColors.secondary,
-              borderRadius: BorderRadius.circular(40)),
-          child: InkWell(
-            onTap: () {},
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Proceed",
-                    style: TextStyle(color: Colors.white, fontSize: 18)),
-                Icon(Icons.arrow_forward_ios, color: Colors.white)
-              ],
-            ),
-          )),
+      // floatingActionButton: Container(
+      //     // width: 100,
+      //     padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      //     decoration: BoxDecoration(
+      //         color: CustomColors.secondary,
+      //         borderRadius: BorderRadius.circular(40)),
+      //     child: InkWell(
+      //       onTap: () {},
+      //       child: Row(
+      //         mainAxisSize: MainAxisSize.min,
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           Text("Proceed",
+      //               style: TextStyle(color: Colors.white, fontSize: 18)),
+      //           Icon(Icons.arrow_forward_ios, color: Colors.white)
+      //         ],
+      //       ),
+      //     )),
     );
   }
 }
